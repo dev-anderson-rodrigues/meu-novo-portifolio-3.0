@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ThemeToggle } from "./components/ThemeToggle";
 
 export default function Home() {
   return (
@@ -48,6 +49,7 @@ export default function Home() {
             Read our docs
           </a>
         </div>
+        <ThemeToggle />
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         <a
@@ -95,6 +97,7 @@ export default function Home() {
           />
           Go to nextjs.org →
         </a>
+        {/* <ThemeToggle /> */}
       </footer>
     </div>
   );
