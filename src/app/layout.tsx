@@ -31,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR" data-theme="dark">
       <Providers>
         <body
           className={`${poppins.className} ${platypi.className} ${alikeAngular.className}`}
