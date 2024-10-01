@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
 
 * {
   margin: 0px;
@@ -159,16 +161,11 @@ body {
         top: 16rem !important;
       }
     }
-    .divComplement {
-      background: rgb(0, 0, 0);
-      background: linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 1) 60%,
-        rgb(0, 0, 0) 100%
-      );
-    }
   }
   main section:nth-child(2) {
+    .img {
+      border-color: var(--primary-color);
+    }
     .cite {
       strong {
         color: var(--primary-color);
@@ -179,6 +176,9 @@ body {
     }
   }
   main section:nth-child(3) {
+    .cards {
+      min-height: 450px;
+    }
     .cards:hover {
       border: 1px solid var(--primary-color);
     }
@@ -215,6 +215,17 @@ h1 {
     margin-bottom: -5px;
   }
 }
+.btn {
+  position: absolute;
+  bottom: calc(100vh - 95vh);
+
+  @media (min-width: 1024px) {
+    bottom: calc(100vh - 42vh);
+  }
+  @media (min-width: 1400px) {
+    bottom: calc(100vh - 50vh) !important;
+  }
+}
 .buttonContact {
   width: 250px;
   height: 45px;
@@ -226,13 +237,6 @@ h1 {
   position: relative;
   z-index: 11;
   border-radius: 10px;
-
-  @media (min-width: 1024px) and (max-width: 1400px) {
-    margin-bottom: 160px;
-  }
-  @media (min-width: 1400px) and (max-width: 1600px) {
-    margin-bottom: 90px;
-  }
 }
 
 .buttonContact:before {
@@ -298,4 +302,38 @@ h1 {
   100% {
     background-position: 0 0;
   }
+}
+
+.slick-prev {
+  left: -20px;
+}
+.slick-next {
+  right: -25px;
+}
+.slick-prev,
+.slick-next {
+  z-index: 1 !important; /* Traz os botões para frente */
+  display: block !important; /* Garante que os botões sejam exibidos */
+  color: white; /* Cor personalizada */
+}
+
+.slick-prev::before,
+.slick-next::before {
+  font-size: 30px; /* Tamanho do ícone da seta */
+  color: white; /* Cor das setas */
+  transition: 0.3s ease-in-out;
+}
+.slick-prev:hover::before,
+.slick-next:hover::before {
+  color: var(--primary-color);
+}
+.stick-dots {
+  display: contents;
+}
+.slide {
+  text-align: -webkit-center;
+}
+.slide {
+  width: 100%;
+  overflow: hidden;
 }
