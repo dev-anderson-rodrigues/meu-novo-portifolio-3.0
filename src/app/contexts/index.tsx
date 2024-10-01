@@ -1,1 +1,1 @@
-export * from "./contexts/ThemeContext";
+export * from "./theme-context/ThemeContext";

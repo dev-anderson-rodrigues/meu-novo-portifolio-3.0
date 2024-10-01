@@ -1,11 +1,7 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import Slider from "react-slick";
-import Card1 from "../cards/card-1";
-import Card2 from "../cards/card-2";
-import Card3 from "../cards/card-3";
-import Card4 from "../cards/card-4";
 
-const CustomCarousel = () => {
+const CustomCarousel = ({ children }: { children: ReactNode }) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -44,12 +40,9 @@ const CustomCarousel = () => {
     >
       <Slider
         {...settings}
-        className="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg max-w-screen-xl gap-4 h-full p-6"
+        className="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg max-w-screen-xl gap-4 h-full p-2"
       >
-        <Card1 />
-        <Card2 />
-        <Card3 />
-        <Card4 />
+        {children}
       </Slider>
     </div>
   );

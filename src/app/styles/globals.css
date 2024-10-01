@@ -183,6 +183,11 @@ body {
       border: 1px solid var(--primary-color);
     }
   }
+  main section:nth-child(4) {
+    .projects {
+      border: 1px solid var(--secondary-color2);
+    }
+  }
 }
 a {
   color: var(--secondary-color2);
@@ -305,7 +310,7 @@ h1 {
 }
 
 .slick-prev {
-  left: -20px;
+  left: -27px;
 }
 .slick-next {
   right: -25px;

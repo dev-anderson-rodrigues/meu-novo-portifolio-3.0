@@ -2,9 +2,6 @@ import React, { ReactNode } from "react";
 
 const ContainerCard = ({ children }: { children: ReactNode }) => {
   return (
-    // <div className="rounded-lg bg-gradient-to-t from-black opacity-90 w-56 max-h-full flex flex-col gap-2 cards m-4 p-2">
-    //   {children}
-    // </div>
     <div
       className="
     w-60
