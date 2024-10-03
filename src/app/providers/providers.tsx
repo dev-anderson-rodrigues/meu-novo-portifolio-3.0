@@ -1,7 +1,11 @@
 "use client";
 
-import { ThemeProvider } from "@/app/contexts";
+import { ThemeProvider, ProjectProvider } from "@/app/contexts";
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
-  return <ThemeProvider>{children}</ThemeProvider>;
+  return (
+    <ProjectProvider>
+      <ThemeProvider>{children}</ThemeProvider>
+    </ProjectProvider>
+  );
 };

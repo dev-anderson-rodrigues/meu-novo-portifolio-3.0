@@ -33,7 +33,7 @@ const SectionAboutMe = () => {
           className="rounded-full shadow-lg border-2 border-solid img"
         />
       </div>
-      <div className="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl pl-6 pr-6 w-full h-full pb-10 ">
+      <div className="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl pl-6 pr-6 w-full h-full mb-6 p-4 pb-10 contentB">
         <strong className="text-3xl">Olá</strong>,{" "}
         <article className="text-lg font-extralight pt-2">
           Sou Anderson Rodrigues, Desenvolvedor Full Stack em Ascenção. Após uma

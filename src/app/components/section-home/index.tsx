@@ -29,10 +29,10 @@ const SectionHome = () => {
         <Image
           src={"/assets/images/mask-banner.png"}
           alt="mask-banner"
-          objectFit="cover"
           width={1920}
           height={666}
           quality={100}
+          className="object-cover"
         />
       </div>
       <div className="macbookBg  z-10 absolute">
@@ -45,7 +45,7 @@ const SectionHome = () => {
         />
       </div>
       <div className="containerPrimary">
-        <h3 className="text-xl md:text-6xl">Desenvolvendo Ideias</h3>
+        <h3 className=" text-xl md:text-6xl">Desenvolvendo Ideias</h3>
         <h4 className="text-base md:text-4xl">Solucionando Desafios</h4>
       </div>
       <div className="btn">

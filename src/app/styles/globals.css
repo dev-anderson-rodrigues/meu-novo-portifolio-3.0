@@ -54,6 +54,9 @@ body {
       height: 100%;
       z-index: 0;
     }
+    @media (max-width: 1023px) {
+      min-height: 62vh;
+    }
     .mask {
       top: 6rem;
       @media (min-width: 450px) {
@@ -130,14 +133,16 @@ body {
       align-items: center;
       justify-content: center;
       z-index: 11;
-      top: 4rem;
       h3,
       h4 {
         font-family: Alike Angular;
         font-weight: 100;
       }
-      @media (min-width: 450px) {
-        top: 8rem !important;
+      @media (max-width: 450px) {
+        top: 40vh !important;
+      }
+      @media (min-width: 450px) and (max-width: 639px) {
+        top: 45vh !important;
       }
       @media (min-width: 640px) {
         top: 10rem !important;
@@ -163,16 +168,29 @@ body {
     }
   }
   main section:nth-child(2) {
+    padding-top: 20px;
     .img {
       border-color: var(--primary-color);
     }
     .cite {
+      transition: 3s ease-in-out;
       strong {
         color: var(--primary-color);
       }
       cite {
         color: var(--primary-color);
       }
+    }
+    .cite:hover {
+      box-shadow: rgb(18, 246, 214, 0.9) 0px 0px 40px,
+        rgb(18, 246, 214) 0px 0px 5px, rgb(18, 246, 214, 0.3) 0px 0px 5px;
+    }
+    .contentB {
+      transition: 3s ease-in-out;
+    }
+    .contentB:hover {
+      box-shadow: rgb(18, 246, 214, 0.9) 0px 0px 40px,
+        rgb(18, 246, 214) 0px 0px 5px, rgb(18, 246, 214, 0.3) 0px 0px 5px;
     }
   }
   main section:nth-child(3) {
@@ -184,8 +202,22 @@ body {
     }
   }
   main section:nth-child(4) {
+    .cards {
+      border-bottom: 2px solid var(--secondary-color2);
+    }
     .projects {
-      border: 1px solid var(--secondary-color2);
+      border: 2px solid var(--secondary-color2);
+    }
+    .projects:hover {
+      border: 2px solid var(--primary-color);
+    }
+    .btn-card-projects {
+      border: 2px solid var(--secondary-color2);
+      transition: linear 1s;
+    }
+    .btn-card-projects:hover {
+      box-shadow: rgb(18, 246, 214) 0px 0px 10px, rgb(18, 246, 214) 0px 0px 20px,
+        rgb(18, 246, 214) 0px 0px 30px;
     }
   }
 }
@@ -222,10 +254,18 @@ h1 {
 }
 .btn {
   position: absolute;
-  bottom: calc(100vh - 95vh);
-
+  /* bottom: calc(100vh - 99vh); */
+  @media (max-width: 450px) {
+    top: 30vh;
+  }
+  @media (max-width: 768px) {
+    top: 50vh;
+  }
+  @media (max-width: 1023px) {
+    top: 60vh;
+  }
   @media (min-width: 1024px) {
-    bottom: calc(100vh - 42vh);
+    bottom: calc(100vh - 44vh);
   }
   @media (min-width: 1400px) {
     bottom: calc(100vh - 50vh) !important;
@@ -243,7 +283,34 @@ h1 {
   z-index: 11;
   border-radius: 10px;
 }
+.btn-theme {
+  position: relative;
+  padding: 0px; /* Espaço entre o botão e a borda gradiente */
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
+  background-size: 500% 500%; /* Para suavizar a animação do gradiente */
+  border-radius: 8px; /* Para arredondar os cantos */
+  animation: gradient-border 6s ease infinite;
+  transition: 0.3s ease-in-out;
+}
+.btn-theme:hover {
+  box-shadow: rgb(18, 246, 214) 0px 0px 10px, rgb(18, 246, 214) 0px 0px 20px,
+    rgb(18, 246, 214) 0px 0px 30px;
+}
 
+.btn-theme span {
+  border: 1px solid var(--primary-color);
+}
 .buttonContact:before {
   content: "";
   background: linear-gradient(
@@ -295,6 +362,7 @@ h1 {
   top: 0;
   border-radius: 10px;
 }
+
 @keyframes glowing {
   0% {
     background-position: 0 0;
@@ -308,12 +376,73 @@ h1 {
     background-position: 0 0;
   }
 }
-
-.slick-prev {
-  left: -27px;
+@keyframes gradient-border {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
-.slick-next {
-  right: -25px;
+.carousel {
+  @media (min-width: 300px) and (max-width: 349px) {
+    max-width: 400px !important;
+    .slick-prev {
+      top: 48%;
+      left: 44px;
+    }
+    .slick-next {
+      top: 48%;
+      right: 54px;
+    }
+  }
+  @media (min-width: 350px) and (max-width: 767px) {
+    max-width: 400px !important;
+    .slick-prev {
+      top: 48%;
+      left: 27px;
+    }
+    .slick-next {
+      top: 48%;
+      right: 40px;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    max-width: 700px !important;
+    .slick-prev {
+      top: 48%;
+      left: 15px;
+    }
+    .slick-next {
+      top: 48%;
+      right: 25px;
+    }
+  }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    max-width: 1000px !important;
+    .slick-prev {
+      top: 48%;
+      left: 13px;
+    }
+    .slick-next {
+      top: 48%;
+      right: 13px;
+    }
+  }
+  @media (min-width: 1200px) {
+    max-width: 1235px !important;
+    .slick-prev {
+      top: 48%;
+      left: 5px;
+    }
+    .slick-next {
+      top: 48%;
+      right: 2px;
+    }
+  }
 }
 .slick-prev,
 .slick-next {
@@ -325,9 +454,10 @@ h1 {
 .slick-prev::before,
 .slick-next::before {
   font-size: 30px; /* Tamanho do ícone da seta */
-  color: white; /* Cor das setas */
+  color: var(--text-color); /* Cor das setas */
   transition: 0.3s ease-in-out;
 }
+
 .slick-prev:hover::before,
 .slick-next:hover::before {
   color: var(--primary-color);
@@ -341,4 +471,56 @@ h1 {
 .slide {
   width: 100%;
   overflow: hidden;
+}
+.btn-nav-img-projects {
+  color: var(--secondary-color2);
+  font-size: 24px;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+.btn-nav-img-projects:hover {
+  color: var(--text-color);
+  text-shadow: rgb(18, 246, 214) 0px 0px 10px, rgb(18, 246, 214) 0px 0px 20px,
+    rgb(18, 246, 214) 0px 0px 30px;
+}
+
+.btn-nav-img-projects.opacity-50 {
+  color: transparent;
+  text-shadow: none;
+}
+.content-projects {
+  color: var(--primary-color);
+  background-color: var(--bg-color);
+
+  @media (min-width: 1280px) {
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+      rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+  }
+  .description {
+    color: var(--text-color);
+  }
+  .btn {
+    transition: 0.2s ease-in-out;
+    color: var(--secondary-color2);
+    border: 2px solid var(--secondary-color2);
+    cursor: pointer;
+
+    @media (max-width: 1280px) {
+      top: 15px;
+      left: 48%;
+    }
+  }
+  .btn-read:hover {
+    color: var(--text-color);
+    text-shadow: rgb(18, 246, 214) 0px 0px 10px, rgb(18, 246, 214) 0px 0px 20px,
+      rgb(18, 246, 214) 0px 0px 30px;
+  }
+  .btn:hover {
+    color: var(--text-color);
+    box-shadow: rgb(18, 246, 214) 0px 0px 10px, rgb(18, 246, 214) 0px 0px 20px,
+      rgb(18, 246, 214) 0px 0px 30px;
+  }
+}
+.containerProjects {
+  min-height: 80vh;
 }

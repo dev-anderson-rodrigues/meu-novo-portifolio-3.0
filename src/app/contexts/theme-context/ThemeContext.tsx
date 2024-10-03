@@ -1,15 +1,6 @@
 "use client";
-import {
-  createContext,
-  useState,
-  ReactNode,
-  useEffect,
-  useContext,
-} from "react";
-type ThemeContextType = {
-  theme: string;
-  toggleTheme: () => void;
-};
+import { createContext, useState, ReactNode, useEffect } from "react";
+import { ThemeContextType } from "./type";
 
 export const AppThemeContext = createContext<ThemeContextType>(null!);
 
@@ -37,11 +28,4 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
       {children}
     </AppThemeContext.Provider>
   );
-};
-export const useTheme = () => {
-  const context = useContext(AppThemeContext);
-  if (!context) {
-    throw new Error("useTheme must be used within a ThemeProvider");
-  }
-  return context;
 };

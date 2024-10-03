@@ -22,11 +22,11 @@ const SectionSkills = () => {
       )}
       id="skills"
     >
-      <div className="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg p-4 w-full h-screen xl:max-w-screen-xl">
-        <div className="w-full h-1/5 items-center flex justify-center text-3xl text-center">
+      <div className="w-full h-screen min-h-screen flex flex-col justify-center items-center">
+        <div className="pt-4 w-full h-17 items-end flex justify-center text-4xl text-end font-semibold">
           <h3>Habilidades</h3>
         </div>
-        <div className="h-4/5 flex items-center justify-center w-full slide">
+        <div className="h-5/6 -mt-4 flex items-center justify-center w-full slide">
           <CustomCarousel>
             <Card1 />
             <Card2 />

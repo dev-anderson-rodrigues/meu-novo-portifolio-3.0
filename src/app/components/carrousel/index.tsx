@@ -35,13 +35,10 @@ const CustomCarousel = ({ children }: { children: ReactNode }) => {
 
   return (
     <div
-      className="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg max-w-screen-xl m-auto
+      className=" m-0
     "
     >
-      <Slider
-        {...settings}
-        className="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg max-w-screen-xl gap-4 h-full p-2"
-      >
+      <Slider {...settings} className="max-h- m-0 carousel">
         {children}
       </Slider>
     </div>
