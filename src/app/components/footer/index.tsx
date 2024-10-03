@@ -15,7 +15,9 @@ const Footer = () => {
             <div className=" flex flex-col md:flex-row gap-4">
               <span className="flex gap-2 m-auto">
                 <Image
-                  src="/assets/images/logo-header.png"
+                  src="/assets/images/logo.png"
+                  width={20}
+                  height={20}
                   alt="logo header inferior"
                   className="h-6 "
                 />
