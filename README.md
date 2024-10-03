@@ -1,7 +1,3 @@
-Aqui está o seu **README** com o alinhamento e a formatação melhorada para que fique mais organizado:
-
----
-
 # 💼 Meu Portfólio 3.0
 
 Bem-vindo à **versão 3.0** do meu portfólio online! Esta nova iteração é uma evolução significativa dos meus projetos anteriores. Enquanto o meu primeiro portfólio foi construído apenas com **HTML**, **CSS**, e **JavaScript**, a versão 3.0 traz uma experiência muito mais robusta e profissional, utilizando as tecnologias mais modernas do desenvolvimento web, como **Next.js**, **React**, e muito mais.
