@@ -1,0 +1,64 @@
+main section:nth-child(4) {
+  .cards {
+    border-bottom: 2px solid var(--secondary-color2);
+  }
+  .projects {
+    border: 2px solid var(--secondary-color2);
+  }
+  .projects:hover {
+    border: 2px solid var(--primary-color);
+  }
+  .btn-card-projects {
+    border: 2px solid var(--secondary-color2);
+    transition: linear 1s;
+  }
+  .btn-card-projects:hover {
+    box-shadow: rgb(18, 246, 214) 0px 0px 10px, rgb(18, 246, 214) 0px 0px 20px,
+      rgb(18, 246, 214) 0px 0px 30px;
+  }
+
+  .content-projects {
+    color: var(--primary-color);
+    background-color: var(--bg-color);
+
+    @media (min-width: 1280px) {
+      box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+        rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+    }
+    .description {
+      color: var(--text-color);
+    }
+    .btn {
+      transition: 0.2s ease-in-out;
+      color: var(--secondary-color2);
+      border: 2px solid var(--secondary-color2);
+      animation: blink 3s infinite ease-in-out;
+      cursor: pointer;
+
+      @media (max-width: 1280px) {
+        top: 15px;
+        left: 48%;
+      }
+    }
+    .btn-read,
+    a {
+      animation: blink 3s infinite ease-in-out;
+    }
+    .btn-read:hover {
+      color: var(--text-color);
+      text-shadow: rgb(18, 246, 214) 0px 0px 10px,
+        rgb(18, 246, 214) 0px 0px 20px, rgb(18, 246, 214) 0px 0px 30px;
+    }
+    .btn:hover {
+      color: var(--text-color);
+      box-shadow: rgb(18, 246, 214) 0px 0px 10px, rgb(18, 246, 214) 0px 0px 20px,
+        rgb(18, 246, 214) 0px 0px 30px;
+    }
+    .img-content {
+      max-height: 520px !important;
+    }
+  }
+  .containerProjects {
+    min-height: 80vh;
+  }
+}

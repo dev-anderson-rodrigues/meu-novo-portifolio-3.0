@@ -1,13 +1,14 @@
 /* eslint-disable @next/next/no-page-custom-font */
 import type { Metadata } from "next";
 import "./styles/globals.css";
-import { Poppins, Platypi, Alike_Angular } from "next/font/google"; // Corrigindo para 'next/font/google'
+import { Poppins, Platypi, Alike_Angular } from "next/font/google";
 import { Providers } from "../app/providers";
 
 export const metadata: Metadata = {
   title: "Anderson Rodrigues | DEV",
   description: "Portifólio de um desenvolvedor fullstack, expertise em nodejs",
 };
+
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -33,6 +34,12 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" data-theme="dark">
       <Providers>
+        <head>
+          <meta
+            name="google-site-verification"
+            content="rPeADMfHTMCG3V3YBOjnivTp8ov8_xJRyBG_zH8YqUI"
+          />
+        </head>
         <body
           className={`${poppins.className} ${platypi.className} ${alikeAngular.className}`}
         >

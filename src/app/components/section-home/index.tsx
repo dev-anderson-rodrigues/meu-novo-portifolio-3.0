@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import "./style.css";
 import { useTheme } from "@/app/contexts";
 
 const SectionHome = () => {

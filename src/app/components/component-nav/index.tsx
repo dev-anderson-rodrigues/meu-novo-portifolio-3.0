@@ -1,12 +1,16 @@
 import Link from "next/link";
 import { ThemeToggle } from "../ThemeToggle";
 import { useState } from "react";
+import { useProject } from "@/app/contexts";
 
 const Component_Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { setSelectedProject, setProject } = useProject();
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
+    setSelectedProject("");
+    setProject([]);
   };
 
   return (

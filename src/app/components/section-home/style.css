@@ -1,0 +1,121 @@
+main section:nth-child(1) {
+  position: relative;
+  .backgroundSection {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+  @media (max-width: 1023px) {
+    min-height: 62vh;
+  }
+  .mask {
+    top: 6rem;
+    @media (min-width: 450px) {
+      top: 8rem !important;
+    }
+    @media (min-width: 640px) {
+      top: 10rem !important;
+    }
+    @media (min-width: 768px) {
+      top: 12rem !important;
+    }
+    @media (min-width: 1024px) {
+      top: 16rem !important;
+    }
+    @media (min-width: 1280px) {
+      top: 18rem !important;
+    }
+    @media (min-width: 1536px) {
+      top: 20rem !important;
+    }
+  }
+  .macbookBg {
+    top: 7rem !important;
+    width: 15rem;
+    @media (min-width: 380px) {
+      top: 8rem !important;
+      width: 17rem !important;
+    }
+    @media (min-width: 450px) {
+      top: 12rem !important;
+      width: 18rem !important;
+    }
+    @media (min-width: 550px) {
+      top: 13rem !important;
+      width: 20rem !important;
+    }
+    @media (min-width: 640px) {
+      top: 16rem !important;
+      width: 24rem !important;
+    }
+    @media (min-width: 768px) {
+      top: 18rem !important;
+      width: 28rem !important;
+    }
+    @media (min-width: 900px) {
+      top: 19rem !important;
+      width: 30rem !important;
+    }
+    @media (min-width: 1024px) {
+      top: 23rem !important;
+      width: 45rem !important;
+    }
+    @media (min-width: 1280px) {
+      top: 24rem !important;
+      width: 55rem !important;
+    }
+    @media (min-width: 1400px) {
+      top: 25rem !important;
+      width: 60rem !important;
+    }
+    @media (min-width: 1536px) {
+      top: 28rem !important;
+      width: 65rem !important;
+    }
+    @media (min-width: 1800px) {
+      top: 35rem !important;
+    }
+  }
+  .containerPrimary {
+    text-align: center;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 11;
+    h3,
+    h4 {
+      font-family: Alike Angular;
+      font-weight: 100;
+    }
+    @media (max-width: 450px) {
+      top: 40vh !important;
+    }
+    @media (min-width: 450px) and (max-width: 639px) {
+      top: 45vh !important;
+    }
+    @media (min-width: 640px) {
+      top: 10rem !important;
+    }
+    @media (min-width: 768px) {
+      top: 10rem !important;
+    }
+    @media (min-width: 1024px) {
+      top: 11rem !important;
+    }
+    @media (min-width: 1280px) {
+      top: 12rem !important;
+    }
+    @media (min-width: 1400px) {
+      top: 13rem !important;
+    }
+    @media (min-width: 1536px) {
+      top: 14rem !important;
+    }
+    @media (min-width: 1800px) {
+      top: 16rem !important;
+    }
+  }
+}

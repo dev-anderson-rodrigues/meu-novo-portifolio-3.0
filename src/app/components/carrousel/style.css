@@ -1,0 +1,85 @@
+.carousel {
+  @media (min-width: 300px) and (max-width: 349px) {
+    max-width: 400px !important;
+    .slick-prev {
+      top: 48%;
+      left: 44px;
+    }
+    .slick-next {
+      top: 48%;
+      right: 54px;
+    }
+  }
+  @media (min-width: 350px) and (max-width: 767px) {
+    max-width: 400px !important;
+    .slick-prev {
+      top: 48%;
+      left: 27px;
+    }
+    .slick-next {
+      top: 48%;
+      right: 40px;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    max-width: 700px !important;
+    .slick-prev {
+      top: 48%;
+      left: 15px;
+    }
+    .slick-next {
+      top: 48%;
+      right: 25px;
+    }
+  }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    max-width: 1000px !important;
+    .slick-prev {
+      top: 48%;
+      left: 13px;
+    }
+    .slick-next {
+      top: 48%;
+      right: 13px;
+    }
+  }
+  @media (min-width: 1200px) {
+    max-width: 1235px !important;
+    .slick-prev {
+      top: 48%;
+      left: 5px;
+    }
+    .slick-next {
+      top: 48%;
+      right: 2px;
+    }
+  }
+}
+.slick-prev,
+.slick-next {
+  z-index: 1 !important; /* Traz os botões para frente */
+  display: block !important; /* Garante que os botões sejam exibidos */
+  color: white; /* Cor personalizada */
+}
+
+.slick-prev::before,
+.slick-next::before {
+  font-size: 30px; /* Tamanho do ícone da seta */
+  color: var(--text-color); /* Cor das setas */
+  transition: 0.3s ease-in-out;
+}
+
+.slick-prev:hover::before,
+.slick-next:hover::before {
+  color: var(--primary-color);
+}
+.stick-dots {
+  display: contents;
+}
+.slide {
+  text-align: -webkit-center;
+}
+.slide {
+  width: 100%;
+  overflow: hidden;
+}

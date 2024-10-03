@@ -1,5 +1,4 @@
-"use client";
-import { projects } from "@/app/components/section-projects/content-project/utils";
+import { projects } from "@/app/utils/index";
 import { createContext, useState, ReactNode, useEffect } from "react";
 import { objectProject, ProjectContextType } from "./type";
 
