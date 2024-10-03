@@ -1,8 +1,0 @@
-main section:nth-child(3) {
-  .cards {
-    min-height: 450px;
-  }
-  .cards:hover {
-    border: 1px solid var(--primary-color);
-  }
-}
