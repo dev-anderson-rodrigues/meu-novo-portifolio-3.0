@@ -52,6 +52,7 @@ Copiar código
 ├── .hintrc             # Configuração do HTMLHint
 
 
+
 🛠️ Como Rodar o Projeto
 Clone o repositório:
 
