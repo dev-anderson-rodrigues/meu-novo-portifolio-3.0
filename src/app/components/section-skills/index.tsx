@@ -1,6 +1,4 @@
 import React from "react";
-// import Image from "next/image";
-import "./style.css";
 import CustomCarousel from "../carrousel";
 import Card1 from "../cards-skills/card-1";
 import Card2 from "../cards-skills/card-2";

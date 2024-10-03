@@ -1,6 +1,5 @@
 import React, { ReactNode } from "react";
 import Slider from "react-slick";
-import "./style.css";
 
 const CustomCarousel = ({ children }: { children: ReactNode }) => {
   const settings = {

@@ -1,5 +1,4 @@
 import React from "react";
-import "./style.css";
 import CardsProjects from "../cards-projects";
 import CustomCarousel from "../carrousel";
 import Cards from "../cards-projects/cards";
