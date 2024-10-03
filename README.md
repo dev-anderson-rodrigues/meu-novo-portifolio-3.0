@@ -114,7 +114,7 @@ http://localhost:3000
 Se você quiser saber mais sobre meus projetos ou colaborar em alguma iniciativa, entre em contato:
 
 - **E-mail**: [andersoncassio2008@gmail.com](mailto:andersoncassio2008@gmail.com)
-- **LinkedIn**: [Seu Perfil no LinkedIn](https://linkedin.com/in/seu-perfil)
-- **GitHub**: [Seu Perfil no GitHub](https://github.com/seu-perfil)
+- **LinkedIn**: [LinkedIn](https://linkedin.com/in/seu-perfil)
+- **GitHub**: [GitHub](https://github.com/seu-perfil)
 
 ---
