@@ -1,36 +1,120 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💼 Meu Portfólio 3.0
 
-## Getting Started
+Bem-vindo à **versão 3.0** do meu portfólio online! Esta nova iteração é uma evolução significativa dos meus projetos anteriores. Enquanto o meu primeiro portfólio foi construído apenas com **HTML**, **CSS**, e **JavaScript**, a versão 3.0 traz uma experiência muito mais robusta e profissional, utilizando as tecnologias mais modernas do desenvolvimento web, como **Next.js**, **React**, e muito mais.
 
-First, run the development server:
+## 🌟 Sobre o Projeto
+
+Este portfólio foi criado para:
+
+- Mostrar minha trajetória como desenvolvedor, desde projetos mais simples até aplicações fullstack complexas.
+- Apresentar de forma visualmente atraente e funcional meus projetos **fullstack** e **APIs backend**.
+- Oferecer uma plataforma sólida e profissional para **credibilidade online**.
+
+A **versão 3.0** aprimora a experiência do usuário em termos de design e navegação, além de melhorar a performance e responsividade, garantindo uma experiência de uso superior.
+
+---
+
+## 🚀 Tecnologias Utilizadas
+
+### Dependências de Produção:
+
+- **Next.js**: Framework React para desenvolvimento de aplicações rápidas e escaláveis.
+- **React**: Biblioteca para construção de interfaces interativas e dinâmicas.
+- **@mui/material**: Componentes de interface de usuário baseados no Material Design.
+- **@emotion/react** & **@emotion/styled**: CSS-in-JS para estilização flexível.
+- **classnames**: Facilita a manipulação de classes CSS dinâmicas.
+- **react-responsive**: Ferramenta para manipulação de layouts responsivos.
+- **react-slick** & **slick-carousel**: Componentes de carrossel modernos e responsivos.
+
+### Dependências de Desenvolvimento:
+
+- **Typescript**: Tipagem estática para JavaScript, proporcionando maior segurança e legibilidade no código.
+- **ESLint**: Ferramenta de linting para manter a qualidade e padronização do código.
+- **TailwindCSS**: Framework de utilitários CSS para estilização rápida e consistente.
+- **PostCSS**: Processador de CSS para transformar e otimizar estilos.
+- **@types/node**, **@types/react**: Tipagens para integração com TypeScript.
+
+---
+
+## 📂 Estrutura do Projeto
+
+```bash
+├── components        # Componentes reutilizáveis do projeto
+├── contexts          # Contextos para gerenciamento de estado global
+│   ├── projects-context
+│   ├── theme-context
+│   ├── index.tsx     # Ponto de entrada para os contextos
+├── providers         # Provedores de contexto ou funcionalidades específicas
+│   ├── index.ts
+│   ├── providers.tsx
+├── styles            # Arquivos de estilização
+│   ├── globals.css   # Estilos globais da aplicação
+├── utils             # Funções utilitárias
+│   ├── index.ts
+├── layout.tsx        # Layout da aplicação
+├── page.tsx          # Página principal
+├── .eslintrc.json    # Configurações do ESLint
+├── .gitignore        # Arquivo para ignorar arquivos no Git
+├── .hintrc           # Configuração do HTMLHint
+```
+
+---
+
+## 🛠️ Como Rodar o Projeto
+
+1. Clone o repositório:
+
+```bash
+git clone https://github.com/dev-anderson-rodrigues/meu-novo-portifolio-3.0.git
+```
+
+2. Instale as dependências:
+
+```bash
+npm install
+# ou
+yarn install
+```
+
+3. Rode o servidor de desenvolvimento:
 
 ```bash
 npm run dev
-# or
+# ou
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Acesse o projeto no navegador:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🎯 Funcionalidades Destaque
 
-To learn more about Next.js, take a look at the following resources:
+- **Seção de Projetos**: Exibição dos meus principais projetos em carrosséis interativos.
+- **Responsividade**: Design otimizado para funcionar perfeitamente em dispositivos móveis e desktops.
+- **Integração com APIs**: Exibição dinâmica de dados de projetos e atualizações em tempo real.
+- **Design Moderno**: Implementação de **Material UI** e **TailwindCSS** para uma interface limpa e intuitiva.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🎉 Evolução do Portfólio
 
-## Deploy on Vercel
+- **Versão 1.0**: Desenvolvido com **HTML**, **CSS** e **JavaScript** puro. Um portfólio simples, mas funcional.
+- **Versão 2.0**: Alguns aprimoramentos na responsividade.
+- **Versão 3.0**: Migração para **Next.js**, **React** e introdução de funcionalidades avançadas, com ênfase em performance, responsividade, e design moderno.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📞 Contato
+
+Se você quiser saber mais sobre meus projetos ou colaborar em alguma iniciativa, entre em contato:
+
+- **E-mail**: [andersoncassio2008@gmail.com](mailto:andersoncassio2008@gmail.com)
+- **LinkedIn**: [LinkedIn](https://linkedin.com/in/seu-perfil)
+- **GitHub**: [GitHub](https://github.com/seu-perfil)
+
+---
