@@ -14,7 +14,7 @@ const SectionProjects = () => {
       className="w-full min-h-screen flex items-center justify-center pt-4 opacity-90 bg-cover bg-center bg-no-repeat"
       id="projects"
     >
-      <div className="w-full min-h-screen pt-12 ">
+      <div className="w-full pt-12 ">
         <div className="flex w-full h-full items-center justify-center text-3xl text-center m-0 xl:pt-5">
           <h3 className="text-4xl h-full justify-center items-center flex m-0 pt-4 font-semibold">
             Projetos
