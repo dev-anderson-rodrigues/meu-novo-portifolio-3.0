@@ -112,7 +112,7 @@ const ContentProject = () => {
               onClick={handleReadFunc}
               className="font-semibold border-b-2 border-slate-600 btn-read pl-2 pt-2"
             >
-              {read ? "Ver Menos" : "Ver Mais"}
+              {readFunc ? "Ver Menos" : "Ver Mais"}
             </button>
           )}
           <div className="xl:w-2/5 pt-5 xl:absolute right-4 bottom-4 ">
