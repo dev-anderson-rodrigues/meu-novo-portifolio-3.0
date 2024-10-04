@@ -51,6 +51,9 @@ body {
     font-weight: 600;
     min-height: 50vh;
 
+    @media (min-width: 1024px) {
+      min-height: 20vh;
+    }
     img {
       color: var(--text-color);
     }

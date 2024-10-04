@@ -4,7 +4,10 @@ import { FaGithub, FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="w-full flex items-start justify-center" id="contact">
+    <footer
+      className="w-full flex items-start sm:items-center justify-center"
+      id="contact"
+    >
       <div className="p-4 w-full max-w-screen-xl pl-12 pr-12 ctn">
         <div className="flex flex-col md:flex-row justify-between">
           <div className="div-1 flex flex-col items-center w-full md:max-w-lg">
