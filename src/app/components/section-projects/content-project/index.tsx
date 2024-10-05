@@ -1,13 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useProject } from "@/app/contexts";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 
 const ContentProject = () => {
   const { project, setSelectedProject, setProject } = useProject();
   const isMobile = useMediaQuery({ query: "(max-width: 1280px)" });
-  const [read, setRead] = useState(false);
   const [readFunc, setReadFunc] = useState(false);
+  const [isOverflowing, setIsOverflowing] = useState(false);
   const currentProject = project[0];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -29,12 +30,21 @@ const ContentProject = () => {
     setProject([]);
   };
 
-  const handleReadMore = () => {
-    setRead(!read);
-  };
   const handleReadFunc = () => {
     setReadFunc(!readFunc);
   };
+
+  useEffect(() => {
+    const div = document.getElementById("tech");
+
+    if (div) {
+      if (div.scrollHeight > 384) {
+        setIsOverflowing(true);
+      } else {
+        setIsOverflowing(false);
+      }
+    }
+  }, [currentProject]);
 
   return (
     <div className="relative w-full h-full justify-center items-center rounded-xl p-4 pt-0  content-projects ">
@@ -45,8 +55,10 @@ const ContentProject = () => {
               X
             </div>
           </button>
-          <h3 className="pt-10 xl:pt-0 w-full flex text-center items-center justify-center font-semibold text-xl">
-            {currentProject.title}
+          <h3 className="pt-10 xl:pt-0 w-full flex text-center items-center justify-center font-semibold text-xl ">
+            <div className="border-b-2 border-slate-600 px-4">
+              {currentProject.title}
+            </div>
           </h3>
           <div className="h-1/4 pt-6 flex flex-wrap flex-row ">
             <h3 className="text-xl font-semibold">Descrição:</h3>
@@ -64,38 +76,40 @@ const ContentProject = () => {
               {currentProject.url}
             </a>
           </div>
-          <div
-            style={{
-              maxHeight: isMobile ? "100%" : read ? "100%" : "89px", // Ajusta a altura da div
-              overflow: "hidden", // Oculta o conteúdo quando "Ver Menos" está ativo
-              transition: "max-height 0.3s ease-in-out", // Adiciona uma animação suave
-            }}
-          >
+          <div>
             <h3 className="text-xl font-semibold pt-2">Funcionalidades:</h3>
-            {currentProject.functions.map((func, index) => (
-              <div
-                key={index}
-                className="pt-2 text-base font-semibold description pl-2"
-              >
-                {func}
-              </div>
-            ))}
+
+            <details>
+              <summary className="ml-4 mt-2">
+                {!isMobile && (
+                  <span className="font-semibold border-b-2 border-slate-600 btn-read ml-2 pt-2 cursor-pointer">
+                    Clique aqui para visualizar as funcionalidades
+                  </span>
+                )}
+              </summary>
+              <ul>
+                <li>
+                  {currentProject.functions.map((func, index) => (
+                    <div
+                      key={index}
+                      className="pt-2 text-base font-semibold description pl-2"
+                    >
+                      {func}
+                    </div>
+                  ))}
+                </li>
+              </ul>
+            </details>
           </div>
-          {!isMobile && (
-            <button
-              onClick={handleReadMore}
-              className="font-semibold border-b-2 border-slate-600 btn-read pl-2 pt-2"
-            >
-              {read ? "Ver Menos" : "Ver Mais"}
-            </button>
-          )}
+
           <div
-            className="xl:w-2/4 pt-5 min-h-80 "
+            className="xl:w-2/4 pt-5 min-h-96 "
             style={{
-              maxHeight: isMobile ? "100%" : readFunc ? "100%" : "89px", // Ajusta a altura da div
-              overflow: "hidden", // Oculta o conteúdo quando "Ver Menos" está ativo
-              transition: "max-height 0.3s ease-in-out", // Adiciona uma animação suave
+              maxHeight: !readFunc && isOverflowing ? "90px" : "100%", // Controla a altura
+              overflow: !readFunc && isOverflowing ? "hidden" : "visible", // Controla o overflow
+              transition: "max-height 0.3s ease-in-out", // Animação suave
             }}
+            id="tech"
           >
             <h3 className="text-xl font-semibold">Tecnologias:</h3>
             {currentProject.tecnologies.map((tech, index) => (
@@ -107,10 +121,10 @@ const ContentProject = () => {
               </div>
             ))}
           </div>
-          {!isMobile && (
+          {!isMobile && isOverflowing && (
             <button
               onClick={handleReadFunc}
-              className="font-semibold border-b-2 border-slate-600 btn-read pl-2 pt-2"
+              className="font-semibold border-b-2 border-slate-600 btn-read ml-2 pt-2"
             >
               {readFunc ? "Ver Menos" : "Ver Mais"}
             </button>
@@ -120,10 +134,10 @@ const ContentProject = () => {
               {Array.isArray(currentProject.image) &&
                 currentProject.image.length > 0 && (
                   <Image
-                    src={currentProject.image[currentImageIndex]} // Mostra a imagem atual
+                    src={currentProject.image[currentImageIndex]}
                     alt={`${currentProject.title} - ${currentImageIndex + 1}`}
-                    width={600} // Ajuste o tamanho conforme necessário
-                    height={250} // Ajuste o tamanho conforme necessário
+                    width={600}
+                    height={250}
                     quality={100}
                     layout="responsive"
                     className="rounded-2xl bg-cover img-content"

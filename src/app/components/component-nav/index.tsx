@@ -2,15 +2,19 @@ import Link from "next/link";
 import { ThemeToggle } from "../ThemeToggle";
 import { useState } from "react";
 import { useProject } from "@/app/contexts";
+import { useMediaQuery } from "react-responsive";
 
 const Component_Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { setSelectedProject, setProject } = useProject();
+  const isMobile = useMediaQuery({ query: "(max-width: 1280px)" });
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
-    setSelectedProject("");
-    setProject([]);
+    if (isMobile) {
+      setSelectedProject("");
+      setProject([]);
+    }
   };
 
   return (

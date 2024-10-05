@@ -500,7 +500,10 @@ main section:nth-child(4) {
         left: 48%;
       }
     }
-    .btn-read,
+    .btn-read {
+      color: var(--secondary-color2);
+      text-align: center;
+    }
     a {
       animation: blink 3s infinite ease-in-out;
     }
