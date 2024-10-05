@@ -23,7 +23,7 @@ const Component_Nav = () => {
         ☰
       </button>
       <div
-        className={`flex-col fixed top-0 left-0 gap-8 bg-#282c33d2 opacity-99 backdrop-blur-sm w-screen h-screen justify-center md:w-auto md:h-full md:bg-inherit md:justify-end md:static md:flex-row items-center md:gap-4 ${
+        className={`flex-col fixed top-0 left-0 gap-8 bg-neutral-950 bg-opacity-80 backdrop-blur-sm w-screen h-screen justify-center md:w-auto md:h-full md:bg-inherit md:justify-end md:static md:flex-row items-center md:gap-4 ${
           isMenuOpen ? "flex" : "hidden"
         } md:flex`}
       >
