@@ -384,7 +384,6 @@ main section:nth-child(1) {
     min-height: 62vh;
   }
   .macbookBg {
-    max-width: 100vh;
     h3,
     h4 {
       font-family: Alike Angular;
@@ -397,6 +396,7 @@ main section:nth-child(1) {
       bottom: 0;
     }
     @media (min-width: 1024px) and (max-width: 1100px) {
+      max-width: 100vh;
       h3,
       h4 {
         display: none !important;
