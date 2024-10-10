@@ -420,6 +420,8 @@ main section:nth-child(2) {
   padding-top: 20px;
   .img {
     border-color: var(--primary-color);
+    height: auto;
+    width: 15.5rem;
   }
   .cite {
     transition: 3s ease-in-out;
@@ -428,6 +430,9 @@ main section:nth-child(2) {
     }
     cite {
       color: var(--primary-color);
+    }
+    p {
+      margin-bottom: revert;
     }
   }
   .cite:hover {

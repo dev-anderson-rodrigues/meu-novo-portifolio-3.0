@@ -9,7 +9,7 @@ const SectionAboutMe = () => {
     >
       <div className="flex flex-col lg:flex-row mt-20 sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg pl-4 pr-4 w-full h-full xl:max-w-screen-xl items-center z-10 justify-around ">
         <div className="pl-4 pr-4 flex cite">
-          <p className="flex flex-col gap-10 m-0 ">
+          <p className="flex flex-col gap-10 m-0">
             <strong className="text-center text-base md:text-2xl">
               Citação
             </strong>
@@ -30,7 +30,7 @@ const SectionAboutMe = () => {
           width={350}
           height={350}
           quality={100}
-          className="rounded-full shadow-lg border-2 border-solid img"
+          className="rounded-3xl shadow-lg border-2 border-solid img"
         />
       </div>
       <div className="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl pl-6 pr-6 w-full h-full mb-6 p-4 pb-10 contentB">
