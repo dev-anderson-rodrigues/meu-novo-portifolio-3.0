@@ -12,7 +12,7 @@ Este portfólio foi criado para:
 
 A **versão 3.0** aprimora a experiência do usuário em termos de design e navegação, além de melhorar a performance e responsividade, garantindo uma experiência de uso superior.
 
----
+----
 
 ## 🚀 Tecnologias Utilizadas
 
