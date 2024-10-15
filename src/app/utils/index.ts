@@ -51,8 +51,7 @@ export const projects = [
     tecnologies: [
       "Next.js: Framework React para desenvolvimento de aplicações rápidas e escaláveis.",
       "React: Biblioteca para construção de interfaces interativas e dinâmicas.",
-      "@mui/material: Componentes de interface de usuário baseados no Material Design.",
-      "@emotion/react & @emotion/styled: CSS-in-JS para estilização flexível.",
+      "materialUi: Componentes de interface de usuário baseados no Material Design.",
       "classnames: Facilita a manipulação de classes CSS dinâmicas.",
       "react-responsive: Ferramenta para manipulação de layouts responsivos.",
       "react-slick & slick-carousel: Componentes de carrossel modernos e responsivos.",
@@ -60,7 +59,6 @@ export const projects = [
       "ESLint: Ferramenta de linting para manter a qualidade e padronização do código.",
       "TailwindCSS: Framework de utilitários CSS para estilização rápida e consistente.",
       "PostCSS: Processador de CSS para transformar e otimizar estilos.",
-      "@types/node, @types/react: Tipagens para integração com TypeScript.",
     ],
     image: [
       "/assets/images/portifolio3.0.png",
@@ -101,7 +99,7 @@ O projeto Meta Vagas é um projeto fullstack e conta com uma API rodando em Nest
       "O usuário poderá fazer login",
       "O usuário tem acesso aos filtros mas com limitação",
       "EO usuário poderá ver todas vagas sem limitação",
-      "O usuário poderá filtrar as vagas por: nome, tecnologia e localização",
+      "O usuário poderá filtrar as vagas por nome, tecnologia e localização",
       "Filtros pela sidebar:",
     ],
     url: "https://github.com/Team-Tech-School/front-end-metavagas",

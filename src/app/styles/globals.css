@@ -525,6 +525,14 @@ main section:nth-child(4) {
     .img-content {
       max-height: 520px !important;
     }
+    .techName,
+    .funcName {
+      color: var(--secondary-color2);
+    }
+    .techDesc,
+    .funcDesc {
+      color: var(--text-color);
+    }
   }
   .containerProjects {
     min-height: 80vh;

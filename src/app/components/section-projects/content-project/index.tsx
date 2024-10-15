@@ -89,14 +89,20 @@ const ContentProject = () => {
               </summary>
               <ul>
                 <li>
-                  {currentProject.functions.map((func, index) => (
-                    <div
-                      key={index}
-                      className="pt-2 text-base font-semibold description pl-2"
-                    >
-                      {func}
-                    </div>
-                  ))}
+                  {currentProject.functions.map((func, index) => {
+                    const [funcName, funcDesc] = func.split(":");
+                    return (
+                      <div
+                        key={index}
+                        className="pt-2 text-base font-semibold description pl-2"
+                      >
+                        <span className="funcName">{funcName}</span>
+                        {funcDesc && (
+                          <span className="funcDesc">: {funcDesc}</span>
+                        )}
+                      </div>
+                    );
+                  })}
                 </li>
               </ul>
             </details>
@@ -105,21 +111,25 @@ const ContentProject = () => {
           <div
             className="xl:w-2/4 pt-5 min-h-96 "
             style={{
-              maxHeight: !readFunc && isOverflowing ? "90px" : "100%", // Controla a altura
-              overflow: !readFunc && isOverflowing ? "hidden" : "visible", // Controla o overflow
-              transition: "max-height 0.3s ease-in-out", // Animação suave
+              maxHeight: !readFunc && isOverflowing ? "90px" : "100%",
+              overflow: !readFunc && isOverflowing ? "hidden" : "visible",
+              transition: "max-height 0.3s ease-in-out",
             }}
             id="tech"
           >
             <h3 className="text-xl font-semibold">Tecnologias:</h3>
-            {currentProject.tecnologies.map((tech, index) => (
-              <div
-                key={index}
-                className="pt-1 text-base font-semibold description pl-2"
-              >
-                {tech}
-              </div>
-            ))}
+            {currentProject.tecnologies.map((tech, index) => {
+              const [techName, techDesc] = tech.split(":");
+              return (
+                <div
+                  key={index}
+                  className="pt-1 text-base font-semibold description pl-2"
+                >
+                  <span className="techName">{techName}</span>
+                  {techDesc && <span className="techDesc">: {techDesc}</span>}
+                </div>
+              );
+            })}
           </div>
           {!isMobile && isOverflowing && (
             <button
