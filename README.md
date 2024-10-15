@@ -73,7 +73,7 @@ git clone https://github.com/dev-anderson-rodrigues/meu-novo-portifolio-3.0.git
 ```bash
 npm install
 # ou
-yarn install
+yarn
 ```
 
 3. Rode o servidor de desenvolvimento:
