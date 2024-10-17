@@ -26,7 +26,7 @@ export const LanguageToggle = () => {
           </span>
         )}
       </div>
-      <div className="hidden lg:inline-block">
+      <div className="hidden lg:inline-block icon-lang rounded-lg">
         <FontAwesomeIcon icon={faGlobe} className="language" />
       </div>
     </button>

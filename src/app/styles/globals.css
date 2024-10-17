@@ -152,7 +152,8 @@ h1 {
   animation: gradient-border 6s ease infinite;
   transition: 0.3s ease-in-out;
 }
-.btn-theme:hover {
+.btn-theme:hover,
+.icon-lang:hover {
   box-shadow: rgb(18, 246, 214) 0px 0px 10px, rgb(18, 246, 214) 0px 0px 20px,
     rgb(18, 246, 214) 0px 0px 30px;
 }
