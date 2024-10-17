@@ -151,7 +151,7 @@ O projeto Meta Vagas é um projeto fullstack e conta com uma API rodando em Nest
       "Bcryptjs",
       "JWT - Token",
     ],
-    image: ["/assets/images/api.webp"], // Adicione a URL da imagem do projeto
+    image: ["/assets/images/api.webp"],
   },
   {
     title: "API - Metavagas",
@@ -187,7 +187,7 @@ O projeto Meta Vagas é um projeto fullstack e conta com uma API rodando em Nest
       "JWT (Json Web Token",
       "Jest",
     ],
-    image: ["/assets/images/api.webp"], // Adicione a URL da imagem do projeto
+    image: ["/assets/images/api.webp"],
   },
   {
     title: "API - Pet & Events Management",
@@ -234,7 +234,7 @@ O projeto Meta Vagas é um projeto fullstack e conta com uma API rodando em Nest
     ],
     url: "https://github.com/dev-anderson-rodrigues/api-users-demo",
     tecnologies: [
-      "NestJS (Core e diversos módulos como @nestjs/jwt, @nestjs/typeorm, etc.)",
+      "NestJS: (Core e diversos módulos como @nestjs/jwt, @nestjs/typeorm, etc.)",
       "TypeORM: ORM para o banco de dados.",
       "PostgreSQL: Banco de dados relacional.",
       "bcrypt: Para hashing de senhas.",
@@ -244,7 +244,7 @@ O projeto Meta Vagas é um projeto fullstack e conta com uma API rodando em Nest
       "ESLint e Prettier: Para padronização e formatação de código.",
       "Jest e Supertest: Para testes unitários e de integração.",
     ],
-    image: ["/assets/images/api.webp"], // Adicione a URL da imagem do projeto
+    image: ["/assets/images/api.webp"],
   },
   {
     title: "API - Customers Management",

@@ -3,6 +3,7 @@ import { ThemeToggle } from "../ThemeToggle";
 import { useState } from "react";
 import { useProject } from "@/app/contexts";
 import { useMediaQuery } from "react-responsive";
+import { LanguageToggle } from "../language-toggle";
 
 const Component_Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -69,8 +70,13 @@ const Component_Nav = () => {
         >
           <span>#</span>Contato
         </Link>
-        <div className="hidden md:flex">
-          <ThemeToggle />
+        <div className="hidden md:flex justify-center text-center h-auto items-center gap-4">
+          <div>
+            <LanguageToggle />
+          </div>
+          <div>
+            <ThemeToggle />
+          </div>
         </div>
       </div>
     </>

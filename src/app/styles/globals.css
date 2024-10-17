@@ -86,20 +86,23 @@ body {
     }
   }
 }
-a {
+a,
+.language {
   color: var(--secondary-color2);
   gap: 5px;
   display: flex;
   font-weight: 800;
   transition: 0.3s ease-in-out;
 
-  span {
+  span,
+  .language {
     font-weight: normal;
     font-size: 1em;
     color: var(--primary-color);
   }
 }
-a:hover {
+a:hover,
+.language:hover {
   color: var(--text-color);
   text-shadow: rgb(18, 246, 214) 0px 0px 10px, rgb(18, 246, 214) 0px 0px 20px,
     rgb(18, 246, 214) 0px 0px 30px;
