@@ -1,8 +1,10 @@
 import React from "react";
 import Image from "next/image";
 import { FaGithub, FaInstagram } from "react-icons/fa";
+import { useLanguage } from "@/app/contexts";
 
 const Footer = () => {
+  const { language } = useLanguage();
   return (
     <footer
       className="w-full flex items-start sm:items-center justify-center"
@@ -25,13 +27,19 @@ const Footer = () => {
               <span className="email">andersoncassio2008@gmail.com</span>
             </div>
             <div className="p-2 text-2xl w-screen flex items-center justify-center">
-              <p>Desenvolvedor full-stack</p>
+              <p>
+                {language === "Portuguese"
+                  ? "Desenvolvedor full-stack"
+                  : "Full-stack developer"}
+              </p>
             </div>
           </div>
 
           <div className="div2">
             <div className="midia flex flex-col m-auto items-center">
-              <p>Mídias Sociais</p>
+              <p>
+                {language === "Portuguese" ? "Mídias Sociais" : "Social Media"}
+              </p>
               <span className="flex m-auto items-center text-center justify-center gap-2">
                 <a
                   href="https://github.com/dev-anderson-rodrigues"
@@ -52,7 +60,11 @@ const Footer = () => {
           </div>
         </div>
         <div className="copy pt-6">
-          <p>© Copyright 2024. Todos os direitos reservados.</p>
+          <p>
+            {language === "Portuguese"
+              ? "© Copyright 2024. Todos os direitos reservados."
+              : "© Copyright 2024. All rights reserved."}
+          </p>
         </div>
       </div>
     </footer>

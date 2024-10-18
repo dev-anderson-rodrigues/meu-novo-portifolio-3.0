@@ -1,8 +1,9 @@
 import React from "react";
 import Image from "next/image";
-import { useTheme } from "@/app/contexts";
+import { useLanguage, useTheme } from "@/app/contexts";
 
 const SectionHome = () => {
+  const { language } = useLanguage();
   const { theme } = useTheme();
   const light = "light";
 
@@ -28,8 +29,16 @@ const SectionHome = () => {
 
       <div className="macbookBg z-40 flex flex-col m-auto items-center  gap-7">
         <div className="flex flex-col text-center mt-16">
-          <h3 className=" text-xl md:text-6xl">Desenvolvendo Ideias</h3>
-          <h4 className="text-base md:text-4xl">Solucionando Desafios</h4>
+          <h3 className=" text-xl md:text-6xl">
+            {language === "Portuguese"
+              ? "Desenvolvendo Ideias"
+              : "Developing insights"}
+          </h3>
+          <h4 className="text-base md:text-4xl">
+            {language === "Portuguese"
+              ? "Solucionando Desafios"
+              : "Solving Challenges"}
+          </h4>
         </div>
         <div className="p-4">
           <a
@@ -37,7 +46,7 @@ const SectionHome = () => {
             target="true"
           >
             <button className="lg:flex justify-center text-center items-center w-full h-full buttonContact">
-              Me Contate
+              {language === "Portuguese" ? "Me Contate" : "Contact me"}
             </button>
           </a>
         </div>

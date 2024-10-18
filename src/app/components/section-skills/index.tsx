@@ -5,9 +5,10 @@ import Card2 from "../cards-skills/card-2";
 import Card3 from "../cards-skills/card-3";
 import Card4 from "../cards-skills/card-4";
 import classNames from "classnames";
-import { useTheme } from "@/app/contexts";
+import { useLanguage, useTheme } from "@/app/contexts";
 
 const SectionSkills = () => {
+  const { language } = useLanguage();
   const { theme } = useTheme();
   const dark = theme === "dark";
 
@@ -23,7 +24,7 @@ const SectionSkills = () => {
     >
       <div className="w-full h-screen min-h-screen flex flex-col justify-center items-center">
         <div className="pt-4 w-full h-17 items-end flex justify-center text-4xl text-end font-semibold">
-          <h3>Habilidades</h3>
+          <h3>{language === "Portuguese" ? "Habilidades" : "Skills"}</h3>
         </div>
         <div className="h-5/6 -mt-4 flex items-center justify-center w-full slide">
           <CustomCarousel>

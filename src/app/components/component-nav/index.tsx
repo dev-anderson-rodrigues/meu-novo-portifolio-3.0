@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { ThemeToggle } from "../ThemeToggle";
 import { useState } from "react";
-import { useProject } from "@/app/contexts";
+import { useLanguage, useProject } from "@/app/contexts";
 import { useMediaQuery } from "react-responsive";
 import { LanguageToggle } from "../language-toggle";
 
 const Component_Nav = () => {
+  const { language } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { setSelectedProject, setProject } = useProject();
   const isMobile = useMediaQuery({ query: "(max-width: 1280px)" });
@@ -40,35 +41,40 @@ const Component_Nav = () => {
         </button>
 
         <Link onClick={toggleMenu} href="#home" className="text-2xl md:text-sm">
-          <span>#</span>Início
+          <span>#</span>
+          {language === "Portuguese" ? "Início" : "Home"}
         </Link>
         <Link
           onClick={toggleMenu}
           href="#about-me"
           className="text-2xl md:text-sm"
         >
-          <span>#</span>Sobre mim
+          <span>#</span>
+          {language === "Portuguese" ? "Sobre mim" : "About me"}
         </Link>
         <Link
           onClick={toggleMenu}
           href="#skills"
           className="text-2xl md:text-sm"
         >
-          <span>#</span>Habilidades
+          <span>#</span>
+          {language === "Portuguese" ? "Habilidades" : "Skills"}
         </Link>
         <Link
           onClick={toggleMenu}
           href="#projects"
           className="text-2xl md:text-sm"
         >
-          <span>#</span>Projetos
+          <span>#</span>
+          {language === "Portuguese" ? "Projetos" : "Projects"}
         </Link>
         <Link
           onClick={toggleMenu}
           href="#contact"
           className="text-2xl md:text-sm"
         >
-          <span>#</span>Contato
+          <span>#</span>
+          {language === "Portuguese" ? "Contato" : "Contact"}
         </Link>
         <div className="hidden md:flex justify-center text-center h-auto items-center gap-4">
           <div>

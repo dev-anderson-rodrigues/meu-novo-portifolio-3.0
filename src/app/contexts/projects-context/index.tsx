@@ -12,9 +12,9 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
     const arrayProjects = projects;
 
     if (arrayProjects.length === 0) {
-      console.warn("Warning: No projects available"); // Use um warning ao invés de erro
-      setProject([]); // Defina como um array vazio
-      return; // Retorna para evitar continuar
+      console.warn("Warning: No projects available");
+      setProject([]);
+      return;
     }
 
     if (selectedProject) {
@@ -25,12 +25,12 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
       if (data.length > 0) {
         setProject(data);
       } else {
-        console.warn("Warning: No projects found for the selected title."); // Aviso se não houver correspondências
-        setProject([]); // Ou defina como vazio se necessário
+        console.warn("Warning: No projects found for the selected title.");
+        setProject([]);
       }
     } else {
-      console.warn("Warning: No project selected."); // Aviso se nenhum projeto for selecionado
-      setProject([]); // Defina como vazio ou deixe inalterado
+      console.warn("Warning: No project selected.");
+      setProject([]);
     }
   }, [selectedProject]);
 

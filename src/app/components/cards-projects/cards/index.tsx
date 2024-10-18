@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { useProject } from "@/app/contexts";
+import { useLanguage, useProject } from "@/app/contexts";
 import { useMediaQuery } from "react-responsive";
 
 type props = {
@@ -11,6 +11,7 @@ type props = {
   description: string;
 };
 const Cards = ({ src, children, tecnologies, title, description }: props) => {
+  const { language } = useLanguage();
   const { setSelectedProject } = useProject();
   const isMobile = useMediaQuery({ query: "(max-width: 1280px)" });
 
@@ -52,7 +53,9 @@ const Cards = ({ src, children, tecnologies, title, description }: props) => {
         onClick={handleClick}
         className="hidden xl:block absolute bottom-4 w-full items-center justify-center"
       >
-        <button className="p-2 w-24 rounded btn-card-projects">Ver Mais</button>
+        <button className="p-2 w-24 rounded btn-card-projects">
+          {language === "Portuguese" ? "Ver Mais" : "View More"}
+        </button>
       </div>
     </div>
   );
