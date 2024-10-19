@@ -1,4 +1,4 @@
-export const projects = [
+export const projectsPort = [
   {
     title: "W3 ERP - Gestão Empresarial",
     description:
@@ -17,7 +17,7 @@ export const projects = [
       "Componentes do Material UI: Utilização de componentes do Material UI para melhorar a experiência do usuário e garantir consistência visual.",
     ],
     url: "https://github.com/dev-anderson-rodrigues/w3-ERP",
-    tecnologies: [
+    technologies: [
       "React",
       "TypeScript",
       "Axios",
@@ -48,7 +48,7 @@ export const projects = [
     A versão 3.0 aprimora a experiência do usuário em termos de design e navegação, além de melhorar a performance e responsividade, garantindo uma experiência de uso superior.`,
     ],
     url: "https://github.com/dev-anderson-rodrigues/meu-novo-portifolio-3.0",
-    tecnologies: [
+    technologies: [
       "Next.js: Framework React para desenvolvimento de aplicações rápidas e escaláveis.",
       "React: Biblioteca para construção de interfaces interativas e dinâmicas.",
       "materialUi: Componentes de interface de usuário baseados no Material Design.",
@@ -78,7 +78,7 @@ export const projects = [
       "Interface Limpa e Intuitiva: Design amigável e fácil de navegar.",
     ],
     url: "https://github.com/dev-anderson-rodrigues/Projeto-linknabio",
-    tecnologies: [
+    technologies: [
       "HTML: Estrutura do conteúdo.",
       "CSS: Estilização e layout responsivo.",
       "JavaScript: Funcionalidades interativas e dinâmicas.",
@@ -103,7 +103,7 @@ O projeto Meta Vagas é um projeto fullstack e conta com uma API rodando em Nest
       "Filtros pela sidebar:",
     ],
     url: "https://github.com/Team-Tech-School/front-end-metavagas",
-    tecnologies: [
+    technologies: [
       "React",
       "TypeScript",
       "Axios",
@@ -143,7 +143,7 @@ O projeto Meta Vagas é um projeto fullstack e conta com uma API rodando em Nest
       "Atualização do estoque e joias do usuário.",
     ],
     url: "https://github.com/dev-anderson-rodrigues/Culture-Power-backend-Node-Express",
-    tecnologies: [
+    technologies: [
       "Node.js",
       "Express",
       "MongoDB",
@@ -179,7 +179,7 @@ O projeto Meta Vagas é um projeto fullstack e conta com uma API rodando em Nest
       "Buscar todas tecnologias",
     ],
     url: "https://github.com/Team-Tech-School/back-end-metavagas",
-    tecnologies: [
+    technologies: [
       "Nest.js",
       "TypeORM",
       "PostgreSQL",
@@ -233,7 +233,7 @@ O projeto Meta Vagas é um projeto fullstack e conta com uma API rodando em Nest
       "POST /auth/login: Autentica um usuário e retorna o token JWT.",
     ],
     url: "https://github.com/dev-anderson-rodrigues/api-users-demo",
-    tecnologies: [
+    technologies: [
       "NestJS: (Core e diversos módulos como @nestjs/jwt, @nestjs/typeorm, etc.)",
       "TypeORM: ORM para o banco de dados.",
       "PostgreSQL: Banco de dados relacional.",
@@ -259,7 +259,7 @@ O projeto Meta Vagas é um projeto fullstack e conta com uma API rodando em Nest
       "DELETE /customers/:id: Remove um cliente específico do sistema com base no id.",
     ],
     url: "https://github.com/dev-anderson-rodrigues/Exercicios---Modulo-3-nestJS",
-    tecnologies: [
+    technologies: [
       "NestJS: Framework Node.js usado para construir a API.",
       "Class Validator: Usado para validação de dados.",
       "Class Transformer: Usado para transformar objetos entre diferentes representações (ex. DTOs).",
@@ -268,5 +268,276 @@ O projeto Meta Vagas é um projeto fullstack e conta com uma API rodando em Nest
       "PostgreSQL: Banco de dados usado para armazenar os dados.",
     ],
     image: ["/assets/images/api.webp"], // Adicione a URL da imagem do projeto
+  },
+];
+
+export const projectsEnglish = [
+  {
+    title: "W3 ERP - Business Management",
+    description:
+      "W3 ERP is an Integrated Business Management System focused on purchase prediction, developed as part of module 4 of the programming course. Upon successful completion, it guarantees the achievement of a one-year course completion certificate. This project aims to consolidate the skills acquired throughout the course, preparing the developer to work as an emerging fullstack developer.",
+    functions: [
+      "High and Low Clients and Products View: Monitor the best and worst performing products and customers.",
+      "Purchase Prediction: Advanced function that helps predict purchase needs based on historical data.",
+      "Product and Disposal Control: Efficient stock management and output control.",
+      "Product and Client Filtering: Dynamic filters for a more precise search and view of information.",
+      "Product Table with Pagination: Organized display of products in a table, including pagination for easier navigation.",
+      "Login Access: Security and access control through authentication.",
+      "User Access Control: Private routes and user permission management.",
+      "Private Routes with React Router Dom: Route protection and redirection based on user authentication.",
+      "Styled-Components Styling: Customization and styling of components using the Styled-Components library.",
+      "Form Validation with React Hook Form: Validation of input data in forms, ensuring integrity and usability.",
+      "Material UI Components: Use of Material UI components to enhance the user experience and ensure visual consistency.",
+    ],
+    url: "https://github.com/dev-anderson-rodrigues/w3-ERP",
+    technologies: [
+      "React",
+      "TypeScript",
+      "Axios",
+      "Vite",
+      "Styled-Components",
+      "Material UI",
+      "React Hook Form",
+      "React Router Dom",
+    ],
+    image: [
+      "/assets/images/w3erp1.png",
+      "/assets/images/w3erp2.png",
+      "/assets/images/w3erp3.png",
+      "/assets/images/w3erp4.png",
+      "/assets/images/w3erp5.png",
+      "/assets/images/w3erp6.png",
+    ],
+  },
+  {
+    title: "Portfolio 3.0",
+    description:
+      "Welcome to version 3.0 of my online portfolio! This new iteration is a significant evolution from my previous projects. While my first portfolio was built with just HTML, CSS, and JavaScript, version 3.0 offers a much more robust and professional experience using the latest web development technologies like Next.js, React, and more.",
+    functions: [
+      `This portfolio was created to:
+      Showcase my journey as a developer, from simpler projects to complex fullstack applications.
+      Present my fullstack projects and backend APIs in a visually appealing and functional way.
+      Provide a solid and professional platform for online credibility.
+      Version 3.0 enhances user experience in terms of design and navigation while improving performance and responsiveness, ensuring a superior user experience.`,
+    ],
+    url: "https://github.com/dev-anderson-rodrigues/meu-novo-portifolio-3.0",
+    technologies: [
+      "Next.js: React framework for building fast and scalable applications.",
+      "React: Library for building interactive and dynamic interfaces.",
+      "Material UI: User interface components based on Material Design.",
+      "classnames: Simplifies dynamic CSS class manipulation.",
+      "react-responsive: Tool for handling responsive layouts.",
+      "react-slick & slick-carousel: Modern and responsive carousel components.",
+      "Typescript: Static typing for JavaScript, providing greater code security and readability.",
+      "ESLint: Linting tool for maintaining code quality and consistency.",
+      "TailwindCSS: Utility-first CSS framework for rapid and consistent styling.",
+      "PostCSS: CSS processor for transforming and optimizing styles.",
+    ],
+    image: [
+      "/assets/images/portifolio3.0.png",
+      "/assets/images/pt-02.png",
+      "/assets/images/pt-03.png",
+      "/assets/images/pt-04.png",
+    ],
+  },
+  {
+    title: "LINK IN BIO",
+    description:
+      "This project was developed for personal use, inspired by the Linktree concept, aiming to group my social networks and contact methods into a single link to be used in the Instagram bio and other social media. The project is fully customized, includes links to 3 attached projects, access to my social networks, and is fully responsive.",
+    functions: [
+      "Links to Social Networks: Quick access to my main social networks.",
+      "Links to Projects: Three highlighted projects easily accessible.",
+      "Responsiveness: Adaptable layout for mobile devices, tablets, and desktops.",
+      "Clean and Intuitive Interface: User-friendly and easy-to-navigate design.",
+    ],
+    url: "https://github.com/dev-anderson-rodrigues/Projeto-linknabio",
+    technologies: [
+      "HTML: Content structure.",
+      "CSS: Styling and responsive layout.",
+      "JavaScript: Interactive and dynamic functionalities.",
+    ],
+    image: ["/assets/images/Img_LinkNaBio.png"],
+  },
+  {
+    title: "Metavagas – Fullstack Project",
+    description: `Inspired by the operation of the renowned social network LinkedIn, our school project from module IV covers a variety of essential functionalities.
+    The Meta Vagas project is a fullstack project with an API running on Nest.js with TypeORM, designed especially for solid construction of this application.`,
+    functions: [
+      "User registration and authentication.",
+      "Job search by companies, advertisers, and related technologies.",
+      "Private functionalities for users, companies, and jobs.",
+      "Detailed documentation and rigorous testing to ensure product quality and security.",
+      "The user can view job listings with some limitations.",
+      "The user can register.",
+      "The user can log in.",
+      "The user has access to filters but with limitations.",
+      "The user can see all job listings without limitations.",
+      "The user can filter job listings by name, technology, and location.",
+      "Filters via sidebar:",
+    ],
+    url: "https://github.com/Team-Tech-School/front-end-metavagas",
+    technologies: [
+      "React",
+      "TypeScript",
+      "Axios",
+      "Vite",
+      "Styled-Components",
+      "React Hook Form",
+      "React Router Dom",
+      "React Toastfy",
+      "Framer Motion",
+    ],
+    image: [
+      "/assets/images/metavagas.jpeg",
+      "/assets/images/metavagas2.jpeg",
+      "/assets/images/metavagas3.jpeg",
+    ],
+  },
+  {
+    title: "Culture Power API",
+    description:
+      "Culture Power is an API developed to support a gamification application, allowing user and product registration and management, authentication and authorization, and product redemption transactions with jewels.",
+    functions: [
+      "(User Registration) Name, email, password, jewels, product redemption, photo.",
+      "Unique email validation.",
+      "Password encryption.",
+      "(User Login) Credential validation.",
+      "(User Login) Access token generation.",
+      "(Admin Login) Differentiated access token generation.",
+      "(Product Registration (Private Route - Admin)) Name, value, quantity, description, and photo.",
+      "(Product Registration (Private Route - Admin)) Admin permission validation.",
+      "Product Editing (Private Route - Admin) Same validation as Product Registration.",
+      "List All Products (Private Route).",
+      "Search Product by ID (Private Route).",
+      "Send Jewels to User (Private Route - Admin) (Number of jewels and user ID).",
+      "Redeem Product (Private Route) Product ID and user ID.",
+      "Validation of existing product and user.",
+      "Validation of sufficient jewel quantity.",
+      "Update stock and user's jewels.",
+    ],
+    url: "https://github.com/dev-anderson-rodrigues/Culture-Power-backend-Node-Express",
+    technologies: [
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Mongoose",
+      "Bcryptjs",
+      "JWT - Token",
+    ],
+    image: ["/assets/images/api.webp"],
+  },
+  {
+    title: "API - Metavagas",
+    description:
+      "Metavagas is a fullstack project aiming to create a frontend and an API for the Metavagas job platform. The goal is to allow users to view, register, and filter job listings, as well as manage companies and technologies related to the jobs.",
+    functions: [
+      "Create user.",
+      "Authentication.",
+      "Search all jobs with companies, advertisers, and related technologies.",
+      "Update user (self-update or admin).",
+      "Soft delete user (self-delete or admin).",
+      "Search all users (admin only).",
+      "Search user by ID (admin only).",
+      "Profile route returning all user information, except the password.",
+      "Create company (admin only).",
+      "Update company (admin only).",
+      "Search all companies and their associated jobs.",
+      "Search company by ID and its associated jobs.",
+      "Create job (advertiser only).",
+      "Update job (admin or advertiser owner of the job only).",
+      "Delete job (admin or advertiser owner of the job only).",
+      "Search job by ID, including company name and advertiser.",
+      "Filter jobs by technology, job name, salary range, job type, and location, with pagination.",
+      "Create technology (admin only).",
+      "Search all technologies.",
+    ],
+    url: "https://github.com/Team-Tech-School/back-end-metavagas",
+    technologies: [
+      "Nest.js",
+      "TypeORM",
+      "PostgreSQL",
+      "Swagger",
+      "JWT (Json Web Token)",
+      "Jest",
+    ],
+    image: ["/assets/images/api.webp"],
+  },
+  {
+    title: "API - Pet & Events Management",
+    description:
+      "This API was built using NestJS and TypeORM, with PostgreSQL as the database, and JWT for authentication and authorization. The API allows users to: Create and manage profiles with addresses. Add and manage pets, including creation, updates, viewing, and deletion. Create and manage events, allowing participants to join and upload photos.",
+    functions: [
+      // Users
+      "POST /users: Creates a new user.",
+      "GET /users: Lists all users.",
+      "GET /users/profile: Displays the authenticated user's profile.",
+      "GET /users/:id: Shows details of a specific user.",
+      "PATCH /users/:id: Updates a user's details.",
+      "DELETE /users/:id: Performs a soft delete on a user.",
+
+      // Pets
+      "POST /pets: Creates a new pet (authenticated user).",
+      "GET /pets: Lists all pets (optional breed filter).",
+      "GET /pets/my-pets: Lists the authenticated user's pets.",
+      "GET /pets/:id: Shows details of a specific pet.",
+      "PATCH /pets/:id: Updates an existing pet (owner only).",
+      "DELETE /pets/:id: Removes a pet (owner only).",
+
+      // Events
+      "POST /events: Creates a new event.",
+      "GET /events: Lists all events.",
+      "POST /events/:id/participate: Adds a participant to an event.",
+      "POST /events/:id/upload-photo: Uploads a photo for the event.",
+      "GET /events/photo/:filename: Retrieves an event photo by file name.",
+      "GET /events/:id: Displays details of a specific event.",
+      "PATCH /events/:id: Updates an existing event.",
+      "DELETE /events/:id: Deletes an event.",
+
+      // Addresses
+      "POST /address: Adds a new address to the user's profile.",
+      "GET /address: Lists all addresses of the authenticated user.",
+      "GET /address/:id: Shows details of a specific address.",
+      "PATCH /address/:id: Updates an existing address.",
+      "DELETE /address/:id: Deletes an address.",
+
+      // Authentication
+      "POST /auth/login: Authenticates a user and returns a JWT token.",
+    ],
+    url: "https://github.com/dev-anderson-rodrigues/api-users-demo",
+    technologies: [
+      "NestJS: (Core and various modules like @nestjs/jwt, @nestjs/typeorm, etc.)",
+      "TypeORM: ORM for the database.",
+      "PostgreSQL: Relational database.",
+      "bcrypt: For password hashing.",
+      "class-validator and class-transformer: For data validation and transformation.",
+      "multer: File upload (images).",
+      "TypeScript: For static typing and development.",
+      "ESLint and Prettier: For code standardization and formatting.",
+      "Jest and Supertest: For unit and integration testing.",
+    ],
+    image: ["/assets/images/api.webp"],
+  },
+  {
+    title: "API - Customers Management",
+    description:
+      "This API was built using the NestJS framework and allows for the creation, reading, updating, and deletion (CRUD) of customers. The API also provides features such as data validation, object transformation, and automatic documentation using Swagger.",
+    functions: [
+      "GET /customers/hello: Returns all registered customers.",
+      "GET /customers: Lists all customers with optional age filter.",
+      "GET /customers/:id: Returns the details of a specific customer by ID.",
+      "POST /customers: Creates a new customer.",
+      "PATCH /customers/:id: Updates a specific customer's details.",
+      "DELETE /customers/:id: Removes a specific customer from the system by ID.",
+    ],
+    url: "https://github.com/dev-anderson-rodrigues/Exercicios---Modulo-3-nestJS",
+    technologies: [
+      "NestJS: Node.js framework used to build the API.",
+      "Class Validator: Used for data validation.",
+      "Class Transformer: Used to transform objects between different representations (e.g., DTOs).",
+      "TypeScript: Language used for application development, with support for static typing.",
+      "Swagger: Library used to document the API.",
+      "PostgreSQL: Database used to store data.",
+    ],
+    image: ["/assets/images/api.webp"],
   },
 ];

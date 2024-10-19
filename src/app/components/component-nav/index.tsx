@@ -6,7 +6,7 @@ import { useMediaQuery } from "react-responsive";
 import { LanguageToggle } from "../language-toggle";
 
 const Component_Nav = () => {
-  const { language } = useLanguage();
+  const { language, toggleLanguage } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { setSelectedProject, setProject } = useProject();
   const isMobile = useMediaQuery({ query: "(max-width: 1280px)" });
@@ -76,6 +76,20 @@ const Component_Nav = () => {
           <span>#</span>
           {language === "Portuguese" ? "Contato" : "Contact"}
         </Link>
+        <button
+          className="fixed md:hidden top-5 left-12"
+          onClick={toggleLanguage}
+        >
+          {language === "Portuguese" ? (
+            <span className="border-b-2 border-solid border-#000 w-18 pl-0 p-2 flex justify-center items-center text-center text-lg md:text-sm language">
+              Portuguese
+            </span>
+          ) : (
+            <span className="border-b-2 border-solid border-#000 w-18 pl-0 p-2 flex justify-center items-center text-center text-lg md:text-sm language">
+              English
+            </span>
+          )}
+        </button>
         <div className="hidden md:flex justify-center text-center h-auto items-center gap-4">
           <div>
             <LanguageToggle />

@@ -8,10 +8,10 @@ import {
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
-    <ProjectProvider>
-      <LanguageProvider>
+    <LanguageProvider>
+      <ProjectProvider>
         <ThemeProvider>{children}</ThemeProvider>
-      </LanguageProvider>
-    </ProjectProvider>
+      </ProjectProvider>
+    </LanguageProvider>
   );
 };

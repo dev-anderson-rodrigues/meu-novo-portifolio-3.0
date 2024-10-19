@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useProject } from "@/app/contexts";
+import { useLanguage, useProject } from "@/app/contexts";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
@@ -10,6 +10,7 @@ const ContentProject = () => {
   const [readFunc, setReadFunc] = useState(false);
   const [isOverflowing, setIsOverflowing] = useState(false);
   const currentProject = project[0];
+  const { language } = useLanguage();
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -61,13 +62,17 @@ const ContentProject = () => {
             </div>
           </h3>
           <div className="h-1/4 pt-6 flex flex-wrap flex-row ">
-            <h3 className="text-xl font-semibold">Descrição:</h3>
+            <h3 className="text-xl font-semibold">
+              {language === "Portuguese" ? "Descrição:" : "Description"}
+            </h3>
             <p className="pt-1 pl-2 text-base font-semibold description">
               {currentProject.description}
             </p>
           </div>
           <div className="flex gap-2 h-20 items-start pt-4 max-w-screen-md justify-start">
-            <h3 className="text-xl font-semibold">Visitar:</h3>
+            <h3 className="text-xl font-semibold">
+              {language === "Portuguese" ? "Visitar:" : "Visit:"}
+            </h3>
             <a
               href={currentProject.url}
               target="_blank"
@@ -77,13 +82,19 @@ const ContentProject = () => {
             </a>
           </div>
           <div>
-            <h3 className="text-xl font-semibold pt-2">Funcionalidades:</h3>
+            <h3 className="text-xl font-semibold pt-2">
+              {language === "Portuguese"
+                ? "Funcionalidades:"
+                : "Functionalities:"}
+            </h3>
 
             <details>
               <summary className="ml-4 mt-2">
                 {!isMobile && (
                   <span className="font-semibold border-b-2 border-slate-600 btn-read ml-2 pt-2 cursor-pointer">
-                    Clique aqui para visualizar as funcionalidades
+                    {language === "Portuguese"
+                      ? "Clique aqui para visualizar as funcionalidades"
+                      : "Click here to view the features"}
                   </span>
                 )}
               </summary>
@@ -117,8 +128,10 @@ const ContentProject = () => {
             }}
             id="tech"
           >
-            <h3 className="text-xl font-semibold">Tecnologias:</h3>
-            {currentProject.tecnologies.map((tech, index) => {
+            <h3 className="text-xl font-semibold">
+              {language === "Portuguese" ? "Tecnologias:" : "Technologies"}
+            </h3>
+            {currentProject.technologies.map((tech, index) => {
               const [techName, techDesc] = tech.split(":");
               return (
                 <div
@@ -183,7 +196,11 @@ const ContentProject = () => {
           </div>
         </>
       ) : (
-        <div>Erro: Nenhum projeto disponível</div>
+        <div>
+          {language === "Portuguese"
+            ? "Erro: Nenhum projeto disponível"
+            : "Error: project not found"}
+        </div>
       )}
     </div>
   );

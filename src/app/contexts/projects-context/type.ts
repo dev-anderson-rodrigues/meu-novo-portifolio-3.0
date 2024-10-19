@@ -12,5 +12,5 @@ export type objectProject = {
   functions: string[];
   url: string;
   image: string[];
-  tecnologies: string[];
+  technologies: string[];
 };
