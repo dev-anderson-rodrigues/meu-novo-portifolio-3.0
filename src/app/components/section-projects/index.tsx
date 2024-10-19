@@ -84,7 +84,7 @@ const SectionProjects = () => {
                     title={
                       language === "Portuguese"
                         ? "Metavagas – Projeto Fullstack"
-                        : "Metavagas - Fullstack Project"
+                        : "Metavagas – Fullstack Project"
                     }
                     description={
                       language === "Portuguese"
