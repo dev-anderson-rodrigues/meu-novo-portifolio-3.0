@@ -97,7 +97,7 @@ const SectionProjects = () => {
               <div className="mx-4">
                 <CardsProjects>
                   <Cards
-                    src="/assets/images/api.webp"
+                    src="/assets/images/imgApi.gif"
                     tecnologies="NODE.JS, EXPRESS, JWT"
                     title="Culture Power API"
                     description={
@@ -109,7 +109,7 @@ const SectionProjects = () => {
                 </CardsProjects>
                 <CardsProjects>
                   <Cards
-                    src="/assets/images/api.webp"
+                    src="/assets/images/imgApi.gif"
                     tecnologies="NEST, JWT, JEST, TYPESCRIPT"
                     title="API - Metavagas"
                     description={
@@ -123,7 +123,7 @@ const SectionProjects = () => {
               <div className="mx-4">
                 <CardsProjects>
                   <Cards
-                    src="/assets/images/api.webp"
+                    src="/assets/images/imgApi.gif"
                     tecnologies="NEST, MULTER, JEST"
                     title="API - Pet & Events Management"
                     description={
@@ -135,7 +135,7 @@ const SectionProjects = () => {
                 </CardsProjects>
                 <CardsProjects>
                   <Cards
-                    src="/assets/images/api.webp"
+                    src="/assets/images/imgApi.gif"
                     tecnologies="NEST, TYPESCRIPT, JEST"
                     title="API - Customers Management"
                     description={
