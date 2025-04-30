@@ -39,6 +39,7 @@ export default function RootLayout({
             name="google-site-verification"
             content="rPeADMfHTMCG3V3YBOjnivTp8ov8_xJRyBG_zH8YqUI"
           />
+          <link rel="icon" type="image/x-icon" href="/meu-portifolio/public/favicon.ico" />
         </head>
         <body
           className={`${poppins.className} ${platypi.className} ${alikeAngular.className}`}
