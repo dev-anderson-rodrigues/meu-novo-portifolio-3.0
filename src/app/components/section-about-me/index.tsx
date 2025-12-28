@@ -37,7 +37,7 @@ const SectionAboutMe = () => {
           </p>
         </div>
         <Image
-          src={"/assets/images/minha-imagem.png"}
+          src={"/assets/images/nv-foto.png"}
           alt="Minha imagem"
           width={350}
           height={350}
@@ -53,67 +53,90 @@ const SectionAboutMe = () => {
         <article className="text-lg font-extralight pt-2">
           {language === "Portuguese" ? (
             <>
-              Sou Anderson Rodrigues, Desenvolvedor Full Stack em Ascenção. Após
-              uma carreira bem-sucedida em instalação, manutenção e suporte em
-              redes de internet, decidi seguir minha verdadeira paixão por
-              tecnologia e mergulhar no universo do desenvolvimento web. Com uma
-              sólida base em suporte de redes e uma abordagem criativa para a
-              solução de problemas, trago uma perspectiva única para o
-              desenvolvimento de soluções digitais que impactam positivamente
-              negócios e usuários.
+              Sou Anderson Rodrigues, desenvolvedor Full Stack com mais de
+              2 anos de experiência. Atuo há mais de 1 ano desenvolvendo
+              soluções para provedores de internet, trabalhando diretamente com
+              análise e automação de processos, integrações entre sistemas ERP e
+              desenvolvimento de soluções inteligentes utilizando n8n,
+              low-code/no-code e Inteligência Artificial. Tenho forte atuação na
+              construção de fluxos automatizados que reduzem erros operacionais,
+              aceleram atendimentos e melhoram a organização interna das
+              equipes. Atualmente, atuo como desenvolvedor CLT, participando de
+              projetos de grande impacto e relevância estratégica para a
+              empresa.
             </>
           ) : (
             <>
-              I'm Anderson Rodrigues, a Full Stack Developer on the rise. After
-              a successful career in network installation, maintenance and
-              support networks, I decided to follow my true passion for
-              technology and into the world of web development. With a solid
-              foundation in support and a creative approach to problem solving,
-              I bring a unique perspective to the development of digital
-              solutions that positively impact businesses and users.
+              I'm Anderson Rodrigues, a Full Stack developer with over 2
+              years of experience. For the past year, I've been developing
+              solutions for internet service providers, working directly with
+              process analysis and automation, ERP system integrations, and
+              developing intelligent solutions using n8n, low-code/no-code, and
+              Artificial Intelligence. I have a strong track record in building
+              automated workflows that reduce operational errors, accelerate
+              service, and improve internal team organization. Currently, I work
+              as a full-time developer, participating in high-impact and
+              strategically relevant projects for the company.
             </>
           )}
         </article>
         <article className="text-lg font-extralight pt-2">
           {language === "Portuguese" ? (
             <>
-              Residente do interior de São Paulo e vindo de uma família humilde,
-              minha vontade de deixar um legado significativo só cresce. Sempre
-              fui um sonhador próximo das tecnologias atuais e, com 12 anos, já
-              formatava meu primeiro PC. Minha visão de um futuro melhor me
-              levou a ingressar em uma escola de programação fullstack, onde
-              conquistei meu certificado de Desenvolvedor Fullstack e adquiri
-              expertise em tecnologias como JavaScript e Node.js, além de
-              frameworks front-end como React.js e back-end como NestJS.
+              Nos últimos projetos, meu foco principal tem sido automação e IA,
+              criando soluções que atendem áreas como suporte, comercial,
+              vendas, financeiro e cobrança, incluindo o desenvolvimento de
+              chats inteligentes com múltiplos agentes de IA, hoje utilizados em
+              produção e em constante evolução. Esse produto foi idealizado e
+              encabeçado por mim, desde a concepção da solução até sua
+              implementação, tornando-se um produto interno oficial da empresa,
+              utilizado diariamente no ambiente corporativo. Além do
+              desenvolvimento técnico, atuo como responsável pela evolução do
+              produto, criando novas funcionalidades, definindo melhorias
+              contínuas, administrando a manutenção da solução e orientando
+              equipes sobre seu funcionamento, garantindo estabilidade,
+              escalabilidade e alinhamento com as necessidades do negócio.
             </>
           ) : (
             <>
-              I live in the interior of São Paulo and come from a humble family,
-              my desire to leave a meaningful legacy only grows. I've always
-              been a dreamer close to current technologies and, at the age of
-              12, I was already my first PC. My vision of a better future led me
-              to a fullstack programming school, where I earned my Fullstack
-              Developer certificate and acquired expertise in technologies such
-              as JavaScript and Node.js, as well as front-end frameworks
-              frameworks like React.js and back-end frameworks like NestJS.
+              In recent projects, my main focus has been automation and AI,
+              creating solutions that serve areas such as support, sales,
+              finance, and collections, including the development of intelligent
+              chats with multiple AI agents, currently used in production and
+              constantly evolving. This product was conceived and spearheaded by
+              me, from the solution's conception to its implementation, becoming
+              an official internal company product used daily in the corporate
+              environment. In addition to technical development, I am
+              responsible for the product's evolution, creating new
+              functionalities, defining continuous improvements, managing the
+              solution's maintenance, and guiding teams on its operation,
+              ensuring stability, scalability, and alignment with business
+              needs.
             </>
           )}
         </article>
         <article className="text-lg font-extralight pt-2">
           {language === "Portuguese" ? (
             <>
-              Atualmente, estou complementando minha formação com a faculdade de
-              Análise e Desenvolvimento de Sistemas, o que me proporciona uma
-              base acadêmica sólida e um conhecimento mais amplo sobre sistemas.
-              Tenho experiência com bancos de dados relacionais e não
-              relacionais, incluindo MongoDB e PostgreSQL.
+              Mesmo com forte atuação em low-code e no-code, mantenho minha base
+              Full Stack ativa, estudando e desenvolvendo projetos com
+              JavaScript, Node.js, APIs, React, Next.js e NestJS, além de
+              trabalhar com bancos de dados relacionais e não relacionais como
+              PostgreSQL e MongoDB. Acredito que essa combinação entre
+              fundamentos sólidos de programação, automação inteligente e visão
+              de produto é o que me permite criar soluções escaláveis, bem
+              estruturadas e com impacto real.
             </>
           ) : (
             <>
-              I'm currently supplementing my education with a degree in Systems
-              Analysis and Development, which gives me a solid academic base and
-              a broader knowledge of systems. I have experience with relational
-              and non-relational databases, including MongoDB and PostgreSQL.
+              Even with a strong focus on low-code and no-code, I maintain an
+              active Full Stack foundation, studying and developing projects
+              with JavaScript, Node.js, APIs, React, Next.js, and NestJS, as
+              well as working with relational and non-relational databases like
+              PostgreSQL and MongoDB. I believe that this combination of solid
+              programming fundamentals, intelligent automation, and product
+              vision is what allows me to create scalable, well-structured
+              solutions with real impact.
             </>
           )}
         </article>
