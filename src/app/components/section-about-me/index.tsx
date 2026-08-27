@@ -6,12 +6,9 @@ import { useLanguage } from "@/app/contexts";
 const SectionAboutMe = () => {
   const { language } = useLanguage();
   return (
-    <section
-      className="w-full min-h-screen items-center flex flex-col justify-between about-me z-20"
-      id="about-me"
-    >
-      <div className="flex flex-col lg:flex-row mt-20 sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg pl-4 pr-4 w-full h-full xl:max-w-screen-xl items-center z-10 justify-around ">
-        <div className="pl-4 pr-4 flex cite">
+    <section className="about-me sobre z-20" id="about-me">
+      <div className="sobre__topo">
+        <div className="cite">
           <p className="flex flex-col gap-10 m-0">
             <strong className="text-center text-base md:text-2xl">
               {language === "Portuguese" ? "Citação" : "Citation"}
@@ -43,10 +40,10 @@ const SectionAboutMe = () => {
           height={350}
           sizes="350px"
           quality={90}
-          className="rounded-3xl shadow-lg border-2 border-solid img"
+          className="rounded-3xl border-2 border-solid img"
         />
       </div>
-      <div className="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl pl-6 pr-6 w-full h-full mb-6 p-4 pb-10 contentB">
+      <div className="contentB">
         <strong className="text-3xl">
           {language === "Portuguese" ? "Olá" : "Hello"}
         </strong>

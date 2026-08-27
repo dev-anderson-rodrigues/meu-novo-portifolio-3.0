@@ -24,13 +24,22 @@ import { useCallback, useEffect, useRef } from "react";
  */
 export const useReveal = <T extends HTMLElement>() => {
   const obsRef = useRef<IntersectionObserver | null>(null);
+  const limparRef = useRef<(() => void) | null>(null);
 
   // Se o componente sair de cena com o observador de pé, ele fica.
-  useEffect(() => () => obsRef.current?.disconnect(), []);
+  useEffect(
+    () => () => {
+      obsRef.current?.disconnect();
+      limparRef.current?.();
+    },
+    []
+  );
 
   return useCallback((root: T | null) => {
     obsRef.current?.disconnect();
     obsRef.current = null;
+    limparRef.current?.();
+    limparRef.current = null;
 
     if (!root) return;
 
@@ -54,16 +63,62 @@ export const useReveal = <T extends HTMLElement>() => {
      */
     root.dataset.reveal = "ready";
 
+    const revelar = (el: Element) => {
+      el.classList.add("is-revealed");
+      obs.unobserve(el);
+      pendentes.delete(el as HTMLElement);
+      if (pendentes.size === 0) pararVarredura();
+    };
+
+    const pendentes = new Set<HTMLElement>(filhos);
+
     const obs = new IntersectionObserver(
       (entradas) => {
         entradas.forEach((e) => {
-          if (!e.isIntersecting) return;
-          e.target.classList.add("is-revealed");
-          obs.unobserve(e.target);
+          if (e.isIntersecting) revelar(e.target);
         });
       },
       { rootMargin: "0px 0px -8% 0px", threshold: 0.1 }
     );
+
+    /**
+     * Rede de segurança para rolagem rápida.
+     *
+     * Num arrastão de dedo o elemento consegue atravessar a tela
+     * inteira entre duas apurações do observador, e aí ele nunca é
+     * notificado — o card ficava invisível para sempre mesmo depois de
+     * a pessoa ter passado por cima dele. Medindo em Chromium, uma
+     * rolagem de 1800px por quadro deixava três dos oito para trás.
+     *
+     * Não adianta testar isso dentro do callback do observador: se ele
+     * não dispara para aquele elemento, não há callback nenhum. A
+     * varredura precisa ser independente — passiva, adiada por quadro
+     * e desligada assim que o último card aparece.
+     */
+    let agendado = false;
+
+    const varrer = () => {
+      agendado = false;
+      const limite = window.innerHeight;
+      pendentes.forEach((el) => {
+        if (el.getBoundingClientRect().top < limite) revelar(el);
+      });
+    };
+
+    const aoRolar = () => {
+      if (agendado) return;
+      agendado = true;
+      requestAnimationFrame(varrer);
+    };
+
+    function pararVarredura() {
+      window.removeEventListener("scroll", aoRolar);
+      window.removeEventListener("resize", aoRolar);
+    }
+
+    window.addEventListener("scroll", aoRolar, { passive: true });
+    window.addEventListener("resize", aoRolar, { passive: true });
+    limparRef.current = pararVarredura;
 
     filhos.forEach((el, i) => {
       // Escalonamento curto: passa a impressão de sequência sem
@@ -71,6 +126,12 @@ export const useReveal = <T extends HTMLElement>() => {
       el.style.setProperty("--reveal-delay", `${Math.min(i, 7) * 60}ms`);
       obs.observe(el);
     });
+
+    // Primeira medição sem depender de rolagem: quem já está na tela
+    // no momento da montagem aparece na hora. É o caso de voltar do
+    // detalhe de um projeto, em que a grade remonta com a seção
+    // inteira já enquadrada e nenhum evento de rolagem acontece.
+    requestAnimationFrame(varrer);
 
     obsRef.current = obs;
   }, []);

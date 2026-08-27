@@ -78,6 +78,13 @@ const ContentProject = () => {
               {currentProject.title}
             </div>
           </h3>
+
+          {/* A galeria era `absolute right-4 bottom-4`, ancorada no
+              painel inteiro: a altura do painel tinha de ser adivinhada
+              pelo texto para a imagem caber. Duas colunas de grade
+              resolvem sem ninguém precisar adivinhar nada. */}
+          <div className="detalhe__corpo">
+            <div className="detalhe__texto">
           <div className="h-1/4 pt-6 flex flex-wrap flex-row ">
             <h3 className="text-xl font-semibold">
               {language === "Portuguese" ? "Descrição:" : "Description"}
@@ -170,7 +177,9 @@ const ContentProject = () => {
               {readFunc ? "Ver Menos" : "Ver Mais"}
             </button>
           )}
-          <div className="xl:w-2/5 pt-5 xl:absolute right-4 bottom-4 ">
+            </div>
+
+            <div className="detalhe__midia">
             <div className="relative">
               {Array.isArray(currentProject.image) &&
                 currentProject.image.length > 0 && (
@@ -184,32 +193,32 @@ const ContentProject = () => {
                     className="rounded-2xl bg-cover img-content"
                   />
                 )}
-              <div className="absolute left-4  xl:right-4 bottom-4 flex space-x-2">
+              <div className="galeria-nav">
                 <button
+                  type="button"
                   onClick={handlePrevious}
                   disabled={currentImageIndex === 0}
-                  className={`btn-nav-img-projects border-b-2 border-slate-600 ${
-                    currentImageIndex === 0
-                      ? "opacity-50 cursor-not-allowed"
-                      : ""
-                  }`}
+                  aria-label={language === "Portuguese" ? "Imagem anterior" : "Previous image"}
+                  className="galeria-btn"
                 >
-                  Previous
+                  ‹
                 </button>
+                <span className="galeria-contador" aria-live="polite">
+                  {currentImageIndex + 1} / {currentProject.image.length}
+                </span>
                 <button
+                  type="button"
                   onClick={handleNext}
                   disabled={
                     currentImageIndex === currentProject.image.length - 1
                   }
-                  className={`btn-nav-img-projects border-b-2 border-slate-600 ${
-                    currentImageIndex === currentProject.image.length - 1
-                      ? "opacity-50 cursor-not-allowed"
-                      : ""
-                  }`}
+                  aria-label={language === "Portuguese" ? "Próxima imagem" : "Next image"}
+                  className="galeria-btn"
                 >
-                  Next
+                  ›
                 </button>
               </div>
+            </div>
             </div>
           </div>
         </>
