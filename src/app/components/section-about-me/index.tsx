@@ -37,11 +37,12 @@ const SectionAboutMe = () => {
           </p>
         </div>
         <Image
-          src={"/assets/images/nv-foto.png"}
+          src={"/assets/images/nv-foto.webp"}
           alt="Minha imagem"
           width={350}
           height={350}
-          quality={100}
+          sizes="350px"
+          quality={90}
           className="rounded-3xl shadow-lg border-2 border-solid img"
         />
       </div>

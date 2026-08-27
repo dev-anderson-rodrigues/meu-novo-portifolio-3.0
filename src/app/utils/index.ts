@@ -28,12 +28,12 @@ export const projectsPort = [
       "React Router Dom",
     ],
     image: [
-      "/assets/images/w3erp1.png",
-      "/assets/images/w3erp2.png",
-      "/assets/images/w3erp3.png",
-      "/assets/images/w3erp4.png",
-      "/assets/images/w3erp5.png",
-      "/assets/images/w3erp6.png",
+      "/assets/images/w3erp1.webp",
+      "/assets/images/w3erp2.webp",
+      "/assets/images/w3erp3.webp",
+      "/assets/images/w3erp4.webp",
+      "/assets/images/w3erp5.webp",
+      "/assets/images/w3erp6.webp",
     ],
   },
   {
@@ -61,10 +61,10 @@ export const projectsPort = [
       "PostCSS: Processador de CSS para transformar e otimizar estilos.",
     ],
     image: [
-      "/assets/images/portifolio3.0.png",
-      "/assets/images/pt-02.png",
-      "/assets/images/pt-03.png",
-      "/assets/images/pt-04.png",
+      "/assets/images/portifolio3.0.webp",
+      "/assets/images/pt-02.webp",
+      "/assets/images/pt-03.webp",
+      "/assets/images/pt-04.webp",
     ],
   },
   {
@@ -83,7 +83,7 @@ export const projectsPort = [
       "CSS: Estilização e layout responsivo.",
       "JavaScript: Funcionalidades interativas e dinâmicas.",
     ],
-    image: ["/assets/images/Img_LinkNaBio.png"],
+    image: ["/assets/images/Img_LinkNaBio.webp"],
   },
   {
     title: "Metavagas – Projeto Fullstack",
@@ -115,9 +115,9 @@ O projeto Meta Vagas é um projeto fullstack e conta com uma API rodando em Nest
       "Framer Motion",
     ],
     image: [
-      "/assets/images/metavagas.jpeg",
-      "/assets/images/metavagas2.jpeg",
-      "/assets/images/metavagas3.jpeg",
+      "/assets/images/metavagas.webp",
+      "/assets/images/metavagas2.webp",
+      "/assets/images/metavagas3.webp",
     ],
   },
   {
@@ -301,12 +301,12 @@ export const projectsEnglish = [
       "React Router Dom",
     ],
     image: [
-      "/assets/images/w3erp1.png",
-      "/assets/images/w3erp2.png",
-      "/assets/images/w3erp3.png",
-      "/assets/images/w3erp4.png",
-      "/assets/images/w3erp5.png",
-      "/assets/images/w3erp6.png",
+      "/assets/images/w3erp1.webp",
+      "/assets/images/w3erp2.webp",
+      "/assets/images/w3erp3.webp",
+      "/assets/images/w3erp4.webp",
+      "/assets/images/w3erp5.webp",
+      "/assets/images/w3erp6.webp",
     ],
   },
   {
@@ -334,10 +334,10 @@ export const projectsEnglish = [
       "PostCSS: CSS processor for transforming and optimizing styles.",
     ],
     image: [
-      "/assets/images/portifolio3.0.png",
-      "/assets/images/pt-02.png",
-      "/assets/images/pt-03.png",
-      "/assets/images/pt-04.png",
+      "/assets/images/portifolio3.0.webp",
+      "/assets/images/pt-02.webp",
+      "/assets/images/pt-03.webp",
+      "/assets/images/pt-04.webp",
     ],
   },
   {
@@ -356,7 +356,7 @@ export const projectsEnglish = [
       "CSS: Styling and responsive layout.",
       "JavaScript: Interactive and dynamic functionalities.",
     ],
-    image: ["/assets/images/Img_LinkNaBio.png"],
+    image: ["/assets/images/Img_LinkNaBio.webp"],
   },
   {
     title: "Metavagas – Fullstack Project",
@@ -388,9 +388,9 @@ export const projectsEnglish = [
       "Framer Motion",
     ],
     image: [
-      "/assets/images/metavagas.jpeg",
-      "/assets/images/metavagas2.jpeg",
-      "/assets/images/metavagas3.jpeg",
+      "/assets/images/metavagas.webp",
+      "/assets/images/metavagas2.webp",
+      "/assets/images/metavagas3.webp",
     ],
   },
   {

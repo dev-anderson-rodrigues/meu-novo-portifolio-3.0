@@ -8,12 +8,11 @@ export const LanguageToggle = () => {
   const { toggleLanguage, language } = useLanguage();
   const port = language === "Portuguese";
 
-  console.log("Language:", language); // Debug log
-
   return (
     <button
       onClick={toggleLanguage}
       className="relative rounded-lg flex items-center"
+      aria-label={port ? "Mudar para inglês" : "Switch to Portuguese"}
     >
       <div className="hidden lg:flex">
         {port ? (

@@ -1,11 +1,10 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useLanguage, useProject } from "@/app/contexts";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 
 const ContentProject = () => {
-  const { project, setSelectedProject, setProject } = useProject();
+  const { project, setSelectedProject } = useProject();
   const isMobile = useMediaQuery({ query: "(max-width: 1280px)" });
   const [readFunc, setReadFunc] = useState(false);
   const [isOverflowing, setIsOverflowing] = useState(false);
@@ -13,6 +12,7 @@ const ContentProject = () => {
   const { language } = useLanguage();
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const techRef = useRef<HTMLDivElement>(null);
 
   const handleNext = () => {
     if (currentImageIndex < currentProject.image.length - 1) {
@@ -28,23 +28,37 @@ const ContentProject = () => {
 
   const handleExit = () => {
     setSelectedProject("");
-    setProject([]);
   };
 
   const handleReadFunc = () => {
     setReadFunc(!readFunc);
   };
 
+  /**
+   * Saber se a lista de tecnologias estoura só é possível depois do
+   * layout, então medir é inevitável. O que não era necessário é
+   * medir uma vez só: a versão anterior lia o scrollHeight quando o
+   * projeto mudava e nunca mais, então girar o celular ou aumentar a
+   * fonte do sistema deixava o "Ver mais" mentindo — aparecendo sem
+   * ter o que revelar, ou sumindo com texto ainda cortado.
+   *
+   * O ResizeObserver dispara já na primeira observação e a cada
+   * mudança de largura, o que cobre os dois casos.
+   */
   useEffect(() => {
-    const div = document.getElementById("tech");
+    const el = techRef.current;
+    if (!el) return;
 
-    if (div) {
-      if (div.scrollHeight > 384) {
-        setIsOverflowing(true);
-      } else {
-        setIsOverflowing(false);
-      }
+    if (typeof ResizeObserver === "undefined") {
+      setIsOverflowing(el.scrollHeight > 384);
+      return;
     }
+
+    const obs = new ResizeObserver(() => {
+      setIsOverflowing(el.scrollHeight > 384);
+    });
+    obs.observe(el);
+    return () => obs.disconnect();
   }, [currentProject]);
 
   return (
@@ -127,6 +141,7 @@ const ContentProject = () => {
               transition: "max-height 0.3s ease-in-out",
             }}
             id="tech"
+            ref={techRef}
           >
             <h3 className="text-xl font-semibold">
               {language === "Portuguese" ? "Tecnologias:" : "Technologies"}
@@ -161,8 +176,8 @@ const ContentProject = () => {
                     alt={`${currentProject.title} - ${currentImageIndex + 1}`}
                     width={600}
                     height={250}
-                    quality={100}
-                    layout="responsive"
+                    sizes="100vw"
+                    style={{ width: "100%", height: "auto" }}
                     className="rounded-2xl bg-cover img-content"
                   />
                 )}

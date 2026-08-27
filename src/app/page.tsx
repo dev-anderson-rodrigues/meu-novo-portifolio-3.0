@@ -1,6 +1,23 @@
-// src/app/page.tsx
-import { redirect } from 'next/navigation';
+"use client";
+
+import Header from "./components/header";
+import SectionHome from "./components/section-home";
+import SectionAboutMe from "./components/section-about-me";
+import SectionSkills from "./components/section-skills";
+import SectionProjects from "./components/section-projects";
+import Footer from "./components/footer";
 
 export default function Home() {
-  redirect('/portifolio');
+  return (
+    <>
+      <Header />
+      <main>
+        <SectionHome />
+        <SectionAboutMe />
+        <SectionSkills />
+        <SectionProjects />
+      </main>
+      <Footer />
+    </>
+  );
 }

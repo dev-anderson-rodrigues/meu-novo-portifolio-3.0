@@ -1,51 +1,39 @@
 import { projectsPort, projectsEnglish } from "@/app/utils/index";
-import { createContext, useState, ReactNode, useEffect } from "react";
+import { createContext, useMemo, useState, ReactNode } from "react";
 import { objectProject, ProjectContextType } from "./type";
 import { useLanguage } from "../language-context/useLanguage";
 
 export const AppProjectContext = createContext<ProjectContextType>(null!);
 
+/**
+ * Antes havia dois estados (a lista traduzida e o projeto aberto) que
+ * um useEffect mantinha em sincronia, e o efeito se listava entre as
+ * próprias dependências: cada troca de idioma custava uma renderização
+ * extra. Pior, ele imprimia três console.warn no caminho normal —
+ * "No project selected" saía no console de todo mundo que abrisse o
+ * site sem clicar em nada.
+ *
+ * As duas informações são derivadas: a lista sai do idioma e o projeto
+ * aberto sai do título selecionado. Sem efeito, sem aviso e sem
+ * estado duplicado.
+ */
 export const ProjectProvider = ({ children }: { children: ReactNode }) => {
-  const [project, setProject] = useState<objectProject[]>([]);
   const [selectedProject, setSelectedProject] = useState<string>("");
-  const [arrayProject, setArrayProject] = useState(projectsPort);
   const { language } = useLanguage();
 
-  useEffect(() => {
-    if (language === "Portuguese") {
-      setArrayProject(projectsPort);
-    }
-    if (language === "English") {
-      setArrayProject(projectsEnglish);
-    }
+  const project = useMemo<objectProject[]>(() => {
+    if (!selectedProject) return [];
+    const lista = language === "Portuguese" ? projectsPort : projectsEnglish;
+    return lista.filter((proj) => proj.title === selectedProject);
+  }, [language, selectedProject]);
 
-    if (arrayProject.length === 0) {
-      console.warn("Warning: No projects available");
-      setProject([]);
-      return;
-    }
-
-    if (selectedProject) {
-      const data = arrayProject.filter(
-        (proj) => proj.title === selectedProject
-      );
-
-      if (data.length > 0) {
-        setProject(data);
-      } else {
-        console.warn("Warning: No projects found for the selected title.");
-        setProject([]);
-      }
-    } else {
-      console.warn("Warning: No project selected.");
-      setProject([]);
-    }
-  }, [arrayProject, language, selectedProject]);
+  const value = useMemo(
+    () => ({ project, setSelectedProject }),
+    [project]
+  );
 
   return (
-    <AppProjectContext.Provider
-      value={{ project, setSelectedProject, setProject }}
-    >
+    <AppProjectContext.Provider value={value}>
       {children}
     </AppProjectContext.Provider>
   );

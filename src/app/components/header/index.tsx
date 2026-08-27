@@ -5,18 +5,18 @@ import { useLanguage } from "@/app/contexts";
 const Header = () => {
   const { language } = useLanguage();
   return (
-    <header className="w-screen fixed top-0 h-16  items-center flex justify-center z-50">
-      <div className="flex justify-between items-center p-6 w-full max-w-screen-xl">
-        <h1 className=" text-lg">
+    <header className="w-screen fixed top-0 items-center flex justify-center z-50">
+      <div className="flex justify-between items-center gap-4 px-4 md:px-6 py-2 w-full max-w-screen-xl">
+        <h1 className="site-name">
           {language === "Portuguese" ? (
             <>
-              <p>Anderson Rodrigues</p>
-              <p>Desenvolvedor Full Stack</p>
+              <span>Anderson Rodrigues</span>
+              <span>Desenvolvedor Full Stack</span>
             </>
           ) : (
             <>
-              <p>Anderson Rodrigues</p>
-              <p className="text-xl">Full Stack Developer</p>
+              <span>Anderson Rodrigues</span>
+              <span>Full Stack Developer</span>
             </>
           )}
         </h1>

@@ -1,153 +1,157 @@
 import React from "react";
-import CardsProjects from "../cards-projects";
-import CustomCarousel from "../carrousel";
 import Cards from "../cards-projects/cards";
 import ContentProject from "./content-project";
 import { useLanguage, useProject } from "@/app/contexts";
+import { useReveal } from "@/app/hooks/useReveal";
+
+/**
+ * Os oito projetos ficavam num carrossel do react-slick, dois por
+ * slide. Duas coisas pesavam contra: as setas e os dots eram os
+ * defaults da biblioteca, e quem avaliava precisava de quatro
+ * cliques para ver tudo — justamente no conteúdo que decide a visita.
+ *
+ * Em grade, os oito aparecem de uma vez. O título continua sendo a
+ * chave que o contexto usa para achar o projeto, então precisa bater
+ * exatamente com o de utils/index.ts.
+ */
+type Projeto = {
+  src?: string;
+  mono?: string;
+  seed?: number;
+  tec: string;
+  pt: { title: string; desc: string };
+  en: { title: string; desc: string };
+};
+
+const PROJETOS: Projeto[] = [
+  {
+    src: "/assets/images/w3-erp.webp",
+    tec: "REACT, MATERIAL UI, AXIOS",
+    pt: {
+      title: "W3 ERP - Gestão Empresarial",
+      desc: "Sistema Integrado de Gestão Empresarial",
+    },
+    en: {
+      title: "W3 ERP - Business Management",
+      desc: "Integrated Business Management System",
+    },
+  },
+  {
+    src: "/assets/images/portifolio3.0.webp",
+    tec: "NEXT, TAILWIND, JAVASCRIPT",
+    pt: {
+      title: "Portifólio 3.0",
+      desc: "Desenvolvido em Next js e resposividade com Tailwind",
+    },
+    en: {
+      title: "Portfolio 3.0",
+      desc: "Developed in Next js and responsive with Tailwind",
+    },
+  },
+  {
+    src: "/assets/images/Img_LinkNaBio.webp",
+    tec: "HTML, CSS, JAVASCRIPT",
+    pt: { title: "LINK NA BIO", desc: "Repositório de links para redes socias" },
+    en: { title: "LINK IN BIO", desc: "Repository of links to social networks" },
+  },
+  {
+    src: "/assets/images/metavagas1.webp",
+    tec: "REACT, AXIOS, REACT ROUTER",
+    pt: { title: "Metavagas – Projeto Fullstack", desc: "Inspirado no Linkedin" },
+    en: { title: "Metavagas – Fullstack Project", desc: "Inspired by Linkedin" },
+  },
+  {
+    mono: "CP",
+    seed: 0,
+    tec: "NODE.JS, EXPRESS, JWT",
+    pt: {
+      title: "Culture Power API",
+      desc: "O Culture Power é uma API de gamificação.",
+    },
+    en: {
+      title: "Culture Power API",
+      desc: "Culture Power is a gamification API.",
+    },
+  },
+  {
+    mono: "MV",
+    seed: 1,
+    tec: "NEST, JWT, JEST, TYPESCRIPT",
+    pt: { title: "API - Metavagas", desc: "API para a plataforma de vagas" },
+    en: { title: "API - Metavagas", desc: "API for the vacancies platform" },
+  },
+  {
+    mono: "PE",
+    seed: 2,
+    tec: "NEST, MULTER, JEST",
+    pt: {
+      title: "API - Pet & Events Management",
+      desc: "Pet Events é uma API desenvolvida em Nest js",
+    },
+    en: {
+      title: "API - Pet & Events Management",
+      desc: "Pet Events is an API developed in Nest js",
+    },
+  },
+  {
+    mono: "CM",
+    seed: 3,
+    tec: "NEST, TYPESCRIPT, JEST",
+    pt: {
+      title: "API - Customers Management",
+      desc: "Customers é uma API desenvolvida em Nest js",
+    },
+    en: {
+      title: "API - Customers Management",
+      desc: "Customers is an API developed in Nest js",
+    },
+  },
+];
 
 const SectionProjects = () => {
   const { language } = useLanguage();
   const { project } = useProject();
-  const currentProject = project.length > 0;
+  const pt = language === "Portuguese";
+  const abertoEm = project.length > 0;
+  const gridRef = useReveal<HTMLUListElement>();
 
   return (
     <section
-      className="w-full min-h-screen flex items-center justify-center pt-4 opacity-90 bg-cover bg-center bg-no-repeat"
+      className="w-full flex items-center justify-center py-16"
       id="projects"
     >
-      <div className="w-full pt-12 ">
-        <div className="flex w-full h-full items-center justify-center text-3xl text-center m-0 xl:pt-5">
-          <h3 className="text-4xl h-full justify-center items-center flex m-0 pt-4 font-semibold">
-            {language === "Portuguese" ? "Projetos" : "Projects"}
-          </h3>
+      <div className="w-full max-w-screen-xl px-4 flex flex-col items-center gap-10">
+        <div className="flex flex-col items-center text-center gap-3">
+          <h3 className="section-title">{pt ? "Projetos" : "Projects"}</h3>
+          <p className="section-lede">
+            {pt
+              ? "Oito projetos entre aplicações fullstack e APIs. Toque em qualquer um para ver os detalhes."
+              : "Eight projects across fullstack apps and APIs. Tap any of them for the details."}
+          </p>
         </div>
-        {currentProject ? (
-          <div className="w-full h-full xl:h-4/5 max-w-7xl m-auto flex justify-center containerProjects xl:pt-10">
+
+        {abertoEm ? (
+          <div className="w-full flex justify-center containerProjects">
             <ContentProject />
           </div>
         ) : (
-          <div className="flex gap-6 items-center justify-center w-full slide containerProjects">
-            <CustomCarousel>
-              <div className="mx-4">
-                <CardsProjects>
+          <ul className="pgrid" ref={gridRef}>
+            {PROJETOS.map((p, i) => {
+              const t = pt ? p.pt : p.en;
+              return (
+                <li key={`${t.title}-${i}`} className="pgrid__item">
                   <Cards
-                    src="/assets/images/w3-erp.png"
-                    tecnologies="REACT, MATERIAL UI, AXIOS"
-                    title={
-                      language === "Portuguese"
-                        ? "W3 ERP - Gestão Empresarial"
-                        : "W3 ERP - Business Management"
-                    }
-                    description={
-                      language === "Portuguese"
-                        ? "Sistema Integrado de Gestão Empresarial"
-                        : "Integrated Business Management System"
-                    }
+                    src={p.src}
+                    mono={p.mono}
+                    seed={p.seed}
+                    tecnologies={p.tec}
+                    title={t.title}
+                    description={t.desc}
                   />
-                </CardsProjects>
-                <CardsProjects>
-                  <Cards
-                    src="/assets/images/portifolio3.0.png"
-                    tecnologies="NEXT, TAILWIND, JAVASCRIPT"
-                    title={
-                      language === "Portuguese"
-                        ? "Portifólio 3.0"
-                        : "Portfolio 3.0"
-                    }
-                    description={
-                      language === "Portuguese"
-                        ? "Desenvolvido em Next js e resposividade com Tailwind"
-                        : "Developed in Next js and responsive with Tailwind"
-                    }
-                  />
-                </CardsProjects>
-              </div>
-              <div className="mx-4">
-                <CardsProjects>
-                  <Cards
-                    src="/assets/images/Img_LinkNaBio.png"
-                    tecnologies="HTML, CSS, JAVASCRIPT"
-                    title={
-                      language === "Portuguese" ? "LINK NA BIO" : "LINK IN BIO"
-                    }
-                    description={
-                      language === "Portuguese"
-                        ? "Repositório de links para redes socias"
-                        : "Repository of links to social networks"
-                    }
-                  />
-                </CardsProjects>
-                <CardsProjects>
-                  <Cards
-                    src="/assets/images/metavagas1.jpeg"
-                    tecnologies="REACT, AXIOS, REACT ROUTER"
-                    title={
-                      language === "Portuguese"
-                        ? "Metavagas – Projeto Fullstack"
-                        : "Metavagas – Fullstack Project"
-                    }
-                    description={
-                      language === "Portuguese"
-                        ? "Inspirado no Linkedin"
-                        : "Inspired by Linkedin"
-                    }
-                  />
-                </CardsProjects>
-              </div>
-              <div className="mx-4">
-                <CardsProjects>
-                  <Cards
-                    src="/assets/images/imgApi.gif"
-                    tecnologies="NODE.JS, EXPRESS, JWT"
-                    title="Culture Power API"
-                    description={
-                      language === "Portuguese"
-                        ? "O Culture Power é uma API de gamificação."
-                        : "Culture Power is a gamification API."
-                    }
-                  />
-                </CardsProjects>
-                <CardsProjects>
-                  <Cards
-                    src="/assets/images/imgApi.gif"
-                    tecnologies="NEST, JWT, JEST, TYPESCRIPT"
-                    title="API - Metavagas"
-                    description={
-                      language === "Portuguese"
-                        ? "API para a plataforma de vagas"
-                        : "API for the vacancies platform"
-                    }
-                  />
-                </CardsProjects>
-              </div>
-              <div className="mx-4">
-                <CardsProjects>
-                  <Cards
-                    src="/assets/images/imgApi.gif"
-                    tecnologies="NEST, MULTER, JEST"
-                    title="API - Pet & Events Management"
-                    description={
-                      language === "Portuguese"
-                        ? "Pet Events é uma API desenvolvida em Nest js"
-                        : "Pet Events is an API developed in Nest js"
-                    }
-                  />
-                </CardsProjects>
-                <CardsProjects>
-                  <Cards
-                    src="/assets/images/imgApi.gif"
-                    tecnologies="NEST, TYPESCRIPT, JEST"
-                    title="API - Customers Management"
-                    description={
-                      language === "Portuguese"
-                        ? "Customers é uma API desenvolvida em Nest js"
-                        : "Customers is an API developed in Nest js"
-                    }
-                  />
-                </CardsProjects>
-              </div>
-            </CustomCarousel>
-          </div>
+                </li>
+              );
+            })}
+          </ul>
         )}
       </div>
     </section>

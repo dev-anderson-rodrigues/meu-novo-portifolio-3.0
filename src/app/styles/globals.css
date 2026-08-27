@@ -1,8 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "slick-carousel/slick/slick.css";
-@import "slick-carousel/slick/slick-theme.css";
 
 * {
   margin: 0px;
@@ -14,28 +12,125 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* ---------------------------------------------------------------
+     ESCALA TIPOGRÁFICA — razão 1.25, ancorada em 16px
+     --------------------------------------------------------------- */
+  --fs-xs: 0.75rem;    /* 12px */
+  --fs-sm: 0.875rem;   /* 14px */
+  --fs-md: 1rem;       /* 16px */
+  --fs-lg: 1.25rem;    /* 20px */
+  --fs-xl: 1.563rem;   /* 25px */
+  --fs-2xl: 1.953rem;  /* 31px */
+  --fs-3xl: 2.441rem;  /* 39px */
+  --fs-4xl: 3.052rem;  /* 49px */
+
+  /* ---------------------------------------------------------------
+     RITMO DE ESPAÇAMENTO — base 4px
+     --------------------------------------------------------------- */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-6: 1.5rem;
+  --sp-8: 2rem;
+  --sp-12: 3rem;
+  --sp-16: 4rem;
+  --sp-24: 6rem;
+
+  /* ---------------------------------------------------------------
+     FORMA E MOVIMENTO
+     --------------------------------------------------------------- */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 160ms;
+  --dur-med: 300ms;
+  --dur-slow: 600ms;
+
+  /* Velocidade das esteiras de habilidades */
+  --marquee-a: 46s;
+  --marquee-b: 62s;
 }
+
+/* =================================================================
+   PALETA
+
+   Mudança de papéis nesta versão:
+   o verde-água que antes era a cor da marca virou a cor de
+   INTERAÇÃO (hover, foco, estado ativo). Uma cor quente assumiu
+   a marca. Para trocar a identidade do site inteiro, mexa apenas
+   em --brand e --brand-strong nos dois temas.
+   ================================================================= */
+
 [data-theme="dark"] {
-  --bg-color: #282c33;
+  --bg-color: #0e1116;
+  --surface: #161a21;
+  --surface-raised: #1d222b;
   --background-liner: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 1) 21%,
-    rgba(40, 44, 51, 1) 44%
+    rgba(6, 8, 11, 1) 21%,
+    rgba(14, 17, 22, 1) 44%
   );
-  --text-color: #ffffff;
-  --primary-color: rgb(18, 246, 214);
-  --secondary-color2: #abb2bf;
+  --text-color: #f0f2f5;
+  --secondary-color2: #98a2b3;
+  --border-color: #262c36;
+
+  --brand: #ff7a5c;
+  --brand-strong: #ff9d85;
+  --interactive: rgb(18, 246, 214);
+
+  /* Compatibilidade: --primary-color segue apontando para a cor
+     de interação, que é onde ela era usada na prática. */
+  --primary-color: var(--interactive);
+
+  --glow-1: rgba(18, 246, 214, 1);
+  --glow-2: rgba(18, 246, 214, 0.9);
+  --glow-3: rgba(18, 246, 214, 0.3);
+
+  --hero-veil: 0.14;
+  --hero-mask-color: #06080b;
 }
+
 [data-theme="light"] {
   --bg-color: #ffffff;
+  --surface: #f5f6f8;
+  --surface-raised: #ffffff;
   --background-liner: linear-gradient(
     180deg,
     rgba(255, 255, 255, 1) 21%,
-    rgba(240, 240, 240, 1) 74%
+    rgba(241, 242, 245, 1) 74%
   );
-  --text-color: #000000;
-  --primary-color: rgb(18, 246, 214);
-  --secondary-color2: #767c86;
+  --text-color: #15181d;
+  --secondary-color2: #5a6472;
+  --border-color: #dfe3e8;
+
+  --brand: #c4482c;
+  --brand-strong: #9d3720;
+  /* O verde-água puro é ilegível sobre branco — aqui ele é
+     escurecido até passar em contraste, mantendo o mesmo matiz. */
+  --interactive: #07a88f;
+
+  --primary-color: var(--interactive);
+
+  --glow-1: rgba(7, 168, 143, 0.85);
+  --glow-2: rgba(7, 168, 143, 0.55);
+  --glow-3: rgba(7, 168, 143, 0.25);
+
+  --hero-veil: 0.05;
+  --hero-mask-color: #f1f2f5;
+}
+
+/* Glows reutilizáveis — antes eram 22 repetições literais do
+   verde-água espalhadas pelo arquivo. */
+:root {
+  --shadow-glow: var(--glow-1) 0px 0px 10px, var(--glow-1) 0px 0px 20px,
+    var(--glow-1) 0px 0px 30px;
+  --shadow-glow-soft: var(--glow-2) 0px 0px 40px, var(--glow-1) 0px 0px 5px,
+    var(--glow-3) 0px 0px 5px;
 }
 body {
   color: var(--text-color);
@@ -104,8 +199,7 @@ a,
 a:hover,
 .language:hover {
   color: var(--text-color);
-  text-shadow: rgb(18, 246, 214) 0px 0px 10px, rgb(18, 246, 214) 0px 0px 20px,
-    rgb(18, 246, 214) 0px 0px 30px;
+  text-shadow: var(--shadow-glow);
 }
 a:active {
   color: var(--primary-color);
@@ -154,8 +248,7 @@ h1 {
 }
 .btn-theme:hover,
 .icon-lang:hover {
-  box-shadow: rgb(18, 246, 214) 0px 0px 10px, rgb(18, 246, 214) 0px 0px 20px,
-    rgb(18, 246, 214) 0px 0px 30px;
+  box-shadow: var(--shadow-glow);
 }
 
 .btn-theme span {
@@ -246,8 +339,7 @@ h1 {
 }
 .btn-nav-img-projects:hover {
   color: var(--text-color);
-  text-shadow: rgb(18, 246, 214) 0px 0px 10px, rgb(18, 246, 214) 0px 0px 20px,
-    rgb(18, 246, 214) 0px 0px 30px;
+  text-shadow: var(--shadow-glow);
 }
 
 .btn-nav-img-projects.opacity-50 {
@@ -291,84 +383,9 @@ h1 {
     transform: rotate(0deg);
   }
 }
-.carousel {
-  @media (min-width: 300px) and (max-width: 349px) {
-    max-width: 400px !important;
-    .slick-prev {
-      top: 48%;
-      left: 44px;
-    }
-    .slick-next {
-      top: 48%;
-      right: 54px;
-    }
-  }
-  @media (min-width: 350px) and (max-width: 767px) {
-    max-width: 400px !important;
-    .slick-prev {
-      top: 48%;
-      left: 27px;
-    }
-    .slick-next {
-      top: 48%;
-      right: 40px;
-    }
-  }
-  @media (min-width: 768px) and (max-width: 991px) {
-    max-width: 700px !important;
-    .slick-prev {
-      top: 48%;
-      left: 15px;
-    }
-    .slick-next {
-      top: 48%;
-      right: 25px;
-    }
-  }
-  @media (min-width: 992px) and (max-width: 1199px) {
-    max-width: 1000px !important;
-    .slick-prev {
-      top: 48%;
-      left: 13px;
-    }
-    .slick-next {
-      top: 48%;
-      right: 13px;
-    }
-  }
-  @media (min-width: 1200px) {
-    max-width: 1235px !important;
-    .slick-prev {
-      top: 48%;
-      left: 5px;
-    }
-    .slick-next {
-      top: 48%;
-      right: 2px;
-    }
-  }
-}
-.slick-prev,
-.slick-next {
-  z-index: 1 !important;
-  display: block !important;
-  color: white;
-}
 
-.slick-prev::before,
-.slick-next::before {
-  font-size: 30px;
-  color: var(--text-color);
-  transition: 0.3s ease-in-out;
-}
 
-.slick-prev:hover::before,
-.slick-next:hover::before {
-  color: var(--primary-color);
-}
-.stick-dots {
-  display: contents;
-}
+
 .slide {
   text-align: -webkit-center;
 }
@@ -441,8 +458,7 @@ main section:nth-child(2) {
   }
   .cite:hover {
     @media (min-width: 1024px) {
-      box-shadow: rgb(18, 246, 214, 0.9) 0px 0px 40px,
-        rgb(18, 246, 214) 0px 0px 5px, rgb(18, 246, 214, 0.3) 0px 0px 5px;
+      box-shadow: var(--shadow-glow-soft);
     }
   }
   .contentB {
@@ -450,8 +466,7 @@ main section:nth-child(2) {
   }
   .contentB:hover {
     @media (min-width: 1024px) {
-      box-shadow: rgb(18, 246, 214, 0.9) 0px 0px 40px,
-        rgb(18, 246, 214) 0px 0px 5px, rgb(18, 246, 214, 0.3) 0px 0px 5px;
+      box-shadow: var(--shadow-glow-soft);
     }
   }
 }
@@ -482,8 +497,7 @@ main section:nth-child(4) {
     transition: linear 1s;
   }
   .btn-card-projects:hover {
-    box-shadow: rgb(18, 246, 214) 0px 0px 10px, rgb(18, 246, 214) 0px 0px 20px,
-      rgb(18, 246, 214) 0px 0px 30px;
+    box-shadow: var(--shadow-glow);
   }
 
   .content-projects {
@@ -518,13 +532,11 @@ main section:nth-child(4) {
     }
     .btn-read:hover {
       color: var(--text-color);
-      text-shadow: rgb(18, 246, 214) 0px 0px 10px,
-        rgb(18, 246, 214) 0px 0px 20px, rgb(18, 246, 214) 0px 0px 30px;
+      text-shadow: var(--shadow-glow);
     }
     .btn:hover {
       color: var(--text-color);
-      box-shadow: rgb(18, 246, 214) 0px 0px 10px, rgb(18, 246, 214) 0px 0px 20px,
-        rgb(18, 246, 214) 0px 0px 30px;
+      box-shadow: var(--shadow-glow);
     }
     .img-content {
       max-height: 520px !important;
@@ -540,5 +552,870 @@ main section:nth-child(4) {
   }
   .containerProjects {
     min-height: 80vh;
+  }
+}
+
+/* =================================================================
+   ESTEIRA DE HABILIDADES
+
+   Fluxo contínuo em CSS puro: a lista é duplicada no JSX e o track
+   anda de 0 a -50%, então a emenda cai exatamente onde a cópia
+   começa e o loop não tem corte. Sem JavaScript, sem biblioteca —
+   só transform, que o navegador compõe na GPU.
+   ================================================================= */
+
+.section-title {
+  font-size: var(--fs-2xl);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text-color);
+  text-wrap: balance;
+
+  @media (min-width: 768px) {
+    font-size: var(--fs-3xl);
+  }
+}
+
+.section-lede {
+  font-size: var(--fs-md);
+  color: var(--secondary-color2);
+  max-width: 46ch;
+  text-wrap: balance;
+}
+
+.marquee-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.marquee {
+  overflow: hidden;
+  width: 100%;
+  padding-block: var(--sp-2);
+
+  /* Desvanece nas bordas para os itens surgirem e sumirem em vez
+     de serem cortados na quina da tela. */
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+}
+
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  width: max-content;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  animation-name: marquee-flow;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+.marquee-track.is-reverse {
+  animation-direction: reverse;
+}
+
+@keyframes marquee-flow {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Pausa quando o visitante quer ler — mouse em cima ou foco por
+   teclado dentro da faixa. */
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+.skill-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex: 0 0 auto;
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  background-color: var(--surface);
+  color: var(--secondary-color2);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) var(--ease);
+}
+
+.skill-item:hover {
+  color: var(--text-color);
+  border-color: var(--interactive);
+  background-color: var(--surface-raised);
+}
+
+.skill-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: 0 0 auto;
+  color: var(--brand);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.skill-item:hover .skill-icon {
+  color: var(--interactive);
+}
+
+/* Quem pediu menos movimento no sistema recebe a lista parada e
+   rolável na horizontal, em vez de nenhuma informação. */
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    overflow-x: auto;
+  }
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* =================================================================
+   HERO — véu de fundo controlado por token
+
+   Antes a opacidade da imagem das montanhas vinha de um ternário no
+   JSX, e estava invertida: o tema CLARO recebia mais opacidade (30%)
+   que o escuro (15%), então a foto escura dominava justamente onde o
+   fundo deveria ser claro. Agora cada tema declara o próprio véu, e a
+   máscara inferior é invertida no claro para não virar um bloco preto.
+   ================================================================= */
+
+.hero-veil {
+  opacity: var(--hero-veil);
+}
+
+/* A máscara agora é SVG e recebe a cor do tema por currentColor.
+   Antes era um WebP escuro que o tema claro precisava inverter com
+   filter — o que clareava tudo junto, inclusive o que não devia. */
+.hero-mask {
+  color: var(--hero-mask-color);
+  height: auto;
+}
+
+/* =================================================================
+   APARÊNCIA POR TEMA — resolvida em CSS, não em JavaScript
+
+   Antes, três componentes escolhiam classes com `theme === "dark"`
+   dentro do render. Como o tema real só existe no navegador, isso
+   fazia servidor e cliente renderizarem árvores diferentes. Aqui a
+   troca acontece pelo seletor [data-theme], que o script de
+   bootstrap já resolveu antes da hidratação.
+   ================================================================= */
+
+/* A seção acompanha o conteúdo em vez de esticar até uma altura
+   arbitrária — a esteira é compacta e um min-height deixava um vazio
+   grande antes da seção de projetos. */
+.skills-section {
+  padding-block: var(--sp-8);
+}
+
+[data-theme="dark"] .skills-section {
+  background-image: url("/assets/images/bg-background.webp");
+}
+
+/* Alternância de ícone do botão de tema */
+.theme-icon {
+  display: none;
+}
+
+[data-theme="dark"] .theme-icon--dark,
+[data-theme="light"] .theme-icon--light {
+  display: flex;
+}
+
+/* =================================================================
+   CARD DE PROJETO
+
+   A superfície era Rectangle.png, uma imagem rasterizada de 44 KB
+   fazendo papel de fundo — por isso a altura era fixa, o card não
+   acompanhava o tema claro e o desenho não escalava. Agora é CSS:
+   fundo, borda e elevação vêm dos tokens e funcionam nos dois temas
+   de graça.
+   ================================================================= */
+
+.pcard-slide {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  padding-inline: var(--sp-2);
+}
+
+.pcard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 20rem;
+  margin-inline: auto;
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+  background-color: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  transition: transform var(--dur-med) var(--ease),
+    border-color var(--dur-med) var(--ease),
+    box-shadow var(--dur-med) var(--ease);
+}
+
+.pcard:hover,
+.pcard:focus-visible {
+  transform: translateY(-4px);
+  border-color: var(--interactive);
+  box-shadow: 0 12px 28px -12px rgb(0 0 0 / 0.45),
+    0 4px 10px -6px rgb(0 0 0 / 0.3);
+}
+
+.pcard:focus-visible {
+  outline: 2px solid var(--interactive);
+  outline-offset: 3px;
+}
+
+/* Proporção fixa: antes cada imagem chegava com um formato e os cards
+   terminavam com alturas diferentes na mesma fileira. */
+.pcard__media {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background-color: var(--surface-raised);
+}
+
+.pcard__img {
+  object-fit: cover;
+  transition: transform var(--dur-slow) var(--ease);
+}
+
+.pcard:hover .pcard__img {
+  transform: scale(1.05);
+}
+
+.pcard__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding: var(--sp-4);
+}
+
+.pcard__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1);
+}
+
+/* Antes as tecnologias eram uma string corrida
+   ("REACT, MATERIAL UI, AXIOS"). Agora cada uma é um marcador. */
+.pcard__chip {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--brand);
+  background-color: color-mix(in srgb, var(--brand) 12%, transparent);
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.pcard__title {
+  display: block;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--text-color);
+  text-wrap: balance;
+}
+
+.pcard__desc {
+  display: block;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  color: var(--secondary-color2);
+}
+
+.pcard__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  margin-top: var(--sp-1);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--secondary-color2);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.pcard:hover .pcard__cta,
+.pcard:focus-visible .pcard__cta {
+  color: var(--interactive);
+}
+
+.pcard__arrow {
+  width: 1rem;
+  height: 1rem;
+  transition: transform var(--dur-fast) var(--ease);
+}
+
+.pcard:hover .pcard__arrow {
+  transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pcard,
+  .pcard__img,
+  .pcard__arrow {
+    transition: none;
+  }
+  .pcard:hover {
+    transform: none;
+  }
+  .pcard:hover .pcard__img {
+    transform: none;
+  }
+}
+
+/* =================================================================
+   SELETOR DE MARCA — 4 temas × claro/escuro
+
+   Cada tema é só um par de valores. Toda a interface acompanha
+   porque nada mais no arquivo tem cor cravada: a marca é sempre
+   var(--brand). O padrão (sem data-brand) é o coral definido acima.
+   ================================================================= */
+
+[data-theme="dark"][data-brand="coral"] { --brand: #ff7a5c; --brand-strong: #ff9d85; }
+[data-theme="light"][data-brand="coral"] { --brand: #c4482c; --brand-strong: #9d3720; }
+
+[data-theme="dark"][data-brand="ambar"] { --brand: #f0a23c; --brand-strong: #ffb95e; }
+[data-theme="light"][data-brand="ambar"] { --brand: #b4761c; --brand-strong: #8f5c11; }
+
+[data-theme="dark"][data-brand="lilas"] { --brand: #b79cff; --brand-strong: #d0bcff; }
+[data-theme="light"][data-brand="lilas"] { --brand: #6d4ac7; --brand-strong: #55379f; }
+
+[data-theme="dark"][data-brand="champanhe"] { --brand: #e5c07b; --brand-strong: #f2d69c; }
+[data-theme="light"][data-brand="champanhe"] { --brand: #96742c; --brand-strong: #765a1e; }
+
+/* =================================================================
+   CABEÇALHO
+
+   A barra tinha altura travada em h-16 com padding de 24px por
+   dentro, sobrando 16px para o conteúdo — o nome transbordava para
+   fora da borda. Agora a altura acompanha o conteúdo e o nome
+   encolhe nas faixas estreitas, onde o menu disputa espaço.
+   ================================================================= */
+
+header {
+  min-height: 4rem;
+}
+
+.site-name {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  font-size: 0.8125rem;
+  text-align: left;
+  font-style: normal;
+
+  @media (min-width: 1024px) {
+    font-size: 1rem;
+  }
+}
+
+.site-name span:first-child {
+  font-weight: 700;
+}
+
+.site-name span:last-child {
+  font-weight: 400;
+  color: var(--secondary-color2);
+}
+
+/* =================================================================
+   MENU DE APARÊNCIA
+
+   Substitui o toggle de tema e as quatro bolinhas soltas por um
+   controle único. O gatilho mostra a cor atual; o painel dá nome às
+   opções, que bolinhas cruas não conseguiam comunicar.
+
+   O estado "selecionado" vem de [data-theme] / [data-brand] no
+   <html>, nunca do React — o mesmo motivo de sempre: hidratação.
+   ================================================================= */
+
+.appearance {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.appearance__trigger {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  background-color: var(--surface);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease);
+}
+
+.appearance__trigger:hover {
+  border-color: var(--interactive);
+}
+
+.appearance__trigger:focus-visible {
+  outline: 2px solid var(--interactive);
+  outline-offset: 2px;
+}
+
+.appearance__swatch {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand), var(--interactive));
+}
+
+.appearance__panel {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  right: 0;
+  z-index: 60;
+  width: 13rem;
+  padding: var(--sp-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  background-color: var(--surface-raised);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: 0 16px 34px -14px rgb(0 0 0 / 0.5);
+}
+
+/* Dentro do menu mobile a barra é centralizada e não há espaço à
+   direita — o painel abre alinhado ao centro. */
+.appearance--stacked .appearance__panel {
+  right: auto;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.appearance__label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--secondary-color2);
+  margin: 0;
+}
+
+.appearance__seg {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-1);
+  padding: 0.2rem;
+  background-color: var(--surface);
+  border-radius: var(--radius-sm);
+}
+
+.appearance__segbtn {
+  padding: 0.4rem;
+  border: none;
+  border-radius: calc(var(--radius-sm) - 2px);
+  background: transparent;
+  color: var(--secondary-color2);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease);
+}
+
+.appearance__segbtn:hover {
+  color: var(--text-color);
+}
+
+[data-theme="light"] .appearance__segbtn[data-value="light"],
+[data-theme="dark"] .appearance__segbtn[data-value="dark"] {
+  background-color: var(--surface-raised);
+  color: var(--text-color);
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.18);
+}
+
+.appearance__colors {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.appearance__color {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  width: 100%;
+  padding: 0.4rem 0.45rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--secondary-color2);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease);
+}
+
+.appearance__color:hover {
+  background-color: var(--surface);
+  color: var(--text-color);
+}
+
+.appearance__chip {
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.2);
+}
+
+.appearance__color--coral .appearance__chip { background-color: #ff7a5c; }
+.appearance__color--ambar .appearance__chip { background-color: #f0a23c; }
+.appearance__color--lilas .appearance__chip { background-color: #b79cff; }
+.appearance__color--champanhe .appearance__chip { background-color: #e5c07b; }
+
+[data-theme="light"] .appearance__color--coral .appearance__chip { background-color: #c4482c; }
+[data-theme="light"] .appearance__color--ambar .appearance__chip { background-color: #b4761c; }
+[data-theme="light"] .appearance__color--lilas .appearance__chip { background-color: #6d4ac7; }
+[data-theme="light"] .appearance__color--champanhe .appearance__chip { background-color: #96742c; }
+
+/* Marca a cor ativa com um tique, em vez de só um anel de cor —
+   funciona para quem não distingue bem os matizes. */
+[data-brand="coral"] .appearance__color--coral,
+[data-brand="ambar"] .appearance__color--ambar,
+[data-brand="lilas"] .appearance__color--lilas,
+[data-brand="champanhe"] .appearance__color--champanhe {
+  background-color: var(--surface);
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+[data-brand="coral"] .appearance__color--coral::after,
+[data-brand="ambar"] .appearance__color--ambar::after,
+[data-brand="lilas"] .appearance__color--lilas::after,
+[data-brand="champanhe"] .appearance__color--champanhe::after {
+  content: "✓";
+  margin-left: auto;
+  color: var(--brand);
+  font-size: 0.8rem;
+}
+
+.appearance__segbtn:focus-visible,
+.appearance__color:focus-visible {
+  outline: 2px solid var(--interactive);
+  outline-offset: -2px;
+}
+
+/* =================================================================
+   ALTURA UNIFORME DOS CARDS
+
+   As descrições têm 1 ou 2 linhas, o que dava 21px de diferença por
+   card. Como o slick posiciona os slides com altura independente, o
+   card de baixo de cada coluna começava num ponto diferente e a
+   fileira inferior ficava torta — as colunas mediam 656, 677 e 698px.
+
+   A correção é deixar a altura determinística pelo conteúdo, e não
+   depender do box model do slick: a mídia tem proporção fixa, e
+   título e descrição ocupam sempre o mesmo número de linhas. Assim
+   todo card mede igual, em qualquer coluna.
+
+   Tentei antes esticar os slides com flex no .slick-track; o
+   `height: auto` necessário ali quebra a cadeia de alturas
+   percentuais e o card estica para o track inteiro. Não vale.
+   ================================================================= */
+
+.pcard__chips {
+  min-height: 1.3125rem; /* uma fileira de chips */
+  align-content: start;
+}
+
+.pcard__title {
+  /* Sempre duas linhas: títulos curtos reservam o espaço, longos
+     são truncados em vez de empurrar o resto do card para baixo. */
+  min-height: 2.6rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.pcard__desc {
+  min-height: 2.625rem; /* duas linhas de 21px */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* =================================================================
+   GRADE DE PROJETOS
+
+   Substitui o carrossel. Os oito projetos aparecem de uma vez, sem
+   setas e dots de biblioteca, e sem exigir quatro cliques de quem
+   está avaliando o trabalho.
+   ================================================================= */
+
+.pgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: var(--sp-6);
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media (min-width: 1280px) {
+  .pgrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.pgrid__item {
+  display: flex;
+}
+
+.pgrid__item .pcard {
+  max-width: none;
+}
+
+/* =================================================================
+   REVELAÇÃO NO SCROLL
+
+   IntersectionObserver em ~40 linhas, sem biblioteca. Anima uma vez
+   só: bibliotecas de scroll costumam reanimar toda vez que você
+   volta pela página, e isso cansa na segunda passada.
+
+   Só transform e opacity, que o navegador compõe na GPU.
+   ================================================================= */
+
+.pgrid__item {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity var(--dur-slow) var(--ease),
+    transform var(--dur-slow) var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.pgrid__item.is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Sem JavaScript o conteúdo tem que aparecer mesmo assim. */
+@media (prefers-reduced-motion: reduce) {
+  .pgrid__item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* =================================================================
+   CAPA GERADA — projetos sem captura
+
+   Os quatro backends dividiam o mesmo GIF de placa de circuito
+   (424 KB). No carrossel isso passava batido; na grade os quatro
+   ficam lado a lado e a repetição denuncia.
+
+   A capa é composta em CSS a partir de dado verdadeiro: as iniciais
+   do projeto e um esquema abstrato de rotas — que sugere uma lista
+   de endpoints sem inventar nenhum. Cada card recebe um --seed que
+   muda o ângulo do gradiente e o desenho das barras, então os
+   quatro saem distintos. Peso: zero.
+   ================================================================= */
+
+.pcard__media--gen {
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(
+      120% 100% at calc(20% + var(--seed) * 22%) 0%,
+      color-mix(in srgb, var(--brand) 26%, transparent),
+      transparent 62%
+    ),
+    linear-gradient(
+      calc(140deg + var(--seed) * 25deg),
+      var(--surface-raised),
+      var(--surface)
+    );
+}
+
+/* Malha de pontos discreta, para a superfície não ficar chapada */
+.pcard__media--gen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--secondary-color2) 30%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 14px 14px;
+  opacity: 0.35;
+}
+
+/* As barras são textura de fundo, não elemento de primeiro plano —
+   antes competiam com o monograma e algumas furavam para fora da
+   caixa dele, o que parecia acidental em vez de desenhado. */
+.pcard__routes {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.55rem;
+  padding-inline: 1.8rem;
+  opacity: 0.4;
+}
+
+.pcard__routes i {
+  display: block;
+  height: 2px;
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--secondary-color2) 55%, transparent);
+}
+
+/* Larguras irregulares imitam uma lista de rotas; o --seed desloca
+   o padrão para nenhum card repetir o desenho do vizinho. */
+.pcard__routes i:nth-child(1) { width: calc(38% + var(--seed) * 7%); }
+.pcard__routes i:nth-child(2) { width: calc(62% - var(--seed) * 5%); }
+.pcard__routes i:nth-child(3) { width: calc(46% + var(--seed) * 9%); }
+.pcard__routes i:nth-child(4) { width: calc(70% - var(--seed) * 8%); }
+.pcard__routes i:nth-child(5) { width: calc(32% + var(--seed) * 6%); }
+
+/* A primeira barra é a "ativa", na cor da marca */
+.pcard__routes i:nth-child(3) {
+  background-color: color-mix(in srgb, var(--brand) 70%, transparent);
+}
+
+/* Sem caixa: com as barras rebaixadas a textura, o monograma se
+   sustenta sozinho e a composição fica limpa. */
+.pcard__mono {
+  position: relative;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: var(--text-color);
+  text-shadow: 0 2px 14px color-mix(in srgb, var(--bg-color) 85%, transparent);
+}
+
+.pcard:hover .pcard__mono {
+  color: var(--brand-strong);
+  transition: color var(--dur-med) var(--ease);
+}
+
+/* =================================================================
+   PULSO NAS ROTAS
+
+   As barras da capa representam endpoints; o pulso que as percorre
+   é uma requisição atravessando. O movimento carrega significado em
+   vez de ser enfeite — era o problema do GIF de placa de circuito
+   que estava ali antes.
+
+   Em repouso só as barras ímpares pulsam, devagar e com pausa entre
+   os ciclos. Vinte pulsos simultâneos na grade virariam ruído e
+   roubariam atenção do título, que é onde a visita se decide.
+   No hover as cinco entram e o ciclo encurta.
+   ================================================================= */
+
+.pcard__routes i {
+  position: relative;
+  overflow: hidden;
+}
+
+.pcard__routes i::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  width: 34%;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--brand-strong),
+    transparent
+  );
+  transform: translateX(-130%);
+}
+
+/* A pausa entre 58% e 100% dá respiro: pulso e descanso, em vez de
+   esteira contínua. */
+@keyframes rota-pulso {
+  0% {
+    transform: translateX(-130%);
+  }
+  58%,
+  100% {
+    transform: translateX(400%);
+  }
+}
+
+.pcard__routes i:nth-child(odd)::after {
+  animation: rota-pulso 4.6s var(--ease) infinite;
+}
+
+.pcard__routes i:nth-child(1)::after { animation-delay: 0s; }
+.pcard__routes i:nth-child(3)::after { animation-delay: 1.1s; }
+.pcard__routes i:nth-child(5)::after { animation-delay: 2.3s; }
+
+.pcard:hover .pcard__routes i::after,
+.pcard:focus-visible .pcard__routes i::after {
+  animation: rota-pulso 2.4s var(--ease) infinite;
+}
+
+.pcard:hover .pcard__routes i:nth-child(2)::after { animation-delay: 0.3s; }
+.pcard:hover .pcard__routes i:nth-child(4)::after { animation-delay: 0.9s; }
+
+/* O conjunto todo ganha presença quando a pessoa se aproxima. */
+.pcard:hover .pcard__routes {
+  opacity: 0.72;
+  transition: opacity var(--dur-med) var(--ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pcard__routes i::after {
+    animation: none !important;
+    opacity: 0;
   }
 }
