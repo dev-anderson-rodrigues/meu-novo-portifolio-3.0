@@ -25,6 +25,10 @@ const ContentProject = () => {
   const currentProject = project[0];
   const pt = language === "Portuguese";
 
+  // Começa sempre na primeira captura. Não existe efeito para
+  // reposicionar ao trocar de projeto: o componente é montado com a
+  // chave do projeto, então trocar de projeto monta um painel novo e
+  // o estado nasce zerado sozinho.
   const [imagem, setImagem] = useState(0);
 
   const fechar = useCallback(() => setSelectedProject(""), [setSelectedProject]);
@@ -38,10 +42,6 @@ const ContentProject = () => {
     document.addEventListener("keydown", aoTeclar);
     return () => document.removeEventListener("keydown", aoTeclar);
   }, [fechar]);
-
-  // Trocar de projeto sem voltar a imagem para a primeira deixava a
-  // galeria abrindo no índice 3 de um projeto que tem 2 capturas.
-  useEffect(() => setImagem(0), [currentProject]);
 
   /**
    * O card que abre pode estar na quarta linha da grade, e a expansão

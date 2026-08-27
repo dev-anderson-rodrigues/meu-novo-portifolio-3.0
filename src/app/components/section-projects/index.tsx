@@ -144,7 +144,7 @@ const SectionProjects = () => {
                 className={`pgrid__item${aberto ? " pgrid__item--aberto" : ""}`}
               >
                 {aberto ? (
-                  <ContentProject />
+                  <ContentProject key={t.title} />
                 ) : (
                   <Cards
                     src={p.src}
