@@ -2095,3 +2095,47 @@ section[id] {
   flex-wrap: wrap;
   align-items: baseline;
 }
+
+/* -----------------------------------------------------------------
+   MENU DO CELULAR
+
+   A cortina era preta a 80% com um blur leve: o conteúdo do site
+   continuava legível por trás e disputava com os itens do menu.
+   ----------------------------------------------------------------- */
+.menu-cortina {
+  background-color: color-mix(in srgb, var(--bg-color) 96%, transparent);
+  backdrop-filter: blur(14px);
+}
+
+@media (min-width: 1024px) {
+  .menu-cortina {
+    background-color: transparent;
+    backdrop-filter: none;
+  }
+}
+
+/* -----------------------------------------------------------------
+   PAINEL DE APARÊNCIA — não pode vazar da tela
+
+   Dentro do menu do celular o gatilho fica na parte de baixo, e o
+   painel abria para baixo a partir dali: com cinco cores ele
+   terminava 38px além da borda inferior num aparelho de 915px, e
+   "Turquesa" ficava fora de alcance. Em telas mais curtas, com a
+   barra de endereço ocupando espaço, o corte comia metade da lista.
+
+   Aqui ele abre para cima, que é onde sobra espaço, e ganha um teto
+   com rolagem para o caso de a lista crescer de novo.
+   ----------------------------------------------------------------- */
+.appearance--stacked .appearance__panel {
+  top: auto;
+  bottom: calc(100% + 0.6rem);
+  right: auto;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.appearance__panel {
+  max-height: min(70vh, 26rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}

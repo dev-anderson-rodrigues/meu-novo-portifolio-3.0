@@ -28,7 +28,7 @@ const Component_Nav = () => {
         ☰
       </button>
       <div
-        className={`flex-col fixed top-0 left-0 gap-8 bg-neutral-950 bg-opacity-80 backdrop-blur-sm w-screen h-screen justify-center lg:w-auto lg:h-full lg:bg-inherit lg:justify-end lg:static lg:flex-row items-center lg:gap-4 ${
+        className={`flex-col fixed top-0 left-0 gap-8 menu-cortina w-screen h-screen justify-center lg:w-auto lg:h-full lg:bg-inherit lg:justify-end lg:static lg:flex-row items-center lg:gap-4 ${
           isMenuOpen ? "flex" : "hidden"
         } lg:flex`}
       >
@@ -87,15 +87,9 @@ const Component_Nav = () => {
               : "Switch to Portuguese"
           }
         >
-          {language === "Portuguese" ? (
-            <span className="border-b-2 border-solid border-#000 w-18 pl-0 p-2 flex justify-center items-center text-center text-lg language">
-              Portuguese
-            </span>
-          ) : (
-            <span className="border-b-2 border-solid border-#000 w-18 pl-0 p-2 flex justify-center items-center text-center text-lg language">
-              English
-            </span>
-          )}
+          <span className="border-b-2 border-solid w-18 pl-0 p-2 flex justify-center items-center text-center text-lg language">
+            {language === "Portuguese" ? "pt-BR" : "en-US"}
+          </span>
         </button>
         <div className="hidden lg:flex justify-center text-center h-auto items-center gap-3">
           <LanguageToggle />
