@@ -8,6 +8,7 @@ const BRANDS = [
   { id: "ambar", pt: "Âmbar", en: "Amber" },
   { id: "lilas", pt: "Lilás", en: "Lilac" },
   { id: "champanhe", pt: "Champanhe", en: "Champagne" },
+  { id: "turquesa", pt: "Turquesa", en: "Turquoise" },
 ] as const;
 
 /**

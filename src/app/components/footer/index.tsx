@@ -24,7 +24,7 @@ const Footer = () => {
                     sem limite e herdam a cor do tema. */}
                 <svg
                   viewBox="0 0 16 17"
-                  className="h-6 w-auto"
+                  className="h-6 w-auto marca-svg"
                   fill="currentColor"
                   shapeRendering="crispEdges"
                   role="img"

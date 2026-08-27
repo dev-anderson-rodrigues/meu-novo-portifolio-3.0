@@ -79,17 +79,12 @@
   --secondary-color2: #98a2b3;
   --border-color: #262c36;
 
+  /* Padrão coral; os blocos [data-brand] abaixo sobrescrevem. O
+     canal RGB existe à parte porque brilho e véu precisam da cor
+     com alfa variável, e não dá para extrair canais de um #hex. */
   --brand: #ff7a5c;
   --brand-strong: #ff9d85;
-  --interactive: rgb(18, 246, 214);
-
-  /* Compatibilidade: --primary-color segue apontando para a cor
-     de interação, que é onde ela era usada na prática. */
-  --primary-color: var(--interactive);
-
-  --glow-1: rgba(18, 246, 214, 1);
-  --glow-2: rgba(18, 246, 214, 0.9);
-  --glow-3: rgba(18, 246, 214, 0.3);
+  --brand-rgb: 255 122 92;
 
   --hero-veil: 0.14;
   --hero-mask-color: #06080b;
@@ -108,17 +103,11 @@
   --secondary-color2: #5a6472;
   --border-color: #dfe3e8;
 
+  /* No claro cada marca tem um valor próprio, escurecido até passar
+     em contraste sobre branco — não é o tom do escuro reaproveitado. */
   --brand: #c4482c;
   --brand-strong: #9d3720;
-  /* O verde-água puro é ilegível sobre branco — aqui ele é
-     escurecido até passar em contraste, mantendo o mesmo matiz. */
-  --interactive: #07a88f;
-
-  --primary-color: var(--interactive);
-
-  --glow-1: rgba(7, 168, 143, 0.85);
-  --glow-2: rgba(7, 168, 143, 0.55);
-  --glow-3: rgba(7, 168, 143, 0.25);
+  --brand-rgb: 196 72 44;
 
   --hero-veil: 0.05;
   --hero-mask-color: #f1f2f5;
@@ -132,9 +121,13 @@
   --shadow-glow-soft: var(--glow-2) 0px 0px 40px, var(--glow-1) 0px 0px 5px,
     var(--glow-3) 0px 0px 5px;
 }
+html {
+  background: var(--background-liner);
+}
+
 body {
   color: var(--text-color);
-  background: var(--background-liner);
+  background: transparent;
   font-family: Poppins, Arial, Helvetica, sans-serif !important;
   z-index: 0;
   overflow-x: hidden;
@@ -906,17 +899,48 @@ main section:nth-child(4) {
    var(--brand). O padrão (sem data-brand) é o coral definido acima.
    ================================================================= */
 
-[data-theme="dark"][data-brand="coral"] { --brand: #ff7a5c; --brand-strong: #ff9d85; }
-[data-theme="light"][data-brand="coral"] { --brand: #c4482c; --brand-strong: #9d3720; }
+[data-theme="dark"][data-brand="coral"] { --brand: #ff7a5c; --brand-strong: #ff9d85; --brand-rgb: 255 122 92; }
+[data-theme="light"][data-brand="coral"] { --brand: #c4482c; --brand-strong: #9d3720; --brand-rgb: 196 72 44; }
 
-[data-theme="dark"][data-brand="ambar"] { --brand: #f0a23c; --brand-strong: #ffb95e; }
-[data-theme="light"][data-brand="ambar"] { --brand: #b4761c; --brand-strong: #8f5c11; }
+[data-theme="dark"][data-brand="ambar"] { --brand: #f0a23c; --brand-strong: #ffb95e; --brand-rgb: 240 162 60; }
+[data-theme="light"][data-brand="ambar"] { --brand: #b4761c; --brand-strong: #8f5c11; --brand-rgb: 180 118 28; }
 
-[data-theme="dark"][data-brand="lilas"] { --brand: #b79cff; --brand-strong: #d0bcff; }
-[data-theme="light"][data-brand="lilas"] { --brand: #6d4ac7; --brand-strong: #55379f; }
+[data-theme="dark"][data-brand="lilas"] { --brand: #b79cff; --brand-strong: #d0bcff; --brand-rgb: 183 156 255; }
+[data-theme="light"][data-brand="lilas"] { --brand: #6d4ac7; --brand-strong: #55379f; --brand-rgb: 109 74 199; }
 
-[data-theme="dark"][data-brand="champanhe"] { --brand: #e5c07b; --brand-strong: #f2d69c; }
-[data-theme="light"][data-brand="champanhe"] { --brand: #96742c; --brand-strong: #765a1e; }
+[data-theme="dark"][data-brand="champanhe"] { --brand: #e5c07b; --brand-strong: #f2d69c; --brand-rgb: 229 192 123; }
+[data-theme="light"][data-brand="champanhe"] { --brand: #96742c; --brand-strong: #765a1e; --brand-rgb: 150 116 44; }
+
+/* O verde-água era a cor fixa do site. Agora é só mais uma escolha —
+   quem gostava dela continua tendo, e ela para de disputar espaço
+   com a marca. Sobre branco ele é ilegível puro, então o claro usa
+   uma versão escurecida no mesmo matiz. */
+[data-theme="dark"][data-brand="turquesa"] { --brand: #12f6d6; --brand-strong: #6dfae4; --brand-rgb: 18 246 214; }
+[data-theme="light"][data-brand="turquesa"] { --brand: #07a88f; --brand-strong: #058873; --brand-rgb: 7 168 143; }
+
+/* =================================================================
+   A COR ESCOLHIDA É A COR DO SITE
+
+   Antes --primary-color apontava para uma cor de interação fixa e
+   --brand vivia à parte, usada em oito lugares: os ícones de
+   habilidade, os chips dos cards e as capas geradas. Ou seja, o
+   seletor de quatro cores praticamente não tinha o que trocar — o
+   resto do portfólio ficava verde-água acontecesse o que
+   acontecesse.
+
+   Estes três apelidos fecham o circuito. Tudo que já escrevia
+   var(--primary-color) ou var(--glow-*) passa a responder ao
+   seletor sem precisar ser reescrito, e os brilhos saem do canal
+   RGB da marca em vez de terem o verde-água cravado no valor.
+   ================================================================= */
+[data-theme] {
+  --primary-color: var(--brand);
+  --interactive: var(--brand);
+
+  --glow-1: rgb(var(--brand-rgb) / 0.85);
+  --glow-2: rgb(var(--brand-rgb) / 0.55);
+  --glow-3: rgb(var(--brand-rgb) / 0.25);
+}
 
 /* =================================================================
    CABEÇALHO
@@ -1110,18 +1134,21 @@ header {
 .appearance__color--ambar .appearance__chip { background-color: #f0a23c; }
 .appearance__color--lilas .appearance__chip { background-color: #b79cff; }
 .appearance__color--champanhe .appearance__chip { background-color: #e5c07b; }
+.appearance__color--turquesa .appearance__chip { background-color: #12f6d6; }
 
 [data-theme="light"] .appearance__color--coral .appearance__chip { background-color: #c4482c; }
 [data-theme="light"] .appearance__color--ambar .appearance__chip { background-color: #b4761c; }
 [data-theme="light"] .appearance__color--lilas .appearance__chip { background-color: #6d4ac7; }
 [data-theme="light"] .appearance__color--champanhe .appearance__chip { background-color: #96742c; }
+[data-theme="light"] .appearance__color--turquesa .appearance__chip { background-color: #07a88f; }
 
 /* Marca a cor ativa com um tique, em vez de só um anel de cor —
    funciona para quem não distingue bem os matizes. */
 [data-brand="coral"] .appearance__color--coral,
 [data-brand="ambar"] .appearance__color--ambar,
 [data-brand="lilas"] .appearance__color--lilas,
-[data-brand="champanhe"] .appearance__color--champanhe {
+[data-brand="champanhe"] .appearance__color--champanhe,
+[data-brand="turquesa"] .appearance__color--turquesa {
   background-color: var(--surface);
   color: var(--text-color);
   font-weight: 600;
@@ -1130,7 +1157,8 @@ header {
 [data-brand="coral"] .appearance__color--coral::after,
 [data-brand="ambar"] .appearance__color--ambar::after,
 [data-brand="lilas"] .appearance__color--lilas::after,
-[data-brand="champanhe"] .appearance__color--champanhe::after {
+[data-brand="champanhe"] .appearance__color--champanhe::after,
+[data-brand="turquesa"] .appearance__color--turquesa::after {
   content: "✓";
   margin-left: auto;
   color: var(--brand);
@@ -1226,7 +1254,15 @@ header {
    Só transform e opacity, que o navegador compõe na GPU.
    ================================================================= */
 
-.pgrid__item {
+/*
+   O estado escondido vive atrás de [data-reveal="ready"], atributo que
+   o hook só escreve depois de confirmar que vai mesmo observar os
+   cards. Antes ele estava solto em .pgrid__item, o que significa que
+   os oito projetos nasciam invisíveis e dependiam de JavaScript para
+   existir — se o script falhasse, a seção ficava preta e não havia
+   como saber. Conteúdo não se aposta em script.
+*/
+[data-reveal="ready"] .pgrid__item {
   opacity: 0;
   transform: translateY(14px);
   transition: opacity var(--dur-slow) var(--ease),
@@ -1234,14 +1270,13 @@ header {
   transition-delay: var(--reveal-delay, 0ms);
 }
 
-.pgrid__item.is-revealed {
+[data-reveal="ready"] .pgrid__item.is-revealed {
   opacity: 1;
   transform: none;
 }
 
-/* Sem JavaScript o conteúdo tem que aparecer mesmo assim. */
 @media (prefers-reduced-motion: reduce) {
-  .pgrid__item {
+  [data-reveal="ready"] .pgrid__item {
     opacity: 1;
     transform: none;
     transition: none;
@@ -1418,4 +1453,645 @@ header {
     animation: none !important;
     opacity: 0;
   }
+}
+
+/* =================================================================
+   VIDA
+
+   O portfólio estava correto e morto: superfícies chapadas, títulos
+   em cinza, uma cor de marca que só pintava ícone de habilidade. Este
+   bloco existe para o site respirar — e todo movimento aqui sai de
+   opacity, transform ou filter, que o navegador compõe na GPU, nunca
+   de propriedade que force recálculo de layout.
+
+   Tudo respeita prefers-reduced-motion no fim do arquivo.
+   ================================================================= */
+
+/* -----------------------------------------------------------------
+   FUNDO — aurora da cor escolhida
+
+   Duas manchas grandes da marca, com alfa baixíssimo, à deriva em
+   ciclo longo. Não é para ser percebida como animação: é para o fundo
+   deixar de ser uma chapa e passar a ter profundidade e temperatura.
+   Muda inteira quando você troca a cor no seletor.
+   ----------------------------------------------------------------- */
+[data-theme="dark"] { --aurora-a: 0.13; --aurora-b: 0.09; }
+[data-theme="light"] { --aurora-a: 0.07; --aurora-b: 0.05; }
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: -25%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      42rem 32rem at 14% 10%,
+      rgb(var(--brand-rgb) / var(--aurora-a)),
+      transparent 62%
+    ),
+    radial-gradient(
+      38rem 30rem at 86% 84%,
+      rgb(var(--brand-rgb) / var(--aurora-b)),
+      transparent 64%
+    );
+  animation: aurora-deriva 26s var(--ease) infinite alternate;
+  will-change: transform;
+}
+
+@keyframes aurora-deriva {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(2.5%, -2%, 0) scale(1.12); }
+}
+
+/* -----------------------------------------------------------------
+   TÍTULOS DE SEÇÃO
+
+   Eram texto cinza do mesmo peso do resto. Agora abrem em degradê da
+   cor do texto para a marca e ganham uma barra que cresce quando a
+   seção entra na tela — o título deixa de ser rótulo e vira abertura.
+   ----------------------------------------------------------------- */
+.section-title {
+  display: inline-block;
+  background-image: linear-gradient(
+    96deg,
+    var(--text-color) 22%,
+    var(--brand-strong) 92%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  height: 3px;
+  width: 100%;
+  margin-top: var(--sp-3);
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, var(--brand), transparent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--dur-slow) var(--ease);
+}
+
+.is-revealed .section-title::after,
+section:hover .section-title::after {
+  transform: scaleX(1);
+}
+
+/* -----------------------------------------------------------------
+   NOME NO CABEÇALHO
+
+   A segunda linha era do mesmo cinza da primeira. Colocá-la na marca
+   dá hierarquia e amarra o cabeçalho ao resto do sistema de cor.
+   ----------------------------------------------------------------- */
+.site-name span:last-child {
+  color: var(--brand);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* -----------------------------------------------------------------
+   MARCA NO RODAPÉ
+
+   O símbolo herdava a cor do texto. Passa a ser a cor escolhida, com
+   um brilho que acende ao passar o mouse.
+   ----------------------------------------------------------------- */
+footer .marca-svg {
+  color: var(--brand);
+  transition: filter var(--dur-med) var(--ease),
+    transform var(--dur-med) var(--ease);
+}
+
+footer .marca-svg:hover {
+  filter: drop-shadow(0 0 12px rgb(var(--brand-rgb) / 0.6));
+  transform: translateY(-2px) rotate(-2deg);
+}
+
+/* -----------------------------------------------------------------
+   SOBRE MIM — superfície de verdade
+
+   Os dois blocos não tinham borda, fundo nem sombra em repouso, e no
+   hover recebiam um brilho de 40px. Resultado: um retângulo luminoso
+   materializava do nada, de aresta dura, encostado na foto. A
+   transição ainda por cima era de 3s em `all` — três segundos, em
+   todas as propriedades.
+
+   Agora existe superfície desde o começo. O hover apenas levanta o
+   que já estava lá.
+   ----------------------------------------------------------------- */
+.sobre .cite,
+.sobre .contentB {
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-6);
+  backdrop-filter: blur(6px);
+  transition: transform var(--dur-med) var(--ease),
+    border-color var(--dur-med) var(--ease),
+    box-shadow var(--dur-med) var(--ease),
+    background-color var(--dur-med) var(--ease);
+}
+
+.sobre .cite:hover,
+.sobre .contentB:hover {
+  transform: translateY(-4px);
+  border-color: rgb(var(--brand-rgb) / 0.5);
+  box-shadow: 0 18px 40px -18px rgb(var(--brand-rgb) / 0.45),
+    0 0 0 1px rgb(var(--brand-rgb) / 0.12);
+  background: color-mix(in srgb, var(--surface-raised) 78%, transparent);
+}
+
+.sobre .cite p { margin: 0; }
+
+/* A foto ganha a moldura da marca e acompanha o mesmo gesto. */
+.sobre .img {
+  transition: transform var(--dur-med) var(--ease),
+    box-shadow var(--dur-med) var(--ease);
+  box-shadow: 0 12px 32px -14px rgb(var(--brand-rgb) / 0.5);
+}
+
+.sobre .img:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 20px 46px -16px rgb(var(--brand-rgb) / 0.65);
+}
+
+/* -----------------------------------------------------------------
+   SOBRE MIM — layout
+
+   A seção era `min-h-screen` com `justify-between` e sete classes de
+   largura máxima empilhadas, o que empurrava a citação contra a foto
+   e deixava o bloco de texto encostando nas duas bordas da tela.
+   Duas faixas, uma grade e um gap resolvem melhor.
+   ----------------------------------------------------------------- */
+.sobre {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding: var(--sp-10) var(--sp-5) var(--sp-12);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+}
+
+.sobre__topo {
+  display: grid;
+  gap: var(--sp-8);
+  align-items: center;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+  .sobre__topo {
+    /* A foto tem tamanho fixo; a citação fica com a folga restante. */
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--sp-10);
+  }
+}
+
+.sobre .cite {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%;
+}
+
+/* A aspa de abertura vira ornamento: dá peso editorial à citação
+   sem depender de mais nenhum elemento no HTML. */
+.sobre .cite::before {
+  content: "\201C";
+  display: block;
+  font-family: Platypi, Georgia, serif;
+  font-size: 4rem;
+  line-height: 0.7;
+  color: rgb(var(--brand-rgb) / 0.45);
+  margin-bottom: var(--sp-2);
+}
+
+.sobre .cite q { quotes: none; }
+
+.sobre .img {
+  border-color: rgb(var(--brand-rgb) / 0.55);
+  width: 15.5rem;
+  height: auto;
+  justify-self: center;
+}
+
+/* -----------------------------------------------------------------
+   ÂNCORAS
+
+   O cabeçalho é fixo com 64px. Sem recuo, clicar em "Sobre mim" ou
+   "Projetos" no menu parava a rolagem com o topo da seção escondido
+   atrás da barra.
+   ----------------------------------------------------------------- */
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
+/* =================================================================
+   DETALHE DO PROJETO
+
+   Era uma folha branca com listas empilhadas: título, um parágrafo,
+   e as tecnologias uma embaixo da outra em texto corrido. Nada
+   separava um assunto do outro e nada dizia onde olhar primeiro.
+
+   O conteúdo é o mesmo; o que muda é o enquadramento — o painel
+   entra em cena, cada assunto vira um bloco com marcação própria e
+   as tecnologias viram fichas em vez de lista.
+   ================================================================= */
+
+.containerProjects {
+  perspective: 1200px;
+}
+
+.content-projects {
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  animation: painel-entra var(--dur-slow) var(--ease) both;
+}
+
+/* Fio da marca no topo: fecha o painel e diz de quem ele é. */
+.content-projects::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--brand),
+    var(--brand-strong),
+    transparent
+  );
+}
+
+@keyframes painel-entra {
+  from {
+    opacity: 0;
+    transform: translateY(18px) rotateX(4deg) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Cada "Descrição:", "Visitar:", "Funcionalidades:", "Tecnologias:"
+   ganha um marcador da marca — antes eram todos o mesmo texto em
+   negrito, no mesmo tamanho, sem hierarquia entre si. */
+.content-projects h3 {
+  color: var(--brand-strong);
+  letter-spacing: 0.01em;
+}
+
+.detalhe__texto h3::before {
+  content: "";
+  display: inline-block;
+  width: 3px;
+  height: 0.9em;
+  margin-inline-end: var(--sp-2);
+  border-radius: 999px;
+  background: var(--brand);
+  vertical-align: -0.08em;
+}
+
+/* -----------------------------------------------------------------
+   TECNOLOGIAS E FUNCIONALIDADES COMO FICHAS
+
+   Vinte tecnologias empilhadas em coluna é o que fazia o painel
+   parecer um formulário. Em fichas elas ocupam a largura, ficam
+   varríveis de um olhar e param de competir com a descrição.
+   ----------------------------------------------------------------- */
+#tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  align-content: flex-start;
+}
+
+#tech h3 {
+  flex: 1 0 100%;
+  margin-bottom: var(--sp-1);
+}
+
+#tech .description {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface-raised) 70%, transparent);
+  font-size: var(--fs-sm);
+  line-height: 1.4;
+  transition: border-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
+}
+
+#tech .description:hover {
+  border-color: rgb(var(--brand-rgb) / 0.6);
+  transform: translateY(-2px);
+}
+
+#tech .description .techName {
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+/* A ficha some se o texto do chip vazar; sem isso o padding some. */
+#tech .description .techDesc {
+  color: var(--secondary-color2);
+  font-weight: 400;
+}
+
+/* A galeria ganha moldura e a mesma linguagem do resto. */
+.content-projects .img-content {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 20px 50px -24px rgb(var(--brand-rgb) / 0.55);
+}
+
+/* O link do repositório piscava com `animation: blink` — chamava
+   atenção sem dizer nada. Agora ele se comporta como link. */
+.content-projects a {
+  animation: none !important;
+  color: var(--brand);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgb(var(--brand-rgb) / 0.4);
+  transition: text-decoration-color var(--dur-fast) var(--ease);
+  word-break: break-all;
+}
+
+.content-projects a:hover {
+  text-decoration-color: var(--brand);
+}
+
+.content-projects .btn {
+  animation: none;
+  border-color: var(--border-color);
+  color: var(--secondary-color2);
+}
+
+.content-projects .btn:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+  box-shadow: 0 0 0 4px rgb(var(--brand-rgb) / 0.15);
+}
+
+/* -----------------------------------------------------------------
+   GALERIA DO PROJETO
+
+   Os dois controles eram as palavras "Previous" e "Next" soltas por
+   cima da imagem — em inglês mesmo com o site em português, sem
+   fundo, e sem dizer em que imagem você estava.
+   ----------------------------------------------------------------- */
+.galeria-nav {
+  position: absolute;
+  left: 50%;
+  bottom: var(--sp-4);
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  padding: 0.25rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  background: color-mix(in srgb, var(--bg-color) 78%, transparent);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px -12px rgb(0 0 0 / 0.6);
+}
+
+.galeria-btn {
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--text-color);
+  transition: background-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease);
+}
+
+.galeria-btn:hover:not(:disabled) {
+  background: rgb(var(--brand-rgb) / 0.18);
+  color: var(--brand-strong);
+}
+
+.galeria-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.galeria-contador {
+  min-width: 3.25rem;
+  text-align: center;
+  font-size: var(--fs-sm);
+  font-variant-numeric: tabular-nums;
+  color: var(--secondary-color2);
+}
+
+/* O bloco de tecnologias carregava min-h-96 do tempo em que era uma
+   lista em coluna. Com as fichas o conteúdo cabe em duas linhas, e a
+   altura travada virava um vão morto de 384px no meio do painel. */
+#tech {
+  min-height: 0 !important;
+}
+
+/* O X de fechar herdava cinza sobre cinza e sumia no painel. */
+.content-projects .btn {
+  color: var(--text-color);
+  background: color-mix(in srgb, var(--surface-raised) 85%, transparent);
+  font-weight: 600;
+}
+
+/* -----------------------------------------------------------------
+   CARD DE PROJETO — brilho que segue o cursor
+
+   O JSX escreve --mx e --my; o desenho é todo aqui. Sem hover (dedo
+   em tela de toque) as variáveis não existem e o fallback 50% deixa
+   o brilho centrado, então nada fica estranho no celular.
+   ----------------------------------------------------------------- */
+.pcard {
+  position: relative;
+  isolation: isolate;
+}
+
+.pcard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(
+    16rem 16rem at var(--mx, 50%) var(--my, 50%),
+    rgb(var(--brand-rgb) / 0.18),
+    transparent 62%
+  );
+  opacity: 0;
+  transition: opacity var(--dur-med) var(--ease);
+}
+
+@media (hover: hover) {
+  .pcard:hover::after,
+  .pcard:focus-visible::after {
+    opacity: 1;
+  }
+
+  /* A capa desliza de leve na direção contrária ao cursor: dá
+     profundidade sem tirar a imagem do lugar. */
+  .pcard__media {
+    overflow: hidden;
+  }
+
+  .pcard__img,
+  .pcard__media--gen {
+    transition: transform var(--dur-slow) var(--ease);
+  }
+
+  .pcard:hover .pcard__img,
+  .pcard:hover .pcard__media--gen {
+    transform: scale(1.06);
+  }
+}
+
+/* =================================================================
+   MENOS MOVIMENTO
+
+   Quem pede menos movimento no sistema recebe o portfólio inteiro
+   parado: a aurora, o brilho dos cards, a barra sob os títulos e a
+   entrada do painel. O que era decoração some; o que é conteúdo
+   fica exatamente onde está.
+   ================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    animation: none;
+  }
+
+  .content-projects {
+    animation: none;
+  }
+
+  .section-title::after {
+    transform: scaleX(1);
+    transition: none;
+  }
+
+  .pcard::after,
+  .pcard__img,
+  .pcard__media--gen,
+  .sobre .cite,
+  .sobre .contentB,
+  .sobre .img,
+  footer .marca-svg {
+    transition: none;
+  }
+
+  .pcard:hover .pcard__img,
+  .pcard:hover .pcard__media--gen,
+  .sobre .cite:hover,
+  .sobre .contentB:hover,
+  .sobre .img:hover,
+  footer .marca-svg:hover {
+    transform: none;
+  }
+}
+
+/* -----------------------------------------------------------------
+   DETALHE — duas colunas
+
+   Com a galeria fora do fluxo, a altura do painel dependia de o texto
+   por acaso ser alto o bastante para a imagem caber embaixo. Quando o
+   texto encurtou (as tecnologias viraram fichas), a imagem passou por
+   cima do título. Em grade cada coluna mede o que precisa.
+   ----------------------------------------------------------------- */
+.detalhe__corpo {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-6);
+  align-items: start;
+  padding-top: var(--sp-4);
+}
+
+@media (min-width: 1024px) {
+  .detalhe__corpo {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: var(--sp-8);
+  }
+}
+
+.detalhe__texto {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  min-width: 0;
+}
+
+.detalhe__midia {
+  min-width: 0;
+  position: relative;
+}
+
+.detalhe__midia .relative {
+  position: relative;
+}
+
+.content-projects .img-content {
+  width: 100%;
+  height: auto;
+  max-height: 26rem !important;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* Alturas travadas herdadas do layout antigo: com a grade elas só
+   abrem buracos entre um assunto e outro. */
+.detalhe__texto > div[class*="h-20"],
+.detalhe__texto > div[class*="h-1/4"] {
+  height: auto !important;
+}
+
+/* -----------------------------------------------------------------
+   FECHAR
+
+   O botão fica no canto superior direito do painel — que é
+   exatamente onde a galeria passou a começar. Cinza sobre uma
+   captura clara, ele sumia. Agora carrega o próprio contraste.
+   ----------------------------------------------------------------- */
+.content-projects .btn {
+  z-index: 5;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  background: color-mix(in srgb, var(--bg-color) 82%, transparent);
+  backdrop-filter: blur(10px);
+  color: var(--text-color);
+  box-shadow: 0 6px 18px -8px rgb(0 0 0 / 0.7);
+}
+
+.content-projects .btn:hover {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: var(--bg-color);
+  box-shadow: 0 0 0 5px rgb(var(--brand-rgb) / 0.2);
+}
+
+/* A linha "Visitar:" põe o rótulo e a URL lado a lado. Como as URLs
+   são longas, o rótulo era espremido até o marcador quebrar sozinho
+   para a linha de cima. Deixando a linha quebrar, a URL desce
+   inteira e o rótulo fica de pé. */
+.detalhe__texto > div {
+  flex-wrap: wrap;
+  align-items: baseline;
 }

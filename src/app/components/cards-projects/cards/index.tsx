@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useCallback, useRef } from "react";
 import Image from "next/image";
 import { useLanguage, useProject } from "@/app/contexts";
 
@@ -39,10 +39,37 @@ const Cards = ({ src, mono, seed = 0, tecnologies, title, description }: props) 
     .map((t) => t.trim())
     .filter(Boolean);
 
+  const cardRef = useRef<HTMLButtonElement>(null);
+
+  /**
+   * Guarda a posição do ponteiro dentro do card em duas variáveis CSS.
+   * Quem desenha o brilho e inclina a capa é a folha de estilo — aqui
+   * só entram dois números.
+   *
+   * Escreve direto no nó em vez de passar por estado: é a cada
+   * movimento do mouse, e um setState por frame renderizaria a grade
+   * inteira dezenas de vezes por segundo à toa.
+   */
+  const seguirPonteiro = useCallback((e: React.PointerEvent<HTMLButtonElement>) => {
+    const el = cardRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty("--mx", `${((e.clientX - r.left) / r.width) * 100}%`);
+    el.style.setProperty("--my", `${((e.clientY - r.top) / r.height) * 100}%`);
+  }, []);
+
+  const soltarPonteiro = useCallback(() => {
+    cardRef.current?.style.removeProperty("--mx");
+    cardRef.current?.style.removeProperty("--my");
+  }, []);
+
   return (
     <button
+      ref={cardRef}
       type="button"
       onClick={() => setSelectedProject(title)}
+      onPointerMove={seguirPonteiro}
+      onPointerLeave={soltarPonteiro}
       className="pcard"
       aria-label={`${pt ? "Ver detalhes do projeto" : "View project details"}: ${title}`}
     >

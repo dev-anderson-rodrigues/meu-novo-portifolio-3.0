@@ -1,23 +1,46 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 /**
  * Revelação no scroll com IntersectionObserver — sem biblioteca.
  *
- * Marca cada filho do elemento com .is-revealed quando ele entra na
- * viewport, e para de observar em seguida: a animação roda uma vez
- * só. Bibliotecas de scroll costumam reanimar toda vez que você
- * volta pela página, o que cansa na segunda passada.
+ * Devolve uma callback ref, não uma ref comum, e isso é o ponto: a
+ * versão anterior usava useRef com um useEffect de dependência vazia,
+ * então o observador era montado uma única vez na vida do componente.
+ * A grade de projetos, porém, desmonta quando alguém abre o detalhe de
+ * um projeto e volta a montar quando fecha — e nessa segunda montagem
+ * ninguém observava mais os cards. Como o estado de repouso é opacidade
+ * zero, os oito projetos sumiam de vez: bastava abrir um projeto e
+ * fechar para a seção inteira ficar preta.
  *
- * Quem pede menos movimento no sistema recebe tudo já revelado, sem
- * observador nenhum.
+ * A callback ref é chamada pelo React a cada anexação e a cada
+ * desanexação do elemento, então o observador acompanha o ciclo de vida
+ * real do nó em vez de supor que ele nunca muda.
+ *
+ * A animação continua rodando uma vez só por montagem: bibliotecas de
+ * scroll costumam reanimar toda vez que você volta pela página, e isso
+ * cansa na segunda passada.
  */
 export const useReveal = <T extends HTMLElement>() => {
-  const ref = useRef<T>(null);
+  const obsRef = useRef<IntersectionObserver | null>(null);
+  const limparRef = useRef<(() => void) | null>(null);
 
-  useEffect(() => {
-    const root = ref.current;
+  // Se o componente sair de cena com o observador de pé, ele fica.
+  useEffect(
+    () => () => {
+      obsRef.current?.disconnect();
+      limparRef.current?.();
+    },
+    []
+  );
+
+  return useCallback((root: T | null) => {
+    obsRef.current?.disconnect();
+    obsRef.current = null;
+    limparRef.current?.();
+    limparRef.current = null;
+
     if (!root) return;
 
     const filhos = Array.from(root.children) as HTMLElement[];
@@ -31,16 +54,71 @@ export const useReveal = <T extends HTMLElement>() => {
       return;
     }
 
+    /**
+     * O estado escondido só existe depois deste atributo. Enquanto ele
+     * não é escrito, o conteúdo está visível — se o JavaScript falhar,
+     * não carregar ou este código quebrar, o visitante ainda vê os
+     * projetos. Esconder primeiro e contar com o JavaScript para
+     * revelar é apostar o conteúdo num script.
+     */
+    root.dataset.reveal = "ready";
+
+    const revelar = (el: Element) => {
+      el.classList.add("is-revealed");
+      obs.unobserve(el);
+      pendentes.delete(el as HTMLElement);
+      if (pendentes.size === 0) pararVarredura();
+    };
+
+    const pendentes = new Set<HTMLElement>(filhos);
+
     const obs = new IntersectionObserver(
       (entradas) => {
         entradas.forEach((e) => {
-          if (!e.isIntersecting) return;
-          e.target.classList.add("is-revealed");
-          obs.unobserve(e.target);
+          if (e.isIntersecting) revelar(e.target);
         });
       },
       { rootMargin: "0px 0px -8% 0px", threshold: 0.1 }
     );
+
+    /**
+     * Rede de segurança para rolagem rápida.
+     *
+     * Num arrastão de dedo o elemento consegue atravessar a tela
+     * inteira entre duas apurações do observador, e aí ele nunca é
+     * notificado — o card ficava invisível para sempre mesmo depois de
+     * a pessoa ter passado por cima dele. Medindo em Chromium, uma
+     * rolagem de 1800px por quadro deixava três dos oito para trás.
+     *
+     * Não adianta testar isso dentro do callback do observador: se ele
+     * não dispara para aquele elemento, não há callback nenhum. A
+     * varredura precisa ser independente — passiva, adiada por quadro
+     * e desligada assim que o último card aparece.
+     */
+    let agendado = false;
+
+    const varrer = () => {
+      agendado = false;
+      const limite = window.innerHeight;
+      pendentes.forEach((el) => {
+        if (el.getBoundingClientRect().top < limite) revelar(el);
+      });
+    };
+
+    const aoRolar = () => {
+      if (agendado) return;
+      agendado = true;
+      requestAnimationFrame(varrer);
+    };
+
+    function pararVarredura() {
+      window.removeEventListener("scroll", aoRolar);
+      window.removeEventListener("resize", aoRolar);
+    }
+
+    window.addEventListener("scroll", aoRolar, { passive: true });
+    window.addEventListener("resize", aoRolar, { passive: true });
+    limparRef.current = pararVarredura;
 
     filhos.forEach((el, i) => {
       // Escalonamento curto: passa a impressão de sequência sem
@@ -49,8 +127,12 @@ export const useReveal = <T extends HTMLElement>() => {
       obs.observe(el);
     });
 
-    return () => obs.disconnect();
-  }, []);
+    // Primeira medição sem depender de rolagem: quem já está na tela
+    // no momento da montagem aparece na hora. É o caso de voltar do
+    // detalhe de um projeto, em que a grade remonta com a seção
+    // inteira já enquadrada e nenhum evento de rolagem acontece.
+    requestAnimationFrame(varrer);
 
-  return ref;
+    obsRef.current = obs;
+  }, []);
 };

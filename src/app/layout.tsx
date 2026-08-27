@@ -100,7 +100,7 @@ const themeBootstrap = `
     document.documentElement.setAttribute('data-theme', t);
 
     var b = localStorage.getItem('brand');
-    var ok = ['coral', 'ambar', 'lilas', 'champanhe'];
+    var ok = ['coral', 'ambar', 'lilas', 'champanhe', 'turquesa'];
     document.documentElement.setAttribute(
       'data-brand',
       ok.indexOf(b) === -1 ? 'coral' : b
