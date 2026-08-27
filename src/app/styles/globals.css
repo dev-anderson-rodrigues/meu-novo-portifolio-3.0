@@ -1879,7 +1879,24 @@ main section.sobre {
   align-items: flex-start;
   gap: var(--sp-3);
   max-width: 60rem;
-  padding-right: 3rem;
+  padding: 1rem;
+}
+
+/*
+   O botão de fechar flutua sobre o canto superior direito do painel.
+   Acima de 768px o painel tem folga lateral suficiente e ele nunca
+   encosta no texto; abaixo disso a folga cai para 1,5rem e o título
+   passava 12px por baixo do botão.
+
+   Quem recua são só o rótulo e o título — as duas linhas que dividem
+   altura com o botão. O padding do bloco continua 1rem nos quatro
+   lados, e a lista de stack e o link seguem usando a largura inteira.
+*/
+@media (max-width: 767px) {
+  .projeto__rotulo,
+  .projeto__titulo {
+    padding-right: 2.5rem;
+  }
 }
 
 .projeto__rotulo {
