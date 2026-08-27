@@ -32,8 +32,10 @@
   --sp-2: 0.5rem;
   --sp-3: 0.75rem;
   --sp-4: 1rem;
+  --sp-5: 1.25rem;
   --sp-6: 1.5rem;
   --sp-8: 2rem;
+  --sp-10: 2.5rem;
   --sp-12: 3rem;
   --sp-16: 4rem;
   --sp-24: 6rem;
@@ -44,6 +46,7 @@
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-lg: 20px;
+  --radius-xl: 28px;
   --radius-full: 9999px;
 
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
@@ -2138,4 +2141,12 @@ section[id] {
   max-height: min(70vh, 26rem);
   overflow-y: auto;
   overscroll-behavior: contain;
+}
+
+/* Uma regra antiga (`main section:nth-child(2)`) crava padding-top de
+   20px com a mesma especificidade da minha, e vinha antes — por isso a
+   aspa ornamental da citação nascia cortada atrás do cabeçalho fixo.
+   Mesmo peso, mais abaixo no arquivo: esta vence. */
+main section.sobre {
+  padding-top: var(--sp-12);
 }
