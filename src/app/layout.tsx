@@ -1,12 +1,59 @@
-/* eslint-disable @next/next/no-page-custom-font */
 import type { Metadata } from "next";
 import "./styles/globals.css";
 import { Poppins, Platypi, Alike_Angular } from "next/font/google";
 import { Providers } from "../app/providers";
+import { SITE_URL } from "./site";
 
+const DESCRICAO =
+  "Portfólio de Anderson Rodrigues, desenvolvedor fullstack com foco em Node.js, NestJS, React e Next.js. Oito projetos entre aplicações fullstack e APIs.";
+
+/**
+ * Sem metadataBase, qualquer caminho relativo em openGraph vira URL
+ * inválida quando o Facebook, o LinkedIn ou o WhatsApp buscam o card —
+ * era por isso que o link do site aparecia cru nas conversas.
+ *
+ * A imagem do card não é declarada aqui de propósito: o Next resolve
+ * sozinho o opengraph-image.png que vive ao lado deste arquivo, e o
+ * mesmo arquivo serve de fallback para o card do X/Twitter.
+ */
 export const metadata: Metadata = {
-  title: "Anderson Rodrigues | DEV",
-  description: "Portifólio de um desenvolvedor fullstack, expertise em nodejs",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Anderson Rodrigues | Desenvolvedor Fullstack",
+    template: "%s | Anderson Rodrigues",
+  },
+  description: DESCRICAO,
+  keywords: [
+    "Anderson Rodrigues",
+    "desenvolvedor fullstack",
+    "Node.js",
+    "NestJS",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "portfólio",
+  ],
+  authors: [{ name: "Anderson Rodrigues", url: SITE_URL }],
+  creator: "Anderson Rodrigues",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    url: "/",
+    siteName: "Anderson Rodrigues",
+    title: "Anderson Rodrigues | Desenvolvedor Fullstack",
+    description: DESCRICAO,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Anderson Rodrigues | Desenvolvedor Fullstack",
+    description: DESCRICAO,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+  },
   verification: {
     google: "rPeADMfHTMCG3V3YBOjnivTp8ov8_xJRyBG_zH8YqUI",
   },
