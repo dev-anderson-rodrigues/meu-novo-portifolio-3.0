@@ -55,16 +55,16 @@ const PROJETOS: Projeto[] = [
     },
   },
   {
-    mono: "CV",
+    mono: "VT",
     seed: 1,
     destaque: true,
     tec: "NESTJS, POSTGRESQL, REDIS, REACT",
     pt: {
-      title: "Coraxy | Vital",
+      title: "Vital",
       desc: "SaaS multi-tenant de cobrança automatizada via WhatsApp para provedores de internet.",
     },
     en: {
-      title: "Coraxy | Vital",
+      title: "Vital",
       desc: "Multi-tenant SaaS for automated billing over WhatsApp for internet providers.",
     },
   },

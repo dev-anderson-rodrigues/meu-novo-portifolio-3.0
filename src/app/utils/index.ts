@@ -14,7 +14,7 @@ export const projectsPort = [
     technologies: ["Node.js", "TypeScript", "React", "LLM APIs", "PostgreSQL", "Redis"],
   },
   {
-    title: "Coraxy | Vital",
+    title: "Vital",
     description:
       "SaaS multi-tenant de cobrança automatizada via WhatsApp Business para provedores de internet, em produção com usuários reais. Arquitetei e desenvolvi do zero ao deploy.",
     functions: [
@@ -336,7 +336,7 @@ export const projectsEnglish = [
     technologies: ["Node.js", "TypeScript", "React", "LLM APIs", "PostgreSQL", "Redis"],
   },
   {
-    title: "Coraxy | Vital",
+    title: "Vital",
     description:
       "Multi-tenant SaaS for automated billing over WhatsApp Business, built for internet service providers and running in production with real users. I architected and built it from zero to deployment.",
     functions: [
