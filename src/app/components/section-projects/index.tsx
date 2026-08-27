@@ -18,51 +18,130 @@ type Projeto = {
   src?: string;
   mono?: string;
   seed?: number;
+  /** Trabalho profissional e projetos próprios recentes vêm primeiro. */
+  destaque?: boolean;
   tec: string;
   pt: { title: string; desc: string };
   en: { title: string; desc: string };
 };
 
+/**
+ * A grade mostrava oito projetos de 2024, todos do mesmo período de
+ * formação, e três deles anunciavam na própria descrição que eram
+ * trabalho de curso. Quem lia o "Sobre mim" logo acima — anos de
+ * atuação, produtos em produção — e descia até aqui encontrava outra
+ * pessoa.
+ *
+ * Os quatro primeiros são o trabalho que sustenta essa conversa. O
+ * resto continua acessível, mas separado, porque formação é contexto
+ * e não deve competir com produto rodando.
+ *
+ * O título é a chave que o contexto usa para achar o projeto, então
+ * precisa bater exatamente com o de utils/index.ts.
+ */
 const PROJETOS: Projeto[] = [
+  {
+    mono: "MA",
+    seed: 0,
+    destaque: true,
+    tec: "IA, NODE.JS, TYPESCRIPT, REACT",
+    pt: {
+      title: "Maestro",
+      desc: "Atendimento automatizado com múltiplos agentes de IA, em produção em provedores de grande porte.",
+    },
+    en: {
+      title: "Maestro",
+      desc: "Automated service with multiple AI agents, running in production at large providers.",
+    },
+  },
+  {
+    mono: "CV",
+    seed: 1,
+    destaque: true,
+    tec: "NESTJS, POSTGRESQL, REDIS, REACT",
+    pt: {
+      title: "Coraxy | Vital",
+      desc: "SaaS multi-tenant de cobrança automatizada via WhatsApp para provedores de internet.",
+    },
+    en: {
+      title: "Coraxy | Vital",
+      desc: "Multi-tenant SaaS for automated billing over WhatsApp for internet providers.",
+    },
+  },
+  {
+    mono: "NX",
+    seed: 2,
+    destaque: true,
+    tec: "TYPESCRIPT, REACT, MULTI-TENANT",
+    pt: {
+      title: "Nexora",
+      desc: "Plataforma que reúne CRM, projetos, contratos e análises assistidas por IA.",
+    },
+    en: {
+      title: "Nexora",
+      desc: "Platform bringing together CRM, projects, contracts and AI-assisted analytics.",
+    },
+  },
+  {
+    mono: "U+",
+    seed: 3,
+    destaque: true,
+    tec: "NODE.JS, TYPESCRIPT, INTEGRAÇÕES",
+    pt: {
+      title: "Unifica +",
+      desc: "Centraliza e automatiza a abertura de chamados em vários ERPs a partir de um ponto só.",
+    },
+    en: {
+      title: "Unifica +",
+      desc: "Centralises and automates ticket creation across several ERPs from a single place.",
+    },
+  },
+  {
+    src: "/assets/images/portifolio3.0.webp",
+    tec: "NEXT, TAILWIND, TYPESCRIPT",
+    pt: {
+      title: "Portifólio 3.0",
+      desc: "Este site: Next 16, sistema de tokens e cinco temas de cor.",
+    },
+    en: {
+      title: "Portfolio 3.0",
+      desc: "This site: Next 16, a token system and five colour themes.",
+    },
+  },
   {
     src: "/assets/images/w3-erp.webp",
     tec: "REACT, MATERIAL UI, AXIOS",
     pt: {
       title: "W3 ERP - Gestão Empresarial",
-      desc: "Sistema Integrado de Gestão Empresarial",
+      desc: "Gestão empresarial com predição de compras a partir do histórico.",
     },
     en: {
       title: "W3 ERP - Business Management",
-      desc: "Integrated Business Management System",
+      desc: "Business management with purchase prediction from historical data.",
     },
-  },
-  {
-    src: "/assets/images/portifolio3.0.webp",
-    tec: "NEXT, TAILWIND, JAVASCRIPT",
-    pt: {
-      title: "Portifólio 3.0",
-      desc: "Desenvolvido em Next js e resposividade com Tailwind",
-    },
-    en: {
-      title: "Portfolio 3.0",
-      desc: "Developed in Next js and responsive with Tailwind",
-    },
-  },
-  {
-    src: "/assets/images/Img_LinkNaBio.webp",
-    tec: "HTML, CSS, JAVASCRIPT",
-    pt: { title: "LINK NA BIO", desc: "Repositório de links para redes socias" },
-    en: { title: "LINK IN BIO", desc: "Repository of links to social networks" },
   },
   {
     src: "/assets/images/metavagas1.webp",
     tec: "REACT, AXIOS, REACT ROUTER",
-    pt: { title: "Metavagas – Projeto Fullstack", desc: "Inspirado no Linkedin" },
-    en: { title: "Metavagas – Fullstack Project", desc: "Inspired by Linkedin" },
+    pt: {
+      title: "Metavagas – Projeto Fullstack",
+      desc: "Plataforma de vagas inspirada no LinkedIn.",
+    },
+    en: {
+      title: "Metavagas – Fullstack Project",
+      desc: "Job platform inspired by LinkedIn.",
+    },
+  },
+  {
+    mono: "MV",
+    seed: 4,
+    tec: "NEST, JWT, JEST, TYPESCRIPT",
+    pt: { title: "API - Metavagas", desc: "API para a plataforma de vagas" },
+    en: { title: "API - Metavagas", desc: "API for the vacancies platform" },
   },
   {
     mono: "CP",
-    seed: 0,
+    seed: 5,
     tec: "NODE.JS, EXPRESS, JWT",
     pt: {
       title: "Culture Power API",
@@ -74,15 +153,8 @@ const PROJETOS: Projeto[] = [
     },
   },
   {
-    mono: "MV",
-    seed: 1,
-    tec: "NEST, JWT, JEST, TYPESCRIPT",
-    pt: { title: "API - Metavagas", desc: "API para a plataforma de vagas" },
-    en: { title: "API - Metavagas", desc: "API for the vacancies platform" },
-  },
-  {
     mono: "PE",
-    seed: 2,
+    seed: 6,
     tec: "NEST, MULTER, JEST",
     pt: {
       title: "API - Pet & Events Management",
@@ -95,7 +167,7 @@ const PROJETOS: Projeto[] = [
   },
   {
     mono: "CM",
-    seed: 3,
+    seed: 7,
     tec: "NEST, TYPESCRIPT, JEST",
     pt: {
       title: "API - Customers Management",
@@ -112,7 +184,40 @@ const SectionProjects = () => {
   const { language } = useLanguage();
   const { project } = useProject();
   const pt = language === "Portuguese";
-  const gridRef = useReveal<HTMLUListElement>();
+  const gridDestaques = useReveal<HTMLUListElement>();
+  const gridOutros = useReveal<HTMLUListElement>();
+
+  const destaques = PROJETOS.filter((p) => p.destaque);
+  const outros = PROJETOS.filter((p) => !p.destaque);
+
+  /**
+   * A mesma célula da grade, com ou sem o painel aberto. Duas listas
+   * usam isto, então o índice entra na chave para os itens não
+   * colidirem entre elas.
+   */
+  const celula = (p: Projeto, i: number, grupo: string) => {
+    const t = pt ? p.pt : p.en;
+    const aberto = t.title === project[0]?.title;
+    return (
+      <li
+        key={`${grupo}-${t.title}-${i}`}
+        className={`pgrid__item${aberto ? " pgrid__item--aberto" : ""}`}
+      >
+        {aberto ? (
+          <ContentProject key={t.title} />
+        ) : (
+          <Cards
+            src={p.src}
+            mono={p.mono}
+            seed={p.seed}
+            tecnologies={p.tec}
+            title={t.title}
+            description={t.desc}
+          />
+        )}
+      </li>
+    );
+  };
 
   return (
     <section
@@ -124,8 +229,8 @@ const SectionProjects = () => {
           <h3 className="section-title">{pt ? "Projetos" : "Projects"}</h3>
           <p className="section-lede">
             {pt
-              ? "Oito projetos entre aplicações fullstack e APIs. Toque em qualquer um para ver os detalhes."
-              : "Eight projects across fullstack apps and APIs. Tap any of them for the details."}
+              ? "Produtos em produção, projetos próprios e o caminho até aqui. Toque em qualquer um para ver os detalhes."
+              : "Products in production, personal projects and the road here. Tap any of them for the details."}
           </p>
         </div>
 
@@ -134,31 +239,18 @@ const SectionProjects = () => {
             comparando projetos e ainda desmontava a lista inteira a
             cada abertura. Agora o card escolhido ocupa a largura toda
             e se abre ali mesmo; os outros continuam em volta. */}
-        <ul className="pgrid" ref={gridRef}>
-          {PROJETOS.map((p, i) => {
-            const t = pt ? p.pt : p.en;
-            const aberto = t.title === project[0]?.title;
-            return (
-              <li
-                key={`${t.title}-${i}`}
-                className={`pgrid__item${aberto ? " pgrid__item--aberto" : ""}`}
-              >
-                {aberto ? (
-                  <ContentProject key={t.title} />
-                ) : (
-                  <Cards
-                    src={p.src}
-                    mono={p.mono}
-                    seed={p.seed}
-                    tecnologies={p.tec}
-                    title={t.title}
-                    description={t.desc}
-                  />
-                )}
-              </li>
-            );
-          })}
+        <ul className="pgrid" ref={gridDestaques}>
+          {destaques.map((p, i) => celula(p, i, "destaque"))}
         </ul>
+
+        <div className="pgrid__divisor">
+          <span>{pt ? "Formação e projetos anteriores" : "Training and earlier projects"}</span>
+        </div>
+
+        <ul className="pgrid pgrid--secundaria" ref={gridOutros}>
+          {outros.map((p, i) => celula(p, i, "outro"))}
+        </ul>
+
       </div>
     </section>
   );
