@@ -112,7 +112,6 @@ const SectionProjects = () => {
   const { language } = useLanguage();
   const { project } = useProject();
   const pt = language === "Portuguese";
-  const abertoEm = project.length > 0;
   const gridRef = useReveal<HTMLUListElement>();
 
   return (
@@ -130,16 +129,23 @@ const SectionProjects = () => {
           </p>
         </div>
 
-        {abertoEm ? (
-          <div className="w-full flex justify-center containerProjects">
-            <ContentProject />
-          </div>
-        ) : (
-          <ul className="pgrid" ref={gridRef}>
-            {PROJETOS.map((p, i) => {
-              const t = pt ? p.pt : p.en;
-              return (
-                <li key={`${t.title}-${i}`} className="pgrid__item">
+        {/* A grade nunca sai de cena. Antes ela era trocada pelo painel
+            de detalhe, o que tirava o contexto de quem estava
+            comparando projetos e ainda desmontava a lista inteira a
+            cada abertura. Agora o card escolhido ocupa a largura toda
+            e se abre ali mesmo; os outros continuam em volta. */}
+        <ul className="pgrid" ref={gridRef}>
+          {PROJETOS.map((p, i) => {
+            const t = pt ? p.pt : p.en;
+            const aberto = t.title === project[0]?.title;
+            return (
+              <li
+                key={`${t.title}-${i}`}
+                className={`pgrid__item${aberto ? " pgrid__item--aberto" : ""}`}
+              >
+                {aberto ? (
+                  <ContentProject key={t.title} />
+                ) : (
                   <Cards
                     src={p.src}
                     mono={p.mono}
@@ -148,11 +154,11 @@ const SectionProjects = () => {
                     title={t.title}
                     description={t.desc}
                   />
-                </li>
-              );
-            })}
-          </ul>
-        )}
+                )}
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </section>
   );

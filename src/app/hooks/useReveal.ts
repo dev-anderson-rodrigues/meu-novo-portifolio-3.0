@@ -50,7 +50,7 @@ export const useReveal = <T extends HTMLElement>() => {
       matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (semMovimento || typeof IntersectionObserver === "undefined") {
-      filhos.forEach((el) => el.classList.add("is-revealed"));
+      filhos.forEach((el) => (el.dataset.revealed = ""));
       return;
     }
 
@@ -63,8 +63,17 @@ export const useReveal = <T extends HTMLElement>() => {
      */
     root.dataset.reveal = "ready";
 
+    /**
+     * Marca por atributo, não por classe.
+     *
+     * O React é dono do `className` de cada item: quando um card
+     * abre e fecha na grade, ele reescreve esse atributo inteiro e
+     * leva junto qualquer classe adicionada por fora — o card que
+     * você acabou de fechar voltava a ficar invisível. Um data-* que
+     * não aparece no JSX o React nunca toca.
+     */
     const revelar = (el: Element) => {
-      el.classList.add("is-revealed");
+      (el as HTMLElement).dataset.revealed = "";
       obs.unobserve(el);
       pendentes.delete(el as HTMLElement);
       if (pendentes.size === 0) pararVarredura();
