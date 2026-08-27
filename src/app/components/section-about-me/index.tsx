@@ -2,9 +2,17 @@
 import React from "react";
 import Image from "next/image";
 import { useLanguage } from "@/app/contexts";
+import {
+  INICIO_CODIGO,
+  INICIO_PROFISSIONAL,
+  tempoDeCarreira,
+} from "@/app/utils/tempo";
 
 const SectionAboutMe = () => {
   const { language } = useLanguage();
+  const pt = language === "Portuguese";
+  const codando = tempoDeCarreira(INICIO_CODIGO, pt);
+  const naArea = tempoDeCarreira(INICIO_PROFISSIONAL, pt);
   return (
     <section className="about-me sobre z-20" id="about-me">
       <div className="sobre__topo">
@@ -51,8 +59,8 @@ const SectionAboutMe = () => {
         <article className="text-lg font-extralight pt-2">
           {language === "Portuguese" ? (
             <>
-              Sou Anderson Rodrigues, desenvolvedor Full Stack com mais de
-              2 anos de experiência. Atuo há mais de 1 ano desenvolvendo
+              Sou Anderson Rodrigues, desenvolvedor Full Stack há {codando}.
+              Atuo há {naArea} desenvolvendo
               soluções para provedores de internet, trabalhando diretamente com
               análise e automação de processos, integrações entre sistemas ERP e
               desenvolvimento de soluções inteligentes utilizando n8n,
@@ -65,8 +73,8 @@ const SectionAboutMe = () => {
             </>
           ) : (
             <>
-              I'm Anderson Rodrigues, a Full Stack developer with over 2
-              years of experience. For the past year, I've been developing
+              I&apos;m Anderson Rodrigues, a Full Stack developer with {codando} of experience.
+              For {naArea} I&apos;ve been developing
               solutions for internet service providers, working directly with
               process analysis and automation, ERP system integrations, and
               developing intelligent solutions using n8n, low-code/no-code, and
