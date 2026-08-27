@@ -1226,7 +1226,15 @@ header {
    Só transform e opacity, que o navegador compõe na GPU.
    ================================================================= */
 
-.pgrid__item {
+/*
+   O estado escondido vive atrás de [data-reveal="ready"], atributo que
+   o hook só escreve depois de confirmar que vai mesmo observar os
+   cards. Antes ele estava solto em .pgrid__item, o que significa que
+   os oito projetos nasciam invisíveis e dependiam de JavaScript para
+   existir — se o script falhasse, a seção ficava preta e não havia
+   como saber. Conteúdo não se aposta em script.
+*/
+[data-reveal="ready"] .pgrid__item {
   opacity: 0;
   transform: translateY(14px);
   transition: opacity var(--dur-slow) var(--ease),
@@ -1234,14 +1242,13 @@ header {
   transition-delay: var(--reveal-delay, 0ms);
 }
 
-.pgrid__item.is-revealed {
+[data-reveal="ready"] .pgrid__item.is-revealed {
   opacity: 1;
   transform: none;
 }
 
-/* Sem JavaScript o conteúdo tem que aparecer mesmo assim. */
 @media (prefers-reduced-motion: reduce) {
-  .pgrid__item {
+  [data-reveal="ready"] .pgrid__item {
     opacity: 1;
     transform: none;
     transition: none;

@@ -65,10 +65,13 @@ const ContentProject = () => {
     <div className="relative w-full h-full justify-center items-center rounded-xl p-4 pt-0  content-projects ">
       {currentProject ? (
         <>
-          <button onClick={handleExit}>
-            <div className="p-2 shadow-sm w-8 h-8 flex justify-center items-center rounded-lg absolute right-6 top-6 btn">
-              X
-            </div>
+          <button
+            type="button"
+            onClick={handleExit}
+            aria-label={language === "Portuguese" ? "Fechar detalhes" : "Close details"}
+            className="p-2 shadow-sm w-8 h-8 flex justify-center items-center rounded-lg absolute right-6 top-6 btn"
+          >
+            X
           </button>
           <h3 className="pt-10 xl:pt-0 w-full flex text-center items-center justify-center font-semibold text-xl ">
             <div className="border-b-2 border-slate-600 px-4">
