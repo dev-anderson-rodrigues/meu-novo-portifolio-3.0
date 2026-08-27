@@ -2233,6 +2233,19 @@ main section.sobre {
    ----------------------------------------------------------------- */
 .pgrid__item--aberto {
   grid-column: 1 / -1;
+
+  /*
+     Aberto, o card sobe para o começo da própria grade.
+
+     Expandindo onde estava, o painel partia a fila ao meio: abrindo o
+     segundo projeto, o primeiro ficava sozinho numa linha acima e os
+     outros seis desciam para depois do painel. A grade deixava de ser
+     uma lista e virava duas, com o conteúdo aberto no meio.
+
+     Com order o painel encabeça o grupo e todos os cards ficam
+     abaixo, em fila inteira.
+  */
+  order: -1;
 }
 
 /* O painel já tem a própria moldura; dentro da grade ele não precisa
