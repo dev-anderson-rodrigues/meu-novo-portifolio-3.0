@@ -2232,3 +2232,72 @@ main section.sobre {
 @media (prefers-reduced-motion: reduce) {
   .pgrid__item--aberto .projeto { animation: none; }
 }
+
+/* -----------------------------------------------------------------
+   DIVISOR ENTRE DESTAQUES E FORMAÇÃO
+
+   Os quatro primeiros cards são trabalho em produção; o resto é
+   formação. Sem uma linha separando, os onze se leem como uma lista
+   plana e o peso se dilui — que era exatamente o problema de mostrar
+   oito projetos de bootcamp embaixo de um texto sobre produtos
+   rodando em provedores de grande porte.
+   ----------------------------------------------------------------- */
+.pgrid__divisor {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  margin-top: var(--sp-4);
+}
+
+.pgrid__divisor::before,
+.pgrid__divisor::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--border-color),
+    transparent
+  );
+}
+
+.pgrid__divisor span {
+  font-size: var(--fs-xs);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--secondary-color2);
+  white-space: nowrap;
+}
+
+/* A grade secundária usa cards menores: o contraste de tamanho já
+   diz o que é destaque, sem precisar de rótulo em cima de cada um. */
+@media (min-width: 768px) {
+  .pgrid--secundaria {
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .pgrid--secundaria {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.pgrid--secundaria .pcard {
+  opacity: 0.82;
+  transition: opacity var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
+}
+
+.pgrid--secundaria .pcard:hover,
+.pgrid--secundaria .pcard:focus-visible {
+  opacity: 1;
+}
+
+/* Aberto, o card secundário volta ao peso normal: o painel é o
+   mesmo dos destaques e não deve aparecer esmaecido. */
+.pgrid--secundaria .pgrid__item--aberto .pcard {
+  opacity: 1;
+}

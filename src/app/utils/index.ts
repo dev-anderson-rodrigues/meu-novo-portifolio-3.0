@@ -1,8 +1,75 @@
 export const projectsPort = [
   {
+    title: "Maestro",
+    description:
+      "Plataforma de atendimento automatizado com múltiplos agentes de IA — suporte, financeiro, comercial, vendas e triagem — em produção em provedores de internet de grande porte. Produto carro-chefe da Coraxy, concebido e arquitetado por mim, do desenho da solução ao deploy.",
+    functions: [
+      "Orquestração multi-agente: roteamento da conversa para o agente certo conforme a intenção do cliente.",
+      "Base de conhecimento consultável pelos agentes durante o atendimento.",
+      "Integração com os sistemas do provedor para responder com dado real, não genérico.",
+      "Operação em produção com acompanhamento contínuo e evolução do produto.",
+    ],
+    url: "",
+    image: [],
+    technologies: ["Node.js", "TypeScript", "React", "LLM APIs", "PostgreSQL", "Redis"],
+  },
+  {
+    title: "Vital",
+    description:
+      "SaaS multi-tenant de cobrança automatizada via WhatsApp Business para provedores de internet, em produção com usuários reais. Arquitetei e desenvolvi do zero ao deploy.",
+    functions: [
+      "Régua de cobrança multi-etapa com campanhas e templates aprovados na Meta.",
+      "PIX dentro da própria mensagem, com conciliação automática de pagamento.",
+      "Fila de workers com retry idempotente para processamento de alto volume.",
+      "Isolamento multi-tenant: cada provedor enxerga apenas os próprios dados.",
+      "Integrações com ERPs do setor (IXC, MK, Proxer), CRM e gateways de pagamento.",
+      "Promessa de pagamento, histórico de interação e auditoria de atividade.",
+      "Comunicação em tempo real via WebSocket e painel com indicadores.",
+    ],
+    url: "https://github.com/SiriusDevelopment-SDA/project-charge",
+    image: [],
+    technologies: [
+      "NestJS: Framework Node.js com TypeScript usado na API.",
+      "TypeORM: Modelagem, consultas e transações sobre PostgreSQL.",
+      "PostgreSQL: Banco relacional principal.",
+      "Redis: Cache e fila de processamento assíncrono.",
+      "Socket.IO: Comunicação em tempo real com o painel.",
+      "React: Interface do painel operacional.",
+      "TanStack Query: Sincronização de estado do servidor no front-end.",
+      "Swagger: Documentação automática da API.",
+    ],
+  },
+  {
+    title: "Nexora",
+    description:
+      "Plataforma multi-tenant que reúne relacionamento com clientes, operação comercial, projetos, contratos, infraestrutura e análises assistidas por IA num só ambiente. Projeto próprio.",
+    functions: [
+      "Dashboard operacional com indicadores e filtros por cliente e projeto.",
+      "CRM com clientes, usuários do portal, pipeline e oportunidades.",
+      "Projetos, propostas, orçamentos e análise de rentabilidade.",
+      "Planos de manutenção, contratos, franquias e renovações.",
+    ],
+    url: "https://github.com/dev-anderson-rodrigues/nexora",
+    image: [],
+    technologies: ["TypeScript", "React", "Node.js", "Arquitetura multi-tenant"],
+  },
+  {
+    title: "Unifica +",
+    description:
+      "Produto interno que centraliza e automatiza a abertura de chamados em vários ERPs a partir de um ponto só, usado no call center de provedores de internet.",
+    functions: [
+      "Um único fluxo de abertura de chamado para ERPs com APIs diferentes.",
+      "Padronização do registro, reduzindo erro operacional e retrabalho.",
+      "Manutenção e evolução contínuas junto à operação.",
+    ],
+    url: "",
+    image: [],
+    technologies: ["Node.js", "TypeScript", "Integrações com ERPs"],
+  },
+  {
     title: "W3 ERP - Gestão Empresarial",
     description:
-      "O W3 ERP é um Sistema Integrado de Gestão Empresarial focado em predição de compras, desenvolvido como parte do módulo 4 do curso de programação, que ao ser concluído com sucesso, garantirá a obtenção do certificado de conclusão de estudos de 1 ano. Este projeto tem como objetivo consolidar as habilidades adquiridas ao longo do curso, preparando o desenvolvedor para atuar como um fullstack em ascensão.",
+      "Sistema integrado de gestão empresarial com foco em predição de compras: acompanha produtos e clientes em alta e em baixa e projeta necessidade de reposição a partir do histórico.",
     functions: [
       "Visualização de Clientes e Produtos em Alta e em Baixa: Monitore os produtos e clientes com melhor e pior desempenho.",
       "Predição de Compras: Função avançada que ajuda a prever necessidades de compra com base em dados históricos.",
@@ -68,26 +135,8 @@ export const projectsPort = [
     ],
   },
   {
-    title: "LINK NA BIO",
-    description:
-      "Este projeto foi desenvolvido para uso pessoal, inspirado na ideia do Linktree, com o objetivo de agrupar minhas redes sociais e meios de contato em um único link para ser utilizado na bio do Instagram e outras redes sociais. O projeto é totalmente personalizado, inclui links para 3 projetos anexados, acesso às minhas redes sociais, e é completamente responsivo.",
-    functions: [
-      "Links para Redes Sociais: Acesso rápido às minhas principais redes sociais.",
-      "Links para Projetos: Três projetos destacados e facilmente acessíveis.",
-      "Responsividade: Layout adaptável para dispositivos móveis, tablets e desktops.",
-      "Interface Limpa e Intuitiva: Design amigável e fácil de navegar.",
-    ],
-    url: "https://github.com/dev-anderson-rodrigues/Projeto-linknabio",
-    technologies: [
-      "HTML: Estrutura do conteúdo.",
-      "CSS: Estilização e layout responsivo.",
-      "JavaScript: Funcionalidades interativas e dinâmicas.",
-    ],
-    image: ["/assets/images/Img_LinkNaBio.webp"],
-  },
-  {
     title: "Metavagas – Projeto Fullstack",
-    description: `Inspirado pelo funcionamento da renomada rede social LinkedIn, nosso projeto escolar do módulo IV abrange uma variedade de funcionalidades essenciais.
+    description: `Plataforma de vagas inspirada no LinkedIn, com front-end em React e API em Nest.js.
 O projeto Meta Vagas é um projeto fullstack e conta com uma API rodando em Nest.js com TypeORM, projetada especialmente para construção sólida dessa aplicação.`,
     functions: [
       "Registro e autenticação de usuários",
@@ -273,9 +322,76 @@ O projeto Meta Vagas é um projeto fullstack e conta com uma API rodando em Nest
 
 export const projectsEnglish = [
   {
+    title: "Maestro",
+    description:
+      "Automated service platform with multiple AI agents — support, finance, sales and triage — running in production at large internet service providers. Coraxy's flagship product, which I conceived and architected from solution design to deployment.",
+    functions: [
+      "Multi-agent orchestration: routes the conversation to the right agent based on customer intent.",
+      "Knowledge base the agents query during the conversation.",
+      "Integrated with the provider's systems so answers carry real data, not generic replies.",
+      "Running in production with continuous monitoring and product evolution.",
+    ],
+    url: "",
+    image: [],
+    technologies: ["Node.js", "TypeScript", "React", "LLM APIs", "PostgreSQL", "Redis"],
+  },
+  {
+    title: "Vital",
+    description:
+      "Multi-tenant SaaS for automated billing over WhatsApp Business, built for internet service providers and running in production with real users. I architected and built it from zero to deployment.",
+    functions: [
+      "Multi-step billing cadence with campaigns and Meta-approved templates.",
+      "PIX payment inside the message itself, with automatic reconciliation.",
+      "Worker queue with idempotent retry for high-volume processing.",
+      "Multi-tenant isolation: each provider sees only its own data.",
+      "Integrations with industry ERPs (IXC, MK, Proxer), CRM and payment gateways.",
+      "Payment promises, interaction history and activity auditing.",
+      "Real-time communication over WebSocket and a dashboard with indicators.",
+    ],
+    url: "https://github.com/SiriusDevelopment-SDA/project-charge",
+    image: [],
+    technologies: [
+      "NestJS: Node.js framework with TypeScript used for the API.",
+      "TypeORM: Modelling, queries and transactions over PostgreSQL.",
+      "PostgreSQL: Primary relational database.",
+      "Redis: Cache and asynchronous processing queue.",
+      "Socket.IO: Real-time communication with the dashboard.",
+      "React: Operational dashboard interface.",
+      "TanStack Query: Server state synchronisation on the front-end.",
+      "Swagger: Automatic API documentation.",
+    ],
+  },
+  {
+    title: "Nexora",
+    description:
+      "Multi-tenant platform bringing customer relationships, commercial operations, projects, contracts, infrastructure and AI-assisted analytics into a single environment. A personal project.",
+    functions: [
+      "Operational dashboard with indicators and filters by client and project.",
+      "CRM with clients, portal users, pipeline and opportunities.",
+      "Projects, proposals, quotes and profitability analysis.",
+      "Maintenance plans, contracts, allowances and renewals.",
+    ],
+    url: "https://github.com/dev-anderson-rodrigues/nexora",
+    image: [],
+    technologies: ["TypeScript", "React", "Node.js", "Multi-tenant architecture"],
+  },
+  {
+    title: "Unifica +",
+    description:
+      "Internal product that centralises and automates ticket creation across several ERPs from a single place, used in internet providers' call centres.",
+    functions: [
+      "One ticket-creation flow for ERPs with different APIs.",
+      "Standardised records, cutting operational error and rework.",
+      "Continuous maintenance and evolution alongside the operation.",
+    ],
+    url: "",
+    image: [],
+    technologies: ["Node.js", "TypeScript", "ERP integrations"],
+  },
+  {
     title: "W3 ERP - Business Management",
     description:
-      "W3 ERP is an Integrated Business Management System focused on purchase prediction, developed as part of module 4 of the programming course. Upon successful completion, it guarantees the achievement of a one-year course completion certificate. This project aims to consolidate the skills acquired throughout the course, preparing the developer to work as an emerging fullstack developer.",
+      "Integrated business management system focused on purchase prediction: tracks best and worst performing products and clients and projects restocking needs from historical data.",
     functions: [
       "High and Low Clients and Products View: Monitor the best and worst performing products and customers.",
       "Purchase Prediction: Advanced function that helps predict purchase needs based on historical data.",
@@ -341,26 +457,8 @@ export const projectsEnglish = [
     ],
   },
   {
-    title: "LINK IN BIO",
-    description:
-      "This project was developed for personal use, inspired by the Linktree concept, aiming to group my social networks and contact methods into a single link to be used in the Instagram bio and other social media. The project is fully customized, includes links to 3 attached projects, access to my social networks, and is fully responsive.",
-    functions: [
-      "Links to Social Networks: Quick access to my main social networks.",
-      "Links to Projects: Three highlighted projects easily accessible.",
-      "Responsiveness: Adaptable layout for mobile devices, tablets, and desktops.",
-      "Clean and Intuitive Interface: User-friendly and easy-to-navigate design.",
-    ],
-    url: "https://github.com/dev-anderson-rodrigues/Projeto-linknabio",
-    technologies: [
-      "HTML: Content structure.",
-      "CSS: Styling and responsive layout.",
-      "JavaScript: Interactive and dynamic functionalities.",
-    ],
-    image: ["/assets/images/Img_LinkNaBio.webp"],
-  },
-  {
     title: "Metavagas – Fullstack Project",
-    description: `Inspired by the operation of the renowned social network LinkedIn, our school project from module IV covers a variety of essential functionalities.
+    description: `Job platform inspired by LinkedIn, with a React front-end and a Nest.js API.
     The Meta Vagas project is a fullstack project with an API running on Nest.js with TypeORM, designed especially for solid construction of this application.`,
     functions: [
       "User registration and authentication.",
