@@ -1,235 +1,216 @@
+"use client";
+
 import { useLanguage, useProject } from "@/app/contexts";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import { useMediaQuery } from "react-responsive";
+import { useCallback, useEffect, useState } from "react";
+
+/**
+ * Separa "Next.js: framework React" em nome e descrição. Metade dos
+ * projetos lista a stack como nome puro ("React", "Axios") e a outra
+ * metade como par nome/descrição — o layout precisa aguentar as duas
+ * formas sem virar uma coisa diferente em cada projeto.
+ *
+ * O split é no primeiro ":" apenas, senão "GET /users: retorna..."
+ * perderia o resto do texto.
+ */
+const separar = (linha: string) => {
+  const i = linha.indexOf(":");
+  if (i === -1) return { nome: linha.trim(), desc: "" };
+  return { nome: linha.slice(0, i).trim(), desc: linha.slice(i + 1).trim() };
+};
 
 const ContentProject = () => {
   const { project, setSelectedProject } = useProject();
-  const isMobile = useMediaQuery({ query: "(max-width: 1280px)" });
-  const [readFunc, setReadFunc] = useState(false);
-  const [isOverflowing, setIsOverflowing] = useState(false);
-  const currentProject = project[0];
   const { language } = useLanguage();
+  const currentProject = project[0];
+  const pt = language === "Portuguese";
 
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const techRef = useRef<HTMLDivElement>(null);
+  const [imagem, setImagem] = useState(0);
 
-  const handleNext = () => {
-    if (currentImageIndex < currentProject.image.length - 1) {
-      setCurrentImageIndex(currentImageIndex + 1);
-    }
-  };
+  const fechar = useCallback(() => setSelectedProject(""), [setSelectedProject]);
 
-  const handlePrevious = () => {
-    if (currentImageIndex > 0) {
-      setCurrentImageIndex(currentImageIndex - 1);
-    }
-  };
+  // Fechar com Esc é o gesto que todo mundo tenta primeiro num painel
+  // que ocupa a seção inteira.
+  useEffect(() => {
+    const aoTeclar = (e: KeyboardEvent) => {
+      if (e.key === "Escape") fechar();
+    };
+    document.addEventListener("keydown", aoTeclar);
+    return () => document.removeEventListener("keydown", aoTeclar);
+  }, [fechar]);
 
-  const handleExit = () => {
-    setSelectedProject("");
-  };
-
-  const handleReadFunc = () => {
-    setReadFunc(!readFunc);
-  };
+  // Trocar de projeto sem voltar a imagem para a primeira deixava a
+  // galeria abrindo no índice 3 de um projeto que tem 2 capturas.
+  useEffect(() => setImagem(0), [currentProject]);
 
   /**
-   * Saber se a lista de tecnologias estoura só é possível depois do
-   * layout, então medir é inevitável. O que não era necessário é
-   * medir uma vez só: a versão anterior lia o scrollHeight quando o
-   * projeto mudava e nunca mais, então girar o celular ou aumentar a
-   * fonte do sistema deixava o "Ver mais" mentindo — aparecendo sem
-   * ter o que revelar, ou sumindo com texto ainda cortado.
-   *
-   * O ResizeObserver dispara já na primeira observação e a cada
-   * mudança de largura, o que cobre os dois casos.
+   * O card que abre pode estar na quarta linha da grade, e a expansão
+   * empurra tudo que vem depois — sem isso o conteúdo cresce fora do
+   * campo de visão e parece que nada aconteceu.
    */
-  useEffect(() => {
-    const el = techRef.current;
+  const aoMontar = useCallback((el: HTMLElement | null) => {
     if (!el) return;
+    requestAnimationFrame(() =>
+      el.scrollIntoView({
+        block: "nearest",
+        behavior:
+          typeof matchMedia === "function" &&
+          matchMedia("(prefers-reduced-motion: reduce)").matches
+            ? "auto"
+            : "smooth",
+      })
+    );
+  }, []);
 
-    if (typeof ResizeObserver === "undefined") {
-      setIsOverflowing(el.scrollHeight > 384);
-      return;
-    }
+  if (!currentProject) return null;
 
-    const obs = new ResizeObserver(() => {
-      setIsOverflowing(el.scrollHeight > 384);
-    });
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [currentProject]);
+  const imagens = Array.isArray(currentProject.image)
+    ? currentProject.image
+    : [];
+  const tecnologias = currentProject.technologies.map(separar);
+  const funcoes = currentProject.functions.filter(Boolean).map(separar);
+  const temDescricao = tecnologias.some((t) => t.desc);
 
   return (
-    <div className="relative w-full h-full justify-center items-center rounded-xl p-4 pt-0  content-projects ">
-      {currentProject ? (
-        <>
-          <button
-            type="button"
-            onClick={handleExit}
-            aria-label={language === "Portuguese" ? "Fechar detalhes" : "Close details"}
-            className="p-2 shadow-sm w-8 h-8 flex justify-center items-center rounded-lg absolute right-6 top-6 btn"
+    <article className="projeto" ref={aoMontar}>
+      <button
+        type="button"
+        onClick={fechar}
+        className="projeto__fechar"
+        aria-label={pt ? "Fechar detalhes" : "Close details"}
+      >
+        <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+          <path
+            d="M4 4l8 8M12 4l-8 8"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+          />
+        </svg>
+      </button>
+
+      <header className="projeto__cabecalho">
+        <p className="projeto__rotulo">{pt ? "Projeto" : "Project"}</p>
+        <h3 className="projeto__titulo">{currentProject.title}</h3>
+
+        <ul className="projeto__stack">
+          {tecnologias.map((t) => (
+            <li key={t.nome}>{t.nome}</li>
+          ))}
+        </ul>
+
+        {currentProject.url && (
+          <a
+            className="projeto__link"
+            href={currentProject.url}
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            X
-          </button>
-          <h3 className="pt-10 xl:pt-0 w-full flex text-center items-center justify-center font-semibold text-xl ">
-            <div className="border-b-2 border-slate-600 px-4">
-              {currentProject.title}
-            </div>
-          </h3>
+            {pt ? "Ver no GitHub" : "View on GitHub"}
+            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+              <path
+                d="M6 3h7v7M13 3 4 12"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.7"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </a>
+        )}
+      </header>
 
-          {/* A galeria era `absolute right-4 bottom-4`, ancorada no
-              painel inteiro: a altura do painel tinha de ser adivinhada
-              pelo texto para a imagem caber. Duas colunas de grade
-              resolvem sem ninguém precisar adivinhar nada. */}
-          <div className="detalhe__corpo">
-            <div className="detalhe__texto">
-          <div className="h-1/4 pt-6 flex flex-wrap flex-row ">
-            <h3 className="text-xl font-semibold">
-              {language === "Portuguese" ? "Descrição:" : "Description"}
-            </h3>
-            <p className="pt-1 pl-2 text-base font-semibold description">
-              {currentProject.description}
-            </p>
-          </div>
-          <div className="flex gap-2 h-20 items-start pt-4 max-w-screen-md justify-start">
-            <h3 className="text-xl font-semibold">
-              {language === "Portuguese" ? "Visitar:" : "Visit:"}
-            </h3>
-            <a
-              href={currentProject.url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {currentProject.url}
-            </a>
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold pt-2">
-              {language === "Portuguese"
-                ? "Funcionalidades:"
-                : "Functionalities:"}
-            </h3>
+      <div className="projeto__topo">
+        {imagens.length > 0 && (
+          <figure className="projeto__galeria">
+            <Image
+              src={imagens[imagem]}
+              alt={`${currentProject.title} — ${imagem + 1} de ${imagens.length}`}
+              width={1200}
+              height={750}
+              quality={90}
+              sizes="(max-width: 1024px) 92vw, 620px"
+              className="projeto__captura"
+            />
 
-            <details>
-              <summary className="ml-4 mt-2">
-                {!isMobile && (
-                  <span className="font-semibold border-b-2 border-slate-600 btn-read ml-2 pt-2 cursor-pointer">
-                    {language === "Portuguese"
-                      ? "Clique aqui para visualizar as funcionalidades"
-                      : "Click here to view the features"}
-                  </span>
-                )}
-              </summary>
-              <ul>
-                <li>
-                  {currentProject.functions.map((func, index) => {
-                    const [funcName, funcDesc] = func.split(":");
-                    return (
-                      <div
-                        key={index}
-                        className="pt-2 text-base font-semibold description pl-2"
-                      >
-                        <span className="funcName">{funcName}</span>
-                        {funcDesc && (
-                          <span className="funcDesc">: {funcDesc}</span>
-                        )}
-                      </div>
-                    );
-                  })}
-                </li>
-              </ul>
-            </details>
-          </div>
-
-          <div
-            className="xl:w-2/4 pt-5 min-h-96 "
-            style={{
-              maxHeight: !readFunc && isOverflowing ? "90px" : "100%",
-              overflow: !readFunc && isOverflowing ? "hidden" : "visible",
-              transition: "max-height 0.3s ease-in-out",
-            }}
-            id="tech"
-            ref={techRef}
-          >
-            <h3 className="text-xl font-semibold">
-              {language === "Portuguese" ? "Tecnologias:" : "Technologies"}
-            </h3>
-            {currentProject.technologies.map((tech, index) => {
-              const [techName, techDesc] = tech.split(":");
-              return (
-                <div
-                  key={index}
-                  className="pt-1 text-base font-semibold description pl-2"
-                >
-                  <span className="techName">{techName}</span>
-                  {techDesc && <span className="techDesc">: {techDesc}</span>}
-                </div>
-              );
-            })}
-          </div>
-          {!isMobile && isOverflowing && (
-            <button
-              onClick={handleReadFunc}
-              className="font-semibold border-b-2 border-slate-600 btn-read ml-2 pt-2"
-            >
-              {readFunc ? "Ver Menos" : "Ver Mais"}
-            </button>
-          )}
-            </div>
-
-            <div className="detalhe__midia">
-            <div className="relative">
-              {Array.isArray(currentProject.image) &&
-                currentProject.image.length > 0 && (
-                  <Image
-                    src={currentProject.image[currentImageIndex]}
-                    alt={`${currentProject.title} - ${currentImageIndex + 1}`}
-                    width={600}
-                    height={250}
-                    sizes="100vw"
-                    style={{ width: "100%", height: "auto" }}
-                    className="rounded-2xl bg-cover img-content"
-                  />
-                )}
-              <div className="galeria-nav">
-                <button
-                  type="button"
-                  onClick={handlePrevious}
-                  disabled={currentImageIndex === 0}
-                  aria-label={language === "Portuguese" ? "Imagem anterior" : "Previous image"}
-                  className="galeria-btn"
-                >
-                  ‹
-                </button>
-                <span className="galeria-contador" aria-live="polite">
-                  {currentImageIndex + 1} / {currentProject.image.length}
-                </span>
-                <button
-                  type="button"
-                  onClick={handleNext}
-                  disabled={
-                    currentImageIndex === currentProject.image.length - 1
-                  }
-                  aria-label={language === "Portuguese" ? "Próxima imagem" : "Next image"}
-                  className="galeria-btn"
-                >
-                  ›
-                </button>
+            {imagens.length > 1 && (
+              <div className="projeto__miniaturas">
+                {imagens.map((src, i) => (
+                  <button
+                    key={src}
+                    type="button"
+                    onClick={() => setImagem(i)}
+                    aria-current={i === imagem}
+                    aria-label={`${pt ? "Imagem" : "Image"} ${i + 1}`}
+                    className="projeto__miniatura"
+                  >
+                    <Image
+                      src={src}
+                      alt=""
+                      width={160}
+                      height={100}
+                      sizes="96px"
+                    />
+                  </button>
+                ))}
               </div>
-            </div>
-            </div>
-          </div>
-        </>
-      ) : (
-        <div>
-          {language === "Portuguese"
-            ? "Erro: Nenhum projeto disponível"
-            : "Error: project not found"}
+            )}
+          </figure>
+        )}
+
+        <div className="projeto__sobre">
+          <h4 className="projeto__secao">{pt ? "Sobre" : "About"}</h4>
+          <p className="projeto__descricao">{currentProject.description}</p>
         </div>
+      </div>
+
+      <section className="projeto__bloco">
+        <h4 className="projeto__secao">
+          {pt ? "Tecnologias" : "Technologies"}
+          <span className="projeto__contagem">{tecnologias.length}</span>
+        </h4>
+
+        {/* Com descrição cada item precisa de duas linhas e vira cartão;
+            sem descrição são só nomes e cartão seria caixa vazia com um
+            rótulo dentro. Uma classe decide, o mesmo HTML serve. */}
+        <ul
+          className={
+            temDescricao ? "projeto__tecnologias" : "projeto__tecnologias--curta"
+          }
+        >
+          {tecnologias.map((t) => (
+            <li key={t.nome}>
+              <strong>{t.nome}</strong>
+              {t.desc && <span>{t.desc}</span>}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {funcoes.length > 0 && (
+        <section className="projeto__bloco">
+          <h4 className="projeto__secao">
+            {pt ? "Funcionalidades" : "Features"}
+            <span className="projeto__contagem">{funcoes.length}</span>
+          </h4>
+
+          {/* Estava atrás de um <details> com "Clique aqui para
+              visualizar", mais um "Ver Mais" que só aparecia acima de
+              1280px: dois cliques e uma medição de altura para ler o
+              que o projeto faz. Em colunas cabe tudo aberto. */}
+          <ul className="projeto__funcoes">
+            {funcoes.map((f, i) => (
+              <li key={`${f.nome}-${i}`}>
+                <strong>{f.nome}</strong>
+                {f.desc && <span>{f.desc}</span>}
+              </li>
+            ))}
+          </ul>
+        </section>
       )}
-    </div>
+    </article>
   );
 };
 

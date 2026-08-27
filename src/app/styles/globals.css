@@ -496,56 +496,6 @@ main section:nth-child(4) {
     box-shadow: var(--shadow-glow);
   }
 
-  .content-projects {
-    color: var(--primary-color);
-    background-color: var(--bg-color);
-
-    @media (min-width: 1280px) {
-      box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
-        rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
-    }
-    .description {
-      color: var(--text-color);
-    }
-    .btn {
-      transition: 0.2s ease-in-out;
-      color: var(--secondary-color2);
-      border: 2px solid var(--secondary-color2);
-      animation: blink 3s infinite ease-in-out;
-      cursor: pointer;
-
-      @media (max-width: 1280px) {
-        top: 15px;
-        left: 48%;
-      }
-    }
-    .btn-read {
-      color: var(--secondary-color2);
-      text-align: center;
-    }
-    a {
-      animation: blink 3s infinite ease-in-out;
-    }
-    .btn-read:hover {
-      color: var(--text-color);
-      text-shadow: var(--shadow-glow);
-    }
-    .btn:hover {
-      color: var(--text-color);
-      box-shadow: var(--shadow-glow);
-    }
-    .img-content {
-      max-height: 520px !important;
-    }
-    .techName,
-    .funcName {
-      color: var(--secondary-color2);
-    }
-    .techDesc,
-    .funcDesc {
-      color: var(--text-color);
-    }
-  }
   .containerProjects {
     min-height: 80vh;
   }
@@ -1273,7 +1223,7 @@ header {
   transition-delay: var(--reveal-delay, 0ms);
 }
 
-[data-reveal="ready"] .pgrid__item.is-revealed {
+[data-reveal="ready"] .pgrid__item[data-revealed] {
   opacity: 1;
   transform: none;
 }
@@ -1539,7 +1489,7 @@ body::before {
   transition: transform var(--dur-slow) var(--ease);
 }
 
-.is-revealed .section-title::after,
+section:has([data-revealed]) .section-title::after,
 section:hover .section-title::after {
   transform: scaleX(1);
 }
@@ -1693,230 +1643,6 @@ section[id] {
   scroll-margin-top: 5rem;
 }
 
-/* =================================================================
-   DETALHE DO PROJETO
-
-   Era uma folha branca com listas empilhadas: título, um parágrafo,
-   e as tecnologias uma embaixo da outra em texto corrido. Nada
-   separava um assunto do outro e nada dizia onde olhar primeiro.
-
-   O conteúdo é o mesmo; o que muda é o enquadramento — o painel
-   entra em cena, cada assunto vira um bloco com marcação própria e
-   as tecnologias viram fichas em vez de lista.
-   ================================================================= */
-
-.containerProjects {
-  perspective: 1200px;
-}
-
-.content-projects {
-  background: color-mix(in srgb, var(--surface) 82%, transparent);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-xl);
-  backdrop-filter: blur(10px);
-  overflow: hidden;
-  animation: painel-entra var(--dur-slow) var(--ease) both;
-}
-
-/* Fio da marca no topo: fecha o painel e diz de quem ele é. */
-.content-projects::before {
-  content: "";
-  position: absolute;
-  inset-inline: 0;
-  top: 0;
-  height: 3px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--brand),
-    var(--brand-strong),
-    transparent
-  );
-}
-
-@keyframes painel-entra {
-  from {
-    opacity: 0;
-    transform: translateY(18px) rotateX(4deg) scale(0.985);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* Cada "Descrição:", "Visitar:", "Funcionalidades:", "Tecnologias:"
-   ganha um marcador da marca — antes eram todos o mesmo texto em
-   negrito, no mesmo tamanho, sem hierarquia entre si. */
-.content-projects h3 {
-  color: var(--brand-strong);
-  letter-spacing: 0.01em;
-}
-
-.detalhe__texto h3::before {
-  content: "";
-  display: inline-block;
-  width: 3px;
-  height: 0.9em;
-  margin-inline-end: var(--sp-2);
-  border-radius: 999px;
-  background: var(--brand);
-  vertical-align: -0.08em;
-}
-
-/* -----------------------------------------------------------------
-   TECNOLOGIAS E FUNCIONALIDADES COMO FICHAS
-
-   Vinte tecnologias empilhadas em coluna é o que fazia o painel
-   parecer um formulário. Em fichas elas ocupam a largura, ficam
-   varríveis de um olhar e param de competir com a descrição.
-   ----------------------------------------------------------------- */
-#tech {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--sp-2);
-  align-content: flex-start;
-}
-
-#tech h3 {
-  flex: 1 0 100%;
-  margin-bottom: var(--sp-1);
-}
-
-#tech .description {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.25rem;
-  padding: 0.3rem 0.7rem;
-  border: 1px solid var(--border-color);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--surface-raised) 70%, transparent);
-  font-size: var(--fs-sm);
-  line-height: 1.4;
-  transition: border-color var(--dur-fast) var(--ease),
-    color var(--dur-fast) var(--ease),
-    transform var(--dur-fast) var(--ease);
-}
-
-#tech .description:hover {
-  border-color: rgb(var(--brand-rgb) / 0.6);
-  transform: translateY(-2px);
-}
-
-#tech .description .techName {
-  color: var(--text-color);
-  font-weight: 600;
-}
-
-/* A ficha some se o texto do chip vazar; sem isso o padding some. */
-#tech .description .techDesc {
-  color: var(--secondary-color2);
-  font-weight: 400;
-}
-
-/* A galeria ganha moldura e a mesma linguagem do resto. */
-.content-projects .img-content {
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border-color);
-  box-shadow: 0 20px 50px -24px rgb(var(--brand-rgb) / 0.55);
-}
-
-/* O link do repositório piscava com `animation: blink` — chamava
-   atenção sem dizer nada. Agora ele se comporta como link. */
-.content-projects a {
-  animation: none !important;
-  color: var(--brand);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-color: rgb(var(--brand-rgb) / 0.4);
-  transition: text-decoration-color var(--dur-fast) var(--ease);
-  word-break: break-all;
-}
-
-.content-projects a:hover {
-  text-decoration-color: var(--brand);
-}
-
-.content-projects .btn {
-  animation: none;
-  border-color: var(--border-color);
-  color: var(--secondary-color2);
-}
-
-.content-projects .btn:hover {
-  border-color: var(--brand);
-  color: var(--brand);
-  box-shadow: 0 0 0 4px rgb(var(--brand-rgb) / 0.15);
-}
-
-/* -----------------------------------------------------------------
-   GALERIA DO PROJETO
-
-   Os dois controles eram as palavras "Previous" e "Next" soltas por
-   cima da imagem — em inglês mesmo com o site em português, sem
-   fundo, e sem dizer em que imagem você estava.
-   ----------------------------------------------------------------- */
-.galeria-nav {
-  position: absolute;
-  left: 50%;
-  bottom: var(--sp-4);
-  transform: translateX(-50%);
-  display: inline-flex;
-  align-items: center;
-  gap: var(--sp-1);
-  padding: 0.25rem;
-  border-radius: 999px;
-  border: 1px solid var(--border-color);
-  background: color-mix(in srgb, var(--bg-color) 78%, transparent);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 24px -12px rgb(0 0 0 / 0.6);
-}
-
-.galeria-btn {
-  width: 2rem;
-  height: 2rem;
-  display: grid;
-  place-items: center;
-  border-radius: 999px;
-  font-size: 1.25rem;
-  line-height: 1;
-  color: var(--text-color);
-  transition: background-color var(--dur-fast) var(--ease),
-    color var(--dur-fast) var(--ease);
-}
-
-.galeria-btn:hover:not(:disabled) {
-  background: rgb(var(--brand-rgb) / 0.18);
-  color: var(--brand-strong);
-}
-
-.galeria-btn:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-}
-
-.galeria-contador {
-  min-width: 3.25rem;
-  text-align: center;
-  font-size: var(--fs-sm);
-  font-variant-numeric: tabular-nums;
-  color: var(--secondary-color2);
-}
-
-/* O bloco de tecnologias carregava min-h-96 do tempo em que era uma
-   lista em coluna. Com as fichas o conteúdo cabe em duas linhas, e a
-   altura travada virava um vão morto de 384px no meio do painel. */
-#tech {
-  min-height: 0 !important;
-}
-
-/* O X de fechar herdava cinza sobre cinza e sumia no painel. */
-.content-projects .btn {
-  color: var(--text-color);
-  background: color-mix(in srgb, var(--surface-raised) 85%, transparent);
-  font-weight: 600;
-}
-
 /* -----------------------------------------------------------------
    CARD DE PROJETO — brilho que segue o cursor
 
@@ -1981,10 +1707,6 @@ section[id] {
     animation: none;
   }
 
-  .content-projects {
-    animation: none;
-  }
-
   .section-title::after {
     transform: scaleX(1);
     transition: none;
@@ -2008,95 +1730,6 @@ section[id] {
   footer .marca-svg:hover {
     transform: none;
   }
-}
-
-/* -----------------------------------------------------------------
-   DETALHE — duas colunas
-
-   Com a galeria fora do fluxo, a altura do painel dependia de o texto
-   por acaso ser alto o bastante para a imagem caber embaixo. Quando o
-   texto encurtou (as tecnologias viraram fichas), a imagem passou por
-   cima do título. Em grade cada coluna mede o que precisa.
-   ----------------------------------------------------------------- */
-.detalhe__corpo {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--sp-6);
-  align-items: start;
-  padding-top: var(--sp-4);
-}
-
-@media (min-width: 1024px) {
-  .detalhe__corpo {
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-    gap: var(--sp-8);
-  }
-}
-
-.detalhe__texto {
-  display: flex;
-  flex-direction: column;
-  gap: var(--sp-2);
-  min-width: 0;
-}
-
-.detalhe__midia {
-  min-width: 0;
-  position: relative;
-}
-
-.detalhe__midia .relative {
-  position: relative;
-}
-
-.content-projects .img-content {
-  width: 100%;
-  height: auto;
-  max-height: 26rem !important;
-  object-fit: cover;
-  object-position: top;
-}
-
-/* Alturas travadas herdadas do layout antigo: com a grade elas só
-   abrem buracos entre um assunto e outro. */
-.detalhe__texto > div[class*="h-20"],
-.detalhe__texto > div[class*="h-1/4"] {
-  height: auto !important;
-}
-
-/* -----------------------------------------------------------------
-   FECHAR
-
-   O botão fica no canto superior direito do painel — que é
-   exatamente onde a galeria passou a começar. Cinza sobre uma
-   captura clara, ele sumia. Agora carrega o próprio contraste.
-   ----------------------------------------------------------------- */
-.content-projects .btn {
-  z-index: 5;
-  width: 2.25rem;
-  height: 2.25rem;
-  border-radius: 999px;
-  border: 1px solid var(--border-color);
-  background: color-mix(in srgb, var(--bg-color) 82%, transparent);
-  backdrop-filter: blur(10px);
-  color: var(--text-color);
-  box-shadow: 0 6px 18px -8px rgb(0 0 0 / 0.7);
-}
-
-.content-projects .btn:hover {
-  background: var(--brand);
-  border-color: var(--brand);
-  color: var(--bg-color);
-  box-shadow: 0 0 0 5px rgb(var(--brand-rgb) / 0.2);
-}
-
-/* A linha "Visitar:" põe o rótulo e a URL lado a lado. Como as URLs
-   são longas, o rótulo era espremido até o marcador quebrar sozinho
-   para a linha de cima. Deixando a linha quebrar, a URL desce
-   inteira e o rótulo fica de pé. */
-.detalhe__texto > div {
-  flex-wrap: wrap;
-  align-items: baseline;
 }
 
 /* -----------------------------------------------------------------
@@ -2149,4 +1782,453 @@ section[id] {
    Mesmo peso, mais abaixo no arquivo: esta vence. */
 main section.sobre {
   padding-top: var(--sp-12);
+}
+
+/* =================================================================
+   DETALHE DO PROJETO
+
+   A versão anterior era uma folha com quatro rótulos em negrito, a
+   URL crua no meio do texto, as funcionalidades escondidas atrás de
+   um "Clique aqui" e as tecnologias empilhadas em coluna. Quando o
+   projeto listava a stack com descrição, cada item virava um balão
+   de três linhas — a leitura ficava pior do que a lista simples que
+   eu tinha substituído.
+
+   Aqui o painel tem cabeçalho, galeria e blocos. A stack aparece
+   duas vezes de propósito: como resumo de uma linha no cabeçalho,
+   para quem só quer saber com o que foi feito, e detalhada embaixo
+   para quem quer ler.
+   ================================================================= */
+
+.containerProjects {
+  width: 100%;
+}
+
+.projeto {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-10);
+  padding: var(--sp-8) var(--sp-6) var(--sp-10);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  animation: projeto-entra var(--dur-slow) var(--ease) both;
+}
+
+@media (min-width: 768px) {
+  .projeto {
+    padding: var(--sp-10) var(--sp-10) var(--sp-12);
+  }
+}
+
+/* Fio da marca no topo: fecha o painel e diz de quem ele é. */
+.projeto::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--brand),
+    var(--brand-strong),
+    transparent
+  );
+}
+
+@keyframes projeto-entra {
+  from { opacity: 0; transform: translateY(16px) scale(0.99); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ---------------- cabeçalho ---------------- */
+
+.projeto__fechar {
+  position: absolute;
+  top: var(--sp-4);
+  right: var(--sp-4);
+  z-index: 5;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  background: color-mix(in srgb, var(--bg-color) 82%, transparent);
+  color: var(--text-color);
+  transition: background-color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
+}
+
+.projeto__fechar:hover {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: var(--bg-color);
+  transform: rotate(90deg);
+}
+
+.projeto__cabecalho {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  max-width: 60rem;
+  padding-right: 3rem;
+}
+
+.projeto__rotulo {
+  font-size: var(--fs-xs);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--secondary-color2);
+  margin: 0;
+}
+
+.projeto__titulo {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  background-image: linear-gradient(
+    96deg,
+    var(--text-color) 28%,
+    var(--brand-strong) 96%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (min-width: 768px) {
+  .projeto__titulo { font-size: var(--fs-3xl); }
+}
+
+/* Resumo da stack: só os nomes, numa linha, para dar a resposta
+   rápida antes de qualquer leitura. */
+.projeto__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.projeto__stack li {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--brand-strong);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: rgb(var(--brand-rgb) / 0.12);
+  border: 1px solid rgb(var(--brand-rgb) / 0.28);
+}
+
+/* A URL do repositório aparecia crua e quebrando em duas linhas no
+   meio do texto. Vira botão. */
+.projeto__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-top: var(--sp-1);
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--bg-color);
+  background: var(--brand);
+  text-decoration: none;
+  transition: transform var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease);
+}
+
+.projeto__link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -10px rgb(var(--brand-rgb) / 0.8);
+}
+
+/* ---------------- galeria + sobre ---------------- */
+
+.projeto__topo {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-8);
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .projeto__topo {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: var(--sp-10);
+  }
+}
+
+.projeto__galeria {
+  margin: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.projeto__captura {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 24px 56px -28px rgb(var(--brand-rgb) / 0.6);
+}
+
+/* Setas com contador viraram miniaturas: dá para ver quantas
+   capturas existem e pular direto para a que interessa, em vez de
+   avançar uma a uma até o fim. */
+.projeto__miniaturas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+.projeto__miniatura {
+  width: 5rem;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  opacity: 0.55;
+  transition: opacity var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
+}
+
+.projeto__miniatura img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.projeto__miniatura:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+}
+
+.projeto__miniatura[aria-current="true"] {
+  opacity: 1;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 2px rgb(var(--brand-rgb) / 0.35);
+}
+
+.projeto__sobre {
+  min-width: 0;
+}
+
+.projeto__descricao {
+  margin: 0;
+  font-size: var(--fs-md);
+  line-height: 1.75;
+  color: var(--text-color);
+  max-width: 46ch;
+}
+
+/* ---------------- blocos ---------------- */
+
+.projeto__bloco {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.projeto__secao {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.projeto__secao::before {
+  content: "";
+  width: 3px;
+  height: 1.1em;
+  border-radius: 999px;
+  background: var(--brand);
+}
+
+.projeto__contagem {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--secondary-color2);
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+}
+
+/* Com descrição, cada tecnologia é um cartão de duas linhas numa
+   grade que se acomoda sozinha. */
+.projeto__tecnologias {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: var(--sp-3);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.projeto__tecnologias li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: var(--sp-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: color-mix(in srgb, var(--surface-raised) 60%, transparent);
+  transition: border-color var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
+}
+
+.projeto__tecnologias li:hover {
+  border-color: rgb(var(--brand-rgb) / 0.5);
+  transform: translateY(-2px);
+}
+
+.projeto__tecnologias strong {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--brand-strong);
+}
+
+.projeto__tecnologias span {
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  color: var(--secondary-color2);
+}
+
+/* Sem descrição sobra só o nome, e cartão seria caixa vazia. */
+.projeto__tecnologias--curta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.projeto__tecnologias--curta li {
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  background: color-mix(in srgb, var(--surface-raised) 60%, transparent);
+  transition: border-color var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
+}
+
+.projeto__tecnologias--curta li:hover {
+  border-color: rgb(var(--brand-rgb) / 0.5);
+  transform: translateY(-2px);
+}
+
+.projeto__tecnologias--curta strong {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+/* Até 26 funcionalidades num projeto: em coluna única isso é uma
+   parede. As colunas do CSS quebram sozinhas onde couber. */
+.projeto__funcoes {
+  columns: 1;
+  column-gap: var(--sp-8);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .projeto__funcoes { columns: 2; }
+}
+
+@media (min-width: 1280px) {
+  .projeto__funcoes { columns: 3; }
+}
+
+.projeto__funcoes li {
+  break-inside: avoid;
+  margin-bottom: var(--sp-4);
+  padding-left: var(--sp-4);
+  border-left: 2px solid var(--border-color);
+  transition: border-color var(--dur-fast) var(--ease);
+}
+
+.projeto__funcoes li:hover {
+  border-left-color: var(--brand);
+}
+
+.projeto__funcoes strong {
+  display: block;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.projeto__funcoes span {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  color: var(--secondary-color2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projeto { animation: none; }
+
+  .projeto__fechar,
+  .projeto__link,
+  .projeto__miniatura,
+  .projeto__tecnologias li,
+  .projeto__tecnologias--curta li {
+    transition: none;
+  }
+
+  .projeto__fechar:hover,
+  .projeto__link:hover,
+  .projeto__miniatura:hover,
+  .projeto__tecnologias li:hover,
+  .projeto__tecnologias--curta li:hover {
+    transform: none;
+  }
+}
+
+/* -----------------------------------------------------------------
+   CARD ABERTO NA GRADE
+
+   O item escolhido passa a ocupar a linha inteira e vira o painel de
+   detalhe ali mesmo, entre os outros cards. Ninguém sai de onde
+   estava: a grade continua desenhada em volta.
+   ----------------------------------------------------------------- */
+.pgrid__item--aberto {
+  grid-column: 1 / -1;
+}
+
+/* O painel já tem a própria moldura; dentro da grade ele não precisa
+   da margem que teria solto na página. */
+.pgrid__item--aberto .projeto {
+  animation: projeto-abre var(--dur-slow) var(--ease) both;
+}
+
+@keyframes projeto-abre {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pgrid__item--aberto .projeto { animation: none; }
 }
