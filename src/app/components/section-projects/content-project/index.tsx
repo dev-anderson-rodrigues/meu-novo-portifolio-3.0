@@ -52,17 +52,25 @@ const ContentProject = () => {
     if (!el) return;
     requestAnimationFrame(() =>
       el.scrollIntoView({
-        // "nearest" faz o mínimo de rolagem possível, e num painel mais
-        // alto que a tela o mínimo é encostar a base — a pessoa
-        // chegava no meio do conteúdo, com o título e o botão de
-        // fechar já acima do campo de visão. "start" alinha o topo, e
-        // o scroll-margin do painel desconta o cabeçalho fixo.
+        /*
+          "nearest" fazia o mínimo de rolagem possível, e num painel
+          mais alto que a tela o mínimo é encostar a base — a pessoa
+          chegava no meio do conteúdo. "start" alinha o topo, e o
+          scroll-margin do painel desconta o cabeçalho fixo.
+
+          O comportamento é instantâneo, não suave, e isso é
+          deliberado: o navegador cancela rolagem programática suave
+          assim que percebe rolagem do usuário, e num toque de dedo a
+          inércia do gesto ainda está correndo quando o painel monta.
+          A animação era interrompida no meio e a pessoa parava em
+          qualquer lugar — falha que só aparece com gesto real, nunca
+          num teste automatizado, onde não há inércia competindo.
+
+          O painel já entra com animação própria, então o salto não
+          fica seco.
+        */
         block: "start",
-        behavior:
-          typeof matchMedia === "function" &&
-          matchMedia("(prefers-reduced-motion: reduce)").matches
-            ? "auto"
-            : "smooth",
+        behavior: "auto",
       })
     );
   }, []);
