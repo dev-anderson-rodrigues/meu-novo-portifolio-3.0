@@ -26,7 +26,7 @@ export const projectsPort = [
       "Promessa de pagamento, histórico de interação e auditoria de atividade.",
       "Comunicação em tempo real via WebSocket e painel com indicadores.",
     ],
-    url: "https://github.com/SiriusDevelopment-SDA/project-charge",
+    url: "",
     image: [],
     technologies: [
       "NestJS: Framework Node.js com TypeScript usado na API.",
@@ -348,7 +348,7 @@ export const projectsEnglish = [
       "Payment promises, interaction history and activity auditing.",
       "Real-time communication over WebSocket and a dashboard with indicators.",
     ],
-    url: "https://github.com/SiriusDevelopment-SDA/project-charge",
+    url: "",
     image: [],
     technologies: [
       "NestJS: Node.js framework with TypeScript used for the API.",
