@@ -1879,7 +1879,24 @@ main section.sobre {
   align-items: flex-start;
   gap: var(--sp-3);
   max-width: 60rem;
-  padding-right: 3rem;
+  padding: 1rem;
+}
+
+/*
+   O botão de fechar flutua sobre o canto superior direito do painel.
+   Acima de 768px o painel tem folga lateral suficiente e ele nunca
+   encosta no texto; abaixo disso a folga cai para 1,5rem e o título
+   passava 12px por baixo do botão.
+
+   Quem recua são só o rótulo e o título — as duas linhas que dividem
+   altura com o botão. O padding do bloco continua 1rem nos quatro
+   lados, e a lista de stack e o link seguem usando a largura inteira.
+*/
+@media (max-width: 767px) {
+  .projeto__rotulo,
+  .projeto__titulo {
+    padding-right: 2.5rem;
+  }
 }
 
 .projeto__rotulo {
@@ -2216,6 +2233,19 @@ main section.sobre {
    ----------------------------------------------------------------- */
 .pgrid__item--aberto {
   grid-column: 1 / -1;
+
+  /*
+     Aberto, o card sobe para o começo da própria grade.
+
+     Expandindo onde estava, o painel partia a fila ao meio: abrindo o
+     segundo projeto, o primeiro ficava sozinho numa linha acima e os
+     outros seis desciam para depois do painel. A grade deixava de ser
+     uma lista e virava duas, com o conteúdo aberto no meio.
+
+     Com order o painel encabeça o grupo e todos os cards ficam
+     abaixo, em fila inteira.
+  */
+  order: -1;
 }
 
 /* O painel já tem a própria moldura; dentro da grade ele não precisa
