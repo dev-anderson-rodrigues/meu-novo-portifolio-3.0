@@ -200,7 +200,7 @@ O projeto Meta Vagas é um projeto fullstack e conta com uma API rodando em Nest
       "Bcryptjs",
       "JWT - Token",
     ],
-    image: ["/assets/images/api.webp"],
+    image: [],
   },
   {
     title: "API - Metavagas",
@@ -236,7 +236,7 @@ O projeto Meta Vagas é um projeto fullstack e conta com uma API rodando em Nest
       "JWT (Json Web Token",
       "Jest",
     ],
-    image: ["/assets/images/api.webp"],
+    image: [],
   },
   {
     title: "API - Pet & Events Management",
@@ -293,7 +293,7 @@ O projeto Meta Vagas é um projeto fullstack e conta com uma API rodando em Nest
       "ESLint e Prettier: Para padronização e formatação de código.",
       "Jest e Supertest: Para testes unitários e de integração.",
     ],
-    image: ["/assets/images/api.webp"],
+    image: [],
   },
   {
     title: "API - Customers Management",
@@ -316,7 +316,7 @@ O projeto Meta Vagas é um projeto fullstack e conta com uma API rodando em Nest
       "Swagger: Biblioteca usada para documentar a API.",
       "PostgreSQL: Banco de dados usado para armazenar os dados.",
     ],
-    image: ["/assets/images/api.webp"], // Adicione a URL da imagem do projeto
+    image: [],
   },
 ];
 
@@ -522,7 +522,7 @@ export const projectsEnglish = [
       "Bcryptjs",
       "JWT - Token",
     ],
-    image: ["/assets/images/api.webp"],
+    image: [],
   },
   {
     title: "API - Metavagas",
@@ -558,7 +558,7 @@ export const projectsEnglish = [
       "JWT (Json Web Token)",
       "Jest",
     ],
-    image: ["/assets/images/api.webp"],
+    image: [],
   },
   {
     title: "API - Pet & Events Management",
@@ -613,7 +613,7 @@ export const projectsEnglish = [
       "ESLint and Prettier: For code standardization and formatting.",
       "Jest and Supertest: For unit and integration testing.",
     ],
-    image: ["/assets/images/api.webp"],
+    image: [],
   },
   {
     title: "API - Customers Management",
@@ -636,6 +636,6 @@ export const projectsEnglish = [
       "Swagger: Library used to document the API.",
       "PostgreSQL: Database used to store data.",
     ],
-    image: ["/assets/images/api.webp"],
+    image: [],
   },
 ];

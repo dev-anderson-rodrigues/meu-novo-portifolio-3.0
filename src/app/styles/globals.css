@@ -2046,6 +2046,21 @@ main section.sobre {
   min-width: 0;
 }
 
+/*
+   Sem captura, a descrição fica sozinha em .projeto__topo e a segunda
+   coluna da grade virava um vazio do tamanho dela — o painel abria
+   com metade da largura em branco. Dezesseis dos vinte e dois projetos
+   estão nesse caso: os quatro em produção, que não têm repositório
+   público para capturar, e as quatro APIs, que dividiam uma mesma
+   figura genérica de placa de circuito.
+
+   O max-width de .projeto__descricao continua limitando a medida, então
+   ocupar a largura toda não estica a linha além do legível.
+*/
+.projeto__sobre:only-child {
+  grid-column: 1 / -1;
+}
+
 .projeto__descricao {
   margin: 0;
   font-size: var(--fs-md);
