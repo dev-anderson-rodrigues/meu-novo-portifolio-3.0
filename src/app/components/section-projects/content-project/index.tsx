@@ -52,7 +52,12 @@ const ContentProject = () => {
     if (!el) return;
     requestAnimationFrame(() =>
       el.scrollIntoView({
-        block: "nearest",
+        // "nearest" faz o mínimo de rolagem possível, e num painel mais
+        // alto que a tela o mínimo é encostar a base — a pessoa
+        // chegava no meio do conteúdo, com o título e o botão de
+        // fechar já acima do campo de visão. "start" alinha o topo, e
+        // o scroll-margin do painel desconta o cabeçalho fixo.
+        block: "start",
         behavior:
           typeof matchMedia === "function" &&
           matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -73,22 +78,26 @@ const ContentProject = () => {
 
   return (
     <article className="projeto" ref={aoMontar}>
-      <button
-        type="button"
-        onClick={fechar}
-        className="projeto__fechar"
-        aria-label={pt ? "Fechar detalhes" : "Close details"}
-      >
-        <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
-          <path
-            d="M4 4l8 8M12 4l-8 8"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-          />
-        </svg>
-      </button>
+      {/* A faixa acompanha a rolagem para o botão não sumir de vista
+          num painel longo. */}
+      <div className="projeto__barra">
+        <button
+          type="button"
+          onClick={fechar}
+          className="projeto__fechar"
+          aria-label={pt ? "Fechar detalhes" : "Close details"}
+        >
+          <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+            <path
+              d="M4 4l8 8M12 4l-8 8"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+            />
+          </svg>
+        </button>
+      </div>
 
       <header className="projeto__cabecalho">
         <p className="projeto__rotulo">{pt ? "Projeto" : "Project"}</p>

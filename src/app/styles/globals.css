@@ -134,7 +134,11 @@ body {
   font-family: Poppins, Arial, Helvetica, sans-serif !important;
   z-index: 0;
   overflow-x: hidden;
-  header {
+  /* Filho direto: a barra de navegação. Sem o >, esta regra pintava
+     qualquer <header> da página — inclusive o do painel de projeto,
+     que aparecia com fundo e traço de barra de navegação em volta do
+     título. */
+  > header {
     background-color: var(--bg-color);
     border-bottom: 1px solid var(--secondary-color2);
   }
@@ -904,7 +908,7 @@ main section:nth-child(4) {
    encolhe nas faixas estreitas, onde o menu disputa espaço.
    ================================================================= */
 
-header {
+body > header {
   min-height: 4rem;
 }
 
@@ -1813,32 +1817,37 @@ main section.sobre {
   padding: var(--sp-8) var(--sp-6) var(--sp-10);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-xl);
-  background: color-mix(in srgb, var(--surface) 82%, transparent);
-  backdrop-filter: blur(10px);
-  overflow: hidden;
-  animation: projeto-entra var(--dur-slow) var(--ease) both;
-}
 
-@media (min-width: 768px) {
-  .projeto {
-    padding: var(--sp-10) var(--sp-10) var(--sp-12);
-  }
-}
-
-/* Fio da marca no topo: fecha o painel e diz de quem ele é. */
-.projeto::before {
-  content: "";
-  position: absolute;
-  inset-inline: 0;
-  top: 0;
-  height: 3px;
-  background: linear-gradient(
+  /*
+     O fio da marca no topo era um ::before absoluto, e para ele não
+     escapar dos cantos arredondados o painel precisava de
+     overflow:hidden — que por sua vez impede position:sticky em
+     qualquer filho, inclusive no botão de fechar. Como background do
+     próprio painel, o fio é recortado pelo border-radius de graça e o
+     overflow deixa de ser necessário.
+  */
+  background-image: linear-gradient(
     90deg,
     transparent,
     var(--brand),
     var(--brand-strong),
     transparent
   );
+  background-size: 100% 3px;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-color: color-mix(in srgb, var(--surface) 82%, transparent);
+  backdrop-filter: blur(10px);
+  animation: projeto-entra var(--dur-slow) var(--ease) both;
+
+  /* Chegando pelo topo, o cabeçalho fixo não come o título. */
+  scroll-margin-top: 5rem;
+}
+
+@media (min-width: 768px) {
+  .projeto {
+    padding: var(--sp-10) var(--sp-10) var(--sp-12);
+  }
 }
 
 @keyframes projeto-entra {
@@ -1848,18 +1857,43 @@ main section.sobre {
 
 /* ---------------- cabeçalho ---------------- */
 
-.projeto__fechar {
-  position: absolute;
-  top: var(--sp-4);
-  right: var(--sp-4);
+/*
+   O botão vive numa faixa de altura zero e grudada no topo. Sendo
+   absolute ele sumia assim que a pessoa descia no painel — e num
+   projeto com 26 funcionalidades isso é quase o painel inteiro sem
+   como fechar, a não ser voltando ao topo ou apertando Esc.
+
+   A faixa não recebe clique para não cobrir o texto embaixo dela; só
+   o botão recebe.
+*/
+.projeto__barra {
+  position: sticky;
+  top: calc(4rem + var(--sp-3));
   z-index: 5;
+  height: 0;
+  display: flex;
+  justify-content: flex-end;
+  pointer-events: none;
+}
+
+.projeto__barra > * {
+  pointer-events: auto;
+}
+
+.projeto__fechar {
   width: 2.25rem;
   height: 2.25rem;
   display: grid;
   place-items: center;
   border-radius: 999px;
   border: 1px solid var(--border-color);
-  background: color-mix(in srgb, var(--bg-color) 82%, transparent);
+
+  /* Grudado no topo, o botão passa por cima do texto enquanto a
+     pessoa rola. Fundo quase opaco e desfoque atrás para o X não
+     disputar legibilidade com o conteúdo que passa por baixo. */
+  background: color-mix(in srgb, var(--bg-color) 94%, transparent);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 14px -6px rgb(0 0 0 / 0.55);
   color: var(--text-color);
   transition: background-color var(--dur-fast) var(--ease),
     border-color var(--dur-fast) var(--ease),
