@@ -57,92 +57,68 @@ const SectionAboutMe = () => {
         </strong>
         ,
         <article className="text-lg font-extralight pt-2">
-          {language === "Portuguese" ? (
+          {pt ? (
             <>
-              Sou Anderson Rodrigues, desenvolvedor Full Stack há {codando}.
-              Atuo há {naArea} desenvolvendo
-              soluções para provedores de internet, trabalhando diretamente com
-              análise e automação de processos, integrações entre sistemas ERP e
-              desenvolvimento de soluções inteligentes utilizando n8n,
-              low-code/no-code e Inteligência Artificial. Tenho forte atuação na
-              construção de fluxos automatizados que reduzem erros operacionais,
-              aceleram atendimentos e melhoram a organização interna das
-              equipes. Atualmente, atuo como desenvolvedor CLT, participando de
-              projetos de grande impacto e relevância estratégica para a
-              empresa.
+              Sou Anderson Rodrigues, desenvolvedor Full Stack há {codando}. Há{" "}
+              {naArea} construo produtos para provedores de internet — do
+              levantamento do processo à arquitetura, ao deploy e ao
+              acompanhamento em produção.
             </>
           ) : (
             <>
-              I&apos;m Anderson Rodrigues, a Full Stack developer with {codando} of experience.
-              For {naArea} I&apos;ve been developing
-              solutions for internet service providers, working directly with
-              process analysis and automation, ERP system integrations, and
-              developing intelligent solutions using n8n, low-code/no-code, and
-              Artificial Intelligence. I have a strong track record in building
-              automated workflows that reduce operational errors, accelerate
-              service, and improve internal team organization. Currently, I work
-              as a full-time developer, participating in high-impact and
-              strategically relevant projects for the company.
+              I&apos;m Anderson Rodrigues, a Full Stack developer with {codando}{" "}
+              of experience. For {naArea} I&apos;ve been building products for
+              internet service providers — from mapping the process to
+              architecture, deployment and keeping it running in production.
             </>
           )}
         </article>
+
         <article className="text-lg font-extralight pt-2">
-          {language === "Portuguese" ? (
+          {pt ? (
             <>
-              Nos últimos projetos, meu foco principal tem sido automação e IA,
-              criando soluções que atendem áreas como suporte, comercial,
-              vendas, financeiro e cobrança, incluindo o desenvolvimento de
-              chats inteligentes com múltiplos agentes de IA, hoje utilizados em
-              produção e em constante evolução. Esse produto foi idealizado e
-              encabeçado por mim, desde a concepção da solução até sua
-              implementação, tornando-se um produto interno oficial da empresa,
-              utilizado diariamente no ambiente corporativo. Além do
-              desenvolvimento técnico, atuo como responsável pela evolução do
-              produto, criando novas funcionalidades, definindo melhorias
-              contínuas, administrando a manutenção da solução e orientando
-              equipes sobre seu funcionamento, garantindo estabilidade,
-              escalabilidade e alinhamento com as necessidades do negócio.
+              Meu trabalho se concentra em atendimento automatizado, cobrança e
+              integração com ERPs. Arquitetei e desenvolvi uma plataforma de
+              atendimento com múltiplos agentes de IA — suporte, financeiro,
+              comercial, vendas e triagem — em produção em provedores de grande
+              porte, com orquestração em n8n e RAG sobre banco vetorial para
+              recuperar contexto. E um SaaS multi-tenant de cobrança
+              automatizada por WhatsApp: régua de várias etapas, PIX dentro da
+              própria conversa, filas com retentativa e conciliação periódica de
+              pagamento.
             </>
           ) : (
             <>
-              In recent projects, my main focus has been automation and AI,
-              creating solutions that serve areas such as support, sales,
-              finance, and collections, including the development of intelligent
-              chats with multiple AI agents, currently used in production and
-              constantly evolving. This product was conceived and spearheaded by
-              me, from the solution's conception to its implementation, becoming
-              an official internal company product used daily in the corporate
-              environment. In addition to technical development, I am
-              responsible for the product's evolution, creating new
-              functionalities, defining continuous improvements, managing the
-              solution's maintenance, and guiding teams on its operation,
-              ensuring stability, scalability, and alignment with business
-              needs.
+              My work centres on automated service, billing and ERP
+              integrations. I architected and built a service platform with
+              multiple AI agents — support, finance, sales and triage — running
+              in production at large providers, with n8n orchestration and RAG
+              over a vector store for context retrieval. And a multi-tenant SaaS
+              for automated billing over WhatsApp: a multi-step cadence, PIX
+              inside the conversation itself, queues with retry and periodic
+              payment reconciliation.
             </>
           )}
         </article>
+
         <article className="text-lg font-extralight pt-2">
-          {language === "Portuguese" ? (
+          {pt ? (
             <>
-              Mesmo com forte atuação em low-code e no-code, mantenho minha base
-              Full Stack ativa, estudando e desenvolvendo projetos com
-              JavaScript, Node.js, APIs, React, Next.js e NestJS, além de
-              trabalhar com bancos de dados relacionais e não relacionais como
-              PostgreSQL e MongoDB. Acredito que essa combinação entre
-              fundamentos sólidos de programação, automação inteligente e visão
-              de produto é o que me permite criar soluções escaláveis, bem
-              estruturadas e com impacto real.
+              A stack é TypeScript dos dois lados: NestJS e Express nas APIs,
+              React e Next.js na interface, PostgreSQL, MongoDB e Redis nos
+              dados. Cuido também do que sustenta isso em produção — Linux,
+              Docker, Traefik, CI/CD e monitoramento — e das integrações que
+              ligam tudo: WhatsApp Business API, Chatwoot e os ERPs IXC Soft,
+              SGP e Hubsoft.
             </>
           ) : (
             <>
-              Even with a strong focus on low-code and no-code, I maintain an
-              active Full Stack foundation, studying and developing projects
-              with JavaScript, Node.js, APIs, React, Next.js, and NestJS, as
-              well as working with relational and non-relational databases like
-              PostgreSQL and MongoDB. I believe that this combination of solid
-              programming fundamentals, intelligent automation, and product
-              vision is what allows me to create scalable, well-structured
-              solutions with real impact.
+              The stack is TypeScript on both sides: NestJS and Express for the
+              APIs, React and Next.js for the interface, PostgreSQL, MongoDB and
+              Redis for data. I also look after what keeps it running — Linux,
+              Docker, Traefik, CI/CD and monitoring — and the integrations that
+              tie it together: WhatsApp Business API, Chatwoot and the IXC Soft,
+              SGP and Hubsoft ERPs.
             </>
           )}
         </article>
